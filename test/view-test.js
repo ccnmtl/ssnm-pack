@@ -1,17 +1,17 @@
-/* global describe: true, before: true, it: true */
-
 require('!file-loader?name=[name].[ext]!./view-test.html');
 require('../src/static.js');
 
 var chai = require('chai');
-var assert = chai.assert;
+chai.assert;
 
-var jQuery = require('jquery');
+require('jquery');
 
+// eslint-disable-next-line no-unused-vars
 function waitFor(testFx, doneFx, millis) {
     var timeout = millis ? millis : 3000; // Default Max Timout is 10s
     var start = new Date().getTime();
 
+    // eslint-disable-next-line scanjs-rules/call_setInterval
     var interval = setInterval(function() {
         var condition = testFx();
 
