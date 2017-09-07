@@ -10,5 +10,5 @@ require('!style-loader!css-loader!bootstrap-arrow-buttons/dist/css/' +
 require('!style-loader!css-loader!../static/css/common.css');
 require('!style-loader!css-loader!../static/css/main.css');
 
-var jQuery = require('jquery');
+require('jquery');
 

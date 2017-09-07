@@ -1,4 +1,5 @@
 /* global module: true */
+/* eslint-disable security/detect-unsafe-regex */
 
 module.exports = {
     entry: './test/view-test.js',
