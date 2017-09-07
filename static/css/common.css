@@ -1,0 +1,110 @@
+header {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+.interactive-module-title {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+
+.btn-print {
+    background-color: #ddd;
+}
+
+.activity-complete {
+    margin: 0;
+}
+
+.done {
+    margin-right: 5px;
+    cursor: auto;
+}
+
+hr {
+    border-top: 1px dashed #ccc;
+}
+
+/* Footer------------------------------------------------------------------ */
+
+footer {
+    background: transparent;
+    font-size: 12px;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.footer-moreinfo,
+.footer-logos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.footer-moreinfo li,
+.footer-logos li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.footer-logos li {
+    padding: 10px 20px 0 20px;
+}
+
+.footer-logos img {
+    height: 30px;
+}
+
+.footer-moreinfo {
+    background-color: #e0e0e0;
+}
+
+.printonly {
+    display: none;
+}
+
+@media print {
+    .printonly {
+        display: block;
+    }
+    .viewonly {
+        display: none !important;
+    }
+}
+
+@-webkit-keyframes flash-orange {
+    0% { background-color: #fff; border-color: #ccc; }
+    50% { background-color: #f0ad4e; border-color: #eea236; }
+    100% { background-color: #fff; border-color: #ccc; }
+}
+
+@-moz-keyframes flash-orange {
+    0% { background-color: #fff; border-color: #ccc; }
+    50% { background-color: #f0ad4e; border-color: #eea236; }
+    100% { background-color: #fff; border-color: #ccc; }
+}
+
+@-ms-keyframes flash-orange {
+    0% { background-color: #fff; border-color: #ccc; }
+    50% { background-color: #f0ad4e; border-color: #eea236; }
+    100% { background-color: #fff; border-color: #ccc; }
+}
+
+.flash {
+  -moz-animation: flash-orange 1s infinite;
+  -webkit-animation: flash-orange 1s infinite;
+  -ms-animation: flash-orange 1s infinite;
+  animation: flash-orange 1s infinite;
+}
+
+.form-group .error-block {
+    display: none;
+    color: #a94442;
+}
+
+.form-group.has-error .error-block {
+    display: block;
+}
