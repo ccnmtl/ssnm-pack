@@ -3,10 +3,14 @@
 jQuery = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var CryptoJS = require('cryptojs').Crypto;
+var CryptoJS = require('crypto-js');
 
 
 var SocialSupportMap = Backbone.Model.extend({
+    defaults: {
+        topic: '',
+        nickname: ''
+    },
     toTemplate: function() {
         return _(this.attributes).clone();
     },
@@ -20,7 +24,7 @@ var SocialSupportMap = Backbone.Model.extend({
     },
     decrypt: function(contents, password) {
         var d = CryptoJS.AES.decrypt(contents, password);
-        var plaintext = d.toString(CryptoJS.charenc.Utf8);
+        var plaintext = d.toString(CryptoJS.enc.Utf8);
         this.fromJSON(JSON.parse(plaintext));
     }
 });

@@ -10,3 +10,10 @@ require('!style-loader!css-loader!../static/css/main.css');
 
 require('jquery');
 
+var module = require('./views.js');
+
+jQuery(document).ready(function() {
+    module.SocialSupportNetworkApp.initialize();
+});
+
+
