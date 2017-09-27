@@ -3,6 +3,30 @@
 var assert = require('chai').assert;
 var models = require('../src/models.js');
 
+describe('Person', function() {
+    it('can be initialized', function() {
+        var person = new models.Person({
+            'name': 'Sam',
+            'proximity': 'very-close',
+            'influence': 'very-helpful',
+            'supportType': ['empathy', 'advice'],
+            'notes': 'some notes here'
+        });
+        assert.equal(person.get('name'), 'Sam');
+        assert.equal(person.get('proximity'), 'very-close');
+        assert.equal(person.get('influence'), 'very-helpful');
+        assert.equal(person.get('supportType')[0], 'empathy');
+        assert.equal(person.get('supportType')[1], 'advice');
+        assert.equal(person.get('notes'), 'some notes here');
+    });
+
+    it('can be empty', function() {
+        var person = new models.Person({});
+        assert.equal(person.get('name'), '');
+        assert.equal(person.get('supportType').length, 0);
+    });
+});
+
 describe('SocialSupportMap', function() {
 
     it('can be initialized', function() {

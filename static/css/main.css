@@ -1,3 +1,7 @@
 .interactive-container {
     min-width: 860px;
 }
+
+.form-group.is-invalid .invalid-feedback {
+    display: block;
+}

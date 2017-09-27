@@ -18,9 +18,14 @@ var PersonModal = Backbone.View.extend({
     events: {
         'click .btn-next': 'onNext',
         'click .btn-prev': 'onPrev',
+        'click .btn-save': 'onSave',
     },
     initialize: function(options) {
-        _.bindAll(this, 'render', 'onNext', 'onPrev');
+        _.bindAll(this, 'render', 'onNext', 'onPrev', 'onSave',
+            'isStepComplete');
+
+        this.parent = options.parent;
+        this.mode = options.mode;
 
         this.state = new models.PersonModalState();
         this.template = require('../static/templates/personModal.html');
@@ -29,13 +34,46 @@ var PersonModal = Backbone.View.extend({
         this.state.bind('change:step', this.render);
     },
     render: function() {
-        var json = this.model.toTemplate();
-        json.state = this.state.toTemplate();
+        var json = {
+            person: this.model.toJSON(),
+            state: this.state.toJSON(),
+            proximity: models.Proximity,
+            influence: models.Influence,
+            supportType: models.SupportType
+        };
 
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
     },
+    isStepComplete: function() {
+        this.$el.find('.is-invalid').removeClass('is-invalid');
+
+        var $step = this.$el.find('.step:visible');
+
+        $step.find('input[type="text"]').each(function() {
+            if (!jQuery(this).val().trim().length > 0) {
+                jQuery(this).addClass('is-invalid');
+            }
+        });
+
+        $step.find('input[type="radio"]').each(function() {
+            // one in the group needs to be checked
+            var selector = 'input[name=' + jQuery(this).attr('name') + ']';
+            if (!jQuery(selector).is(':checked')) {
+                jQuery(this).parents('.form-group').addClass('is-invalid');
+            }
+        });
+        return this.$el.find('.is-invalid').length < 1;
+    },
     onNext: function(evt) {
+        if (!this.isStepComplete()) {
+            evt.preventDefault();
+            return false;
+        }
+
+        // set properties on my model
+        this.setAttributes();
+
         var step = this.state.get('step');
         this.state.set('step', ++step);
     },
@@ -43,8 +81,36 @@ var PersonModal = Backbone.View.extend({
         var step = this.state.get('step');
         this.state.set('step', --step);
     },
+    onSave: function(evt) {
+        this.setAttributes();
+        this.parent.trigger('savePerson');
+    },
     show: function() {
         this.$el.modal('show');
+    },
+    hide: function() {
+        this.$el.modal('hide');
+        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+    },
+    setAttributes: function() {
+        var self = this;
+        for (var p in this.model.attributes) {
+            this.$el.find('.step:visible [name="' + p + '"]').each(function() {
+                if (this.type === 'text' ||
+                    (this.type === 'radio' && jQuery(this).is(':checked')) ||
+                    this.tagName === 'TEXTAREA' ||
+                        this.tagName === 'SELECT') {
+                    self.model.set(p, jQuery(this).val().trim());
+                } else if (this.type === 'checkbox' &&
+                           jQuery(this).is(':checked')) {
+                    var a = self.model.get(p);
+                    var val = jQuery(this).val();
+                    if (a.indexOf(val) < 0) {
+                        a.push(val);
+                    }
+                }
+            });
+        }
     }
 });
 
@@ -59,7 +125,7 @@ var SocialSupportMapView = Backbone.View.extend({
     initialize: function(options) {
         _.bindAll(this, 'render',
             'createMap', 'importMap', 'exportMap',
-            'addPerson');
+            'addPerson', 'savePerson');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -69,6 +135,10 @@ var SocialSupportMapView = Backbone.View.extend({
 
         this.model = new models.SocialSupportMap();
         this.model.bind('change', this.render);
+        this.model.get('people').bind('add', this.render);
+        this.model.get('people').bind('remove', this.render);
+
+        this.on('savePerson', this.savePerson);
 
         this.personModal = jQuery('#personModal');
 
@@ -117,7 +187,10 @@ var SocialSupportMapView = Backbone.View.extend({
         if (this.model.isEmpty()) {
             markup = this.createMapTemplate({});
         } else {
-            var json = this.model.toTemplate();
+            var json = this.model.toJSON();
+            json.proximity = models.Proximity;
+            json.influence = models.Influence;
+            json.supportType = models.SupportType;
             markup = this.mapTemplate(json);
         }
 
@@ -139,9 +212,15 @@ var SocialSupportMapView = Backbone.View.extend({
     addPerson: function() {
         this.personModal = new PersonModal({
             el: this.$el.find('#personModal'),
-            model: new models.Person({})
+            model: new models.Person({}),
+            parent: this
         });
         this.personModal.show();
+    },
+    savePerson: function() {
+        this.model.get('people').add(this.personModal.model);
+        this.personModal.hide();
+        delete this.personModal;
     }
 });
 
