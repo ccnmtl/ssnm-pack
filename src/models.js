@@ -9,14 +9,14 @@ var CryptoJS = require('crypto-js');
 var SocialSupportMap = Backbone.Model.extend({
     defaults: {
         topic: '',
-        nickname: ''
+        owner: ''
     },
     toTemplate: function() {
         return _(this.attributes).clone();
     },
     fromJSON: function(json) {
-        this.set('topic', json['topic']);
-        this.set('nickname', json['nickname']);
+        this.set('topic', json.topic);
+        this.set('owner', json.owner);
     },
     encrypt: function(password) {
         var contents = JSON.stringify(this.toJSON());
@@ -26,6 +26,9 @@ var SocialSupportMap = Backbone.Model.extend({
         var d = CryptoJS.AES.decrypt(contents, password);
         var plaintext = d.toString(CryptoJS.enc.Utf8);
         this.fromJSON(JSON.parse(plaintext));
+    },
+    isEmpty: function() {
+        return this.get('topic').length < 1 && this.get('owner').length < 1;
     }
 });
 
