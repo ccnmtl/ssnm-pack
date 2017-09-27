@@ -14,16 +14,52 @@ require('bootstrap');
 var FileSaver = require('filesaver.js');
 
 
+var PersonModal = Backbone.View.extend({
+    events: {
+        'click .btn-next': 'onNext',
+        'click .btn-prev': 'onPrev',
+    },
+    initialize: function(options) {
+        _.bindAll(this, 'render', 'onNext', 'onPrev');
+
+        this.state = new models.PersonModalState();
+        this.template = require('../static/templates/personModal.html');
+        this.render();
+
+        this.state.bind('change:step', this.render);
+    },
+    render: function() {
+        var json = this.model.toTemplate();
+        json.state = this.state.toTemplate();
+
+        var markup = this.template(json);
+        this.$el.find('.modal-content').html(markup);
+    },
+    onNext: function(evt) {
+        var step = this.state.get('step');
+        this.state.set('step', ++step);
+    },
+    onPrev: function(evt) {
+        var step = this.state.get('step');
+        this.state.set('step', --step);
+    },
+    show: function() {
+        this.$el.modal('show');
+    }
+});
+
 var SocialSupportMapView = Backbone.View.extend({
     events: {
         'click .btn-export': 'exportMap',
         'click .btn-import': 'importMap',
         'change :file': 'onFileSelected',
-        'click .btn-create-map': 'createMap'
+        'click .btn-create-map': 'createMap',
+        'click .btn-add-person': 'addPerson',
     },
     initialize: function(options) {
         _.bindAll(this, 'render',
-            'createMap', 'importMap', 'exportMap');
+            'createMap', 'importMap', 'exportMap',
+            'addPerson');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -33,6 +69,8 @@ var SocialSupportMapView = Backbone.View.extend({
 
         this.model = new models.SocialSupportMap();
         this.model.bind('change', this.render);
+
+        this.personModal = jQuery('#personModal');
 
         this.render();
     },
@@ -97,6 +135,13 @@ var SocialSupportMapView = Backbone.View.extend({
         }
 
         this.model.set({'topic': topic, 'owner': owner});
+    },
+    addPerson: function() {
+        this.personModal = new PersonModal({
+            el: this.$el.find('#personModal'),
+            model: new models.Person({})
+        });
+        this.personModal.show();
     }
 });
 

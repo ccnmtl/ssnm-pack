@@ -1,0 +1,69 @@
+<form>
+    <div class="step" data-id="1" <% if (state.step !== 1) { %>style="display: none" <% } %> >
+        <div class="modal-header">
+            <h5>Step 1 of 5: Who is this?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <label for="personName" class="col-2 col-form-label">Name</label>
+                <div class="col-10">
+                    <input type="text" name="personName" class="form-control" value="<%=name%>" />
+                    <div class="invalid-feedback">Please enter a name</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step" data-id="2" <% if (state.step !== 2) { %>style="display: none" <% } %>>
+        <div class="modal-header">
+            <h5>Step 2 of 5: Proximity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="proximity">How close are you to this person?</label>
+                <small class="form-text text-muted">Some explanation on what proximity means here</small>
+                <br />
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input"
+                            name="proximity" value="very-close"
+                            <% if (proximity === "very-close") { %>checked<% } %> />
+                            Very Close
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input"
+                            name="proximity" value="somewhat-close"
+                            <% if (proximity === "somewhat-close") { %>checked<% } %>
+                            />
+                            Somewhat Close
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input"
+                            name="proximity" value="not-close"
+                            <% if (proximity === "not-close") { %>checked<% } %>
+                            />
+                            Not Close
+                    </label>
+                </div>
+                <div class="invalid-feedback">Please select a proximity</div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <% if (state.step > 1) { %>
+        <button class="btn btn-primary btn-prev">Prev</button>
+    <% } %>
+    <% if (state.step < state.lastStep) { %>
+        <button class="btn btn-primary btn-next">Next</button>
+    <% } %>
+</div>
