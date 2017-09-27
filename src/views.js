@@ -5,6 +5,7 @@ jQuery = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var models = require('./models.js');
+var utils = require('./utils.js');
 
 window.jQuery = window.$ = jQuery;
 window.Popper = require('popper.js');
@@ -12,14 +13,20 @@ require('bootstrap');
 
 var FileSaver = require('filesaver.js');
 
+
 var SocialSupportMapView = Backbone.View.extend({
     events: {
         'click .btn-export': 'exportMap',
         'click .btn-import': 'importMap',
-        'change :file': 'onFileSelected'
+        'change :file': 'onFileSelected',
+        'click .btn-create-map': 'createMap'
     },
     initialize: function(options) {
-        _.bindAll(this, 'render', 'exportMap', 'importMap');
+        _.bindAll(this, 'render',
+            'createMap', 'importMap', 'exportMap');
+
+        this.createMapTemplate =
+            require('../static/templates/createMap.html');
 
         this.mapTemplate =
             require('../static/templates/map.html');
@@ -28,15 +35,8 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.bind('change', this.render);
 
         this.render();
-
     },
     exportMap: function(evt) {
-        // debug only. this will be removed
-        this.model.set({
-            'topic': this.$el.find('input[name="map-topic"]').val(),
-            'nickname': this.$el.find('input[name="map-nickname"]').val()
-        });
-
         var dlg = jQuery(evt.currentTarget).parents('.modal');
         var pwd = jQuery(dlg).find('.export-password').val();
         var fName = jQuery(dlg).find('.export-filename').val();
@@ -46,10 +46,11 @@ var SocialSupportMapView = Backbone.View.extend({
         FileSaver.saveAs(f, fName);
 
         jQuery(dlg).modal('hide');
+        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
     },
     importMap: function(evt) {
         var self = this;
-        var dlg = jQuery(evt.currentTarget).parents('.modal');
+        var dlg = this.$el.find('#importModal');
 
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -59,6 +60,7 @@ var SocialSupportMapView = Backbone.View.extend({
             self.model.decrypt(contents, pwd);
 
             jQuery(dlg).modal('hide');
+            jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
         };
         reader.readAsText(this.file);
     },
@@ -73,9 +75,28 @@ var SocialSupportMapView = Backbone.View.extend({
         this.file = file;
     },
     render: function() {
-        var json = this.model.toTemplate();
-        var markup = this.mapTemplate(json);
+        var markup;
+        if (this.model.isEmpty()) {
+            markup = this.createMapTemplate({});
+        } else {
+            var json = this.model.toTemplate();
+            markup = this.mapTemplate(json);
+        }
+
         this.$el.find('.ssnm-map-container').html(markup);
+    },
+    createMap: function(evt) {
+        var $form = jQuery(evt.currentTarget).parents('form');
+
+        var topic = utils.validateFormValue($form, 'input[name="topic"]');
+        var owner = utils.validateFormValue($form, 'input[name="owner"]');
+
+        if (!topic || !owner) {
+            evt.preventDefault();
+            return false;
+        }
+
+        this.model.set({'topic': topic, 'owner': owner});
     }
 });
 
