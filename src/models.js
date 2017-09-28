@@ -1,30 +1,26 @@
 /* global jQuery: true, module: true, CryptoJS: true */
 
 jQuery = require('jquery');
-var _ = require('underscore');
 var Backbone = require('backbone');
 var CryptoJS = require('crypto-js');
 
-// eslint-disable-next-line no-unused-vars
 var Proximity = {
-    VERY_CLOSE: 1,
-    SOMEWHAT_CLOSE: 2,
-    NOT_CLOSE: 3
+    'very-close': 'Very Close',
+    'somewhat-close': 'Somewhat Close',
+    'not-close': 'Not Close'
 };
 
-//eslint-disable-next-line no-unused-vars
 var Influence = {
-    VERY_HELPFUL: 1,
-    SOMEWHAT_HELPFUL: 2,
-    NOT_HELPFUL: 3
+    'very-helpful': 'Very Helpful',
+    'somewhat-helpful': 'Somewhat Helpful',
+    'not-helpful': 'Not Helpful'
 };
 
-//eslint-disable-next-line no-unused-vars
 var SupportType = {
-    EMPATHY: 1,
-    ADVICE: 2,
-    SOCIAL: 3,
-    PRACTICAL: 4
+    'empathy': 'Empathy',
+    'advice': 'Advice',
+    'social': 'Social',
+    'practical': 'Practical'
 };
 
 var Person = Backbone.Model.extend({
@@ -32,31 +28,19 @@ var Person = Backbone.Model.extend({
         name: '',
         proximity: undefined,
         influence: undefined,
-        supportTypes: [],
+        supportType: undefined,
         notes: ''
     },
-    toTemplate: function() {
-        return _(this.attributes).clone();
+    initialize: function(attributes) {
+        if (!this.get('supportType')) { 
+            this.set({supportType: new Array()});
+        }
     }
 });
 
+
 var PersonList = Backbone.Collection.extend({
     model: Person,
-    initialize: function(lst) {
-        if (lst !== undefined && lst instanceof Array) {
-            for (var i = 0; i < lst.length; i++) {
-                var x = new Person(lst[i]);
-                this.add(x);
-            }
-        }
-    },
-    toTemplate: function() {
-        var a = [];
-        this.forEach(function(item) {
-            a.push(item.toTemplate());
-        });
-        return a;
-    }
 });
 
 
@@ -65,9 +49,6 @@ var PersonModalState = Backbone.Model.extend({
         step: 1,
         lastStep: 5
     },
-    toTemplate: function() {
-        return _(this.attributes).clone();
-    }
 });
 
 
@@ -76,9 +57,6 @@ var SocialSupportMap = Backbone.Model.extend({
         topic: '',
         owner: '',
         people: new PersonList()
-    },
-    toTemplate: function() {
-        return _(this.attributes).clone();
     },
     fromJSON: function(json) {
         this.set('topic', json.topic);
@@ -96,9 +74,18 @@ var SocialSupportMap = Backbone.Model.extend({
     },
     isEmpty: function() {
         return this.get('topic').length < 1 && this.get('owner').length < 1;
+    },
+    toJSON: function() {
+        var json = Backbone.Model.prototype.toJSON.call(this);
+        json.people = this.get('people').toJSON();
+        return json;
     }
 });
 
-module.exports.SocialSupportMap = SocialSupportMap;
+module.exports.Proximity = Proximity;
+module.exports.Influence = Influence;
+module.exports.SupportType = SupportType;
+
 module.exports.Person = Person;
 module.exports.PersonModalState = PersonModalState;
+module.exports.SocialSupportMap = SocialSupportMap;

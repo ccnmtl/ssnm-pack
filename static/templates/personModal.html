@@ -1,5 +1,5 @@
-<form>
-    <div class="step" data-id="1" <% if (state.step !== 1) { %>style="display: none" <% } %> >
+<form novalidate>
+    <div class="step" <% if (state.step !== 1) { %>style="display: none" <% } %> >
         <div class="modal-header">
             <h5>Step 1 of 5: Who is this?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -8,15 +8,15 @@
         </div>
         <div class="modal-body">
             <div class="form-group row">
-                <label for="personName" class="col-2 col-form-label">Name</label>
+                <label for="name" class="col-2 col-form-label">Name</label>
                 <div class="col-10">
-                    <input type="text" name="personName" class="form-control" value="<%=name%>" />
+                    <input type="text" name="name" class="form-control" value="<%=person.name%>" />
                     <div class="invalid-feedback">Please enter a name</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="step" data-id="2" <% if (state.step !== 2) { %>style="display: none" <% } %>>
+    <div class="step" <% if (state.step !== 2) { %>style="display: none" <% } %>>
         <div class="modal-header">
             <h5>Step 2 of 5: Proximity</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,33 +28,83 @@
                 <label for="proximity">How close are you to this person?</label>
                 <small class="form-text text-muted">Some explanation on what proximity means here</small>
                 <br />
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input"
-                            name="proximity" value="very-close"
-                            <% if (proximity === "very-close") { %>checked<% } %> />
-                            Very Close
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input"
-                            name="proximity" value="somewhat-close"
-                            <% if (proximity === "somewhat-close") { %>checked<% } %>
-                            />
-                            Somewhat Close
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input"
-                            name="proximity" value="not-close"
-                            <% if (proximity === "not-close") { %>checked<% } %>
-                            />
-                            Not Close
-                    </label>
-                </div>
+                <% for (var p in proximity) { %>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input"
+                                name="proximity" value="<%=p%>" <% if (person.proximity === p) { %>checked<% } %> />
+                                <%=proximity[p]%>
+                        </label>
+                    </div>
+                <% } %>
                 <div class="invalid-feedback">Please select a proximity</div>
+            </div>
+        </div>
+    </div>
+    <div class="step" <% if (state.step !== 3) { %>style="display: none" <% } %>>
+        <div class="modal-header">
+            <h5>Step 3 of 5: Influence</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="influence">How much does this person shape your life?</label>
+                <small class="form-text text-muted">Some explanation on what influence means here</small>
+                <br />
+                <% for (var p in influence) { %>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input"
+                                name="influence" value="<%=p%>" <% if (person.influence === p) { %>checked<% } %> />
+                                <%=influence[p]%>
+                        </label>
+                    </div>
+                <% } %>
+                <div class="invalid-feedback">Please select an influence</div>
+            </div>
+        </div>
+    </div>
+    <div class="step" <% if (state.step !== 4) { %>style="display: none" <% } %>>
+        <div class="modal-header">
+            <h5>Step 4 of 5: Support Type</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="supportType">How much does this person shape your life?</label>
+                <small class="form-text text-muted">Some explanation on what support types mean here</small>
+                <br />
+                <% for (var p in supportType) { %>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"
+                                name="supportType" value="<%=p%>"
+                                <% if (person.supportType.indexOf(p) > -1) { %>checked<% } %> />
+                                <%=supportType[p]%>
+                        </label>
+                    </div>
+                <% } %>
+                <div class="invalid-feedback">Please select .</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step" <% if (state.step !== 5) { %>style="display: none" <% } %>>
+        <div class="modal-header">
+            <h5>Step 5 of 5: More information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="supportType">What else can you say about this person?</label>
+                <br />
+                <textarea name="notes" class="form-control"><%= person.notes %></textarea>
             </div>
         </div>
     </div>
@@ -65,5 +115,7 @@
     <% } %>
     <% if (state.step < state.lastStep) { %>
         <button class="btn btn-primary btn-next">Next</button>
+    <% } else { %>
+        <button class="btn btn-primary btn-save">Save</button>
     <% } %>
 </div>
