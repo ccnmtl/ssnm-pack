@@ -14,6 +14,38 @@ require('bootstrap');
 var FileSaver = require('filesaver.js');
 
 
+var MapModal = Backbone.View.extend({
+    events: {
+        'click .btn-save': 'onSave',
+    },
+    initialize: function(options) {
+        _.bindAll(this, 'render', 'onSave');
+
+        this.template = require('../static/templates/editMap.html');
+        this.render();
+    },
+    render: function() {
+        var json = this.model.toJSON();
+        var markup = this.template(json);
+        this.$el.find('.modal-content').html(markup);
+        this.$el.modal('show');
+    },
+    onSave: function(evt) {
+        var $form = jQuery(evt.currentTarget).parents('.modal').find('form');
+
+        var topic = utils.validateFormValue($form, 'input[name="topic"]');
+        var owner = utils.validateFormValue($form, 'input[name="owner"]');
+
+        if (!topic || !owner) {
+            evt.preventDefault();
+            return false;
+        }
+
+        this.model.set({'topic': topic, 'owner': owner});
+        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+    }
+});
+
 var PersonModal = Backbone.View.extend({
     events: {
         'click .btn-next': 'onNext',
@@ -25,7 +57,6 @@ var PersonModal = Backbone.View.extend({
             'isStepComplete');
 
         this.parent = options.parent;
-        this.mode = options.mode;
 
         this.state = new models.PersonModalState();
         this.template = require('../static/templates/personModal.html');
@@ -120,11 +151,12 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-import': 'importMap',
         'change :file': 'onFileSelected',
         'click .btn-create-map': 'createMap',
+        'click .btn-edit-map': 'editMap',
         'click .btn-add-person': 'addPerson',
     },
     initialize: function(options) {
         _.bindAll(this, 'render',
-            'createMap', 'importMap', 'exportMap',
+            'createMap', 'editMap', 'importMap', 'exportMap',
             'addPerson', 'savePerson');
 
         this.createMapTemplate =
@@ -208,6 +240,12 @@ var SocialSupportMapView = Backbone.View.extend({
         }
 
         this.model.set({'topic': topic, 'owner': owner});
+    },
+    editMap: function() {
+        new MapModal({
+            el: this.$el.find('#editMapModal'),
+            model: this.model
+        });
     },
     addPerson: function() {
         this.personModal = new PersonModal({
