@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h5 class="modal-title">Edit Map Info</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label for="topic">What is the topic of your map?</label>
+            <input type="input" name="topic" class="form-control" aria-describedby="topicHelp" value="<%=topic%>">
+            <div class="invalid-feedback">Please add a topic for your map.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="topic">Who is the owner of this map?</label>
+            <input type="input" name="owner" class="form-control" aria-describedby="topicHelp" value="<%=owner%>">
+            <div class="invalid-feedback">Please add an owner for your map.</div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary btn-save">Save</button>
+</div>
