@@ -153,11 +153,15 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-create-map': 'createMap',
         'click .btn-edit-map': 'editMap',
         'click .btn-add-person': 'addPerson',
+        'click .btn-delete-person-confirm': 'deletePersonConfirm',
+        'click .btn-delete-person': 'deletePerson',
+        'click .btn-edit-person': 'editPerson'
     },
     initialize: function(options) {
         _.bindAll(this, 'render',
             'createMap', 'editMap', 'importMap', 'exportMap',
-            'addPerson', 'savePerson');
+            'addPerson', 'savePerson', 'deletePerson', 'deletePersonConfirm',
+            'editPerson');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -259,6 +263,28 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.get('people').add(this.personModal.model);
         this.personModal.hide();
         delete this.personModal;
+    },
+    deletePersonConfirm: function(evt) {
+        var $elt = jQuery(evt.currentTarget);
+        var cid = $elt.data('id');
+        var person = this.model.get('people').get(cid);
+
+        jQuery('#confirmDeleteModal').find('.name').html(person.get('name'));
+        jQuery('#confirmDeleteModal').find(
+            '.btn-delete-person').attr('data-id', cid);
+        jQuery('#confirmDeleteModal').modal('show');
+    },
+    deletePerson: function(evt) {
+        jQuery('#confirmDeleteModal').modal('hide');
+        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+
+        var cid = jQuery(evt.currentTarget).data('id');
+        var person = this.model.get('people').get(cid);
+
+        this.model.get('people').remove(person);
+    },
+    editPerson: function(evt) {
+
     }
 });
 

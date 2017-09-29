@@ -35,7 +35,12 @@ var Person = Backbone.Model.extend({
         if (!this.get('supportType')) { 
             this.set({supportType: new Array()});
         }
-    }
+    },
+    toJSON: function() {
+        var json = Backbone.Model.prototype.toJSON.call(this);
+        json.cid = this.cid;
+        return json;
+    },
 });
 
 
@@ -55,13 +60,25 @@ var PersonModalState = Backbone.Model.extend({
 var SocialSupportMap = Backbone.Model.extend({
     defaults: {
         topic: '',
-        owner: '',
-        people: new PersonList()
+        owner: ''
+    },
+    initialize: function(attributes) {
+        this.set({people: new PersonList()});
     },
     fromJSON: function(json) {
         this.set('topic', json.topic);
         this.set('owner', json.owner);
-        this.set('people', new PersonList(json.people));
+
+        var people = this.get('people');
+        people.reset();
+        for (var i=0; i < json.people.length; i++) {
+            people.add(new Person(json.people[i]));
+        }
+    },
+    toJSON: function() {
+        var json = Backbone.Model.prototype.toJSON.call(this);
+        json.people = this.get('people').toJSON();
+        return json;
     },
     encrypt: function(password) {
         var contents = JSON.stringify(this.toJSON());
@@ -74,11 +91,6 @@ var SocialSupportMap = Backbone.Model.extend({
     },
     isEmpty: function() {
         return this.get('topic').length < 1 && this.get('owner').length < 1;
-    },
-    toJSON: function() {
-        var json = Backbone.Model.prototype.toJSON.call(this);
-        json.people = this.get('people').toJSON();
-        return json;
     }
 });
 

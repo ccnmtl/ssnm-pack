@@ -31,7 +31,7 @@
 <h5>People</h5>
 
 <table class="table">
-<tr><th>Name</th><th>Proximity</th><th>Influence</th><th>Support</th><th>Notes</th></tr>
+<tr><th>Name</th><th>Proximity</th><th>Influence</th><th>Support</th><th>Notes</th><th>Edit</th><th>Delete</th></tr>
 
 <% for (var i=0; i < people.length; i++) { %>
     <tr>
@@ -44,6 +44,8 @@
             <% } %>
         </td>
         <td><%=people[i].notes%></td>
+        <td><button class="btn-edit-person" data-id="<%=people[i].cid%>"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+        <td><button class="btn-delete-person-confirm" data-id="<%=people[i].cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
     </tr>
 <% } %>
 </table>
@@ -90,6 +92,26 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-export btn-primary">Export</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmDeleteModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Remove Person From Map</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove <strong><span class="name"></span></strong> from your map?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-delete-person btn-primary">Remove</button>
             </div>
         </div>
     </div>
