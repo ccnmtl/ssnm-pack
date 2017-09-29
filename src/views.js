@@ -278,8 +278,7 @@ var SocialSupportMapView = Backbone.View.extend({
         jQuery('#confirmDeleteModal').modal('hide');
         jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
 
-        var $elt = jQuery(evt.currentTarget);
-        var cid = $elt.data('id');
+        var cid = jQuery(evt.currentTarget).data('id');
         var person = this.model.get('people').get(cid);
 
         this.model.get('people').remove(person);
