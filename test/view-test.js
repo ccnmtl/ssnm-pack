@@ -1,10 +1,14 @@
+/* global describe: true, before: true, it: true */
+
 require('!file-loader?name=[name].[ext]!./view-test.html');
 require('../src/static.js');
 
 var chai = require('chai');
-chai.assert;
+var assert = chai.assert;
 
-require('jquery');
+var jQuery = require('jquery');
+
+var module = require('../src/views.js');
 
 // eslint-disable-next-line no-unused-vars
 function waitFor(testFx, doneFx, millis) {
@@ -25,3 +29,28 @@ function waitFor(testFx, doneFx, millis) {
     }, 250); //< repeat check every 250ms
 }
 
+
+describe('SocialSupportNetworkApp', function() {
+
+    before(function() {
+        module.SocialSupportNetworkApp.initialize();
+    });
+
+    describe('map interaction', function() {
+        it('initializes', function() {
+            assert.equal(jQuery('input[name="topic"]:visible').length, 1);
+            assert.equal(jQuery('input[name="owner"]:visible').length, 1);
+            assert.equal(jQuery('a.import-map-link:visible').length, 1);
+        });
+
+        it('requires owner and topic', function() {
+            jQuery('.btn-create-map').click();
+
+            assert(jQuery(
+                '.form-group.topic .invalid-feedback:visible').length > 0);
+            assert(jQuery(
+                '.form-group.owner .invalid-feedback:visible').length > 0);
+        });
+
+    });
+});

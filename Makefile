@@ -1,7 +1,7 @@
 OUTPUT_PATH=dist
 JS_FILES=src test
 
-all: clean eslint test-unit
+all: clean eslint test
 
 include js.mk
 
