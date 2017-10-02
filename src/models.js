@@ -17,10 +17,22 @@ var Influence = {
 };
 
 var SupportType = {
-    'empathy': 'Empathy',
-    'advice': 'Advice',
-    'social': 'Social',
-    'practical': 'Practical'
+    'empathy': {
+        'display': 'Empathy',
+        'icon': 'heart',
+    },
+    'advice': {
+        'display': 'Advice',
+        'icon': 'comments'
+    },
+    'social': {
+        'display': 'Social',
+        'icon': 'users'
+    },
+    'practical': {
+        'display': 'Practical',
+        'icon': 'wrench'
+    }
 };
 
 var Person = Backbone.Model.extend({

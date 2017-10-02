@@ -84,7 +84,7 @@
                             <input type="checkbox" class="form-check-input"
                                 name="supportType" value="<%=p%>"
                                 <% if (person.supportType.indexOf(p) > -1) { %>checked<% } %> />
-                                <%=supportType[p]%>
+                                <%=supportType[p].display%>
                         </label>
                     </div>
                 <% } %>

@@ -27,28 +27,48 @@
 <br />
 <div>Owner: <input type="text" name="map-nickname" value="<%= owner %>" /></div>
 
-<br /><br />
-<h5>People</h5>
+<div class="row">
+    <div class="col">
+        <br /><br />
+        <h5>People</h5>
 
-<table class="table">
-<tr><th>Name</th><th>Proximity</th><th>Influence</th><th>Support</th><th>Notes</th><th>Edit</th><th>Delete</th></tr>
+        <table class="table">
+        <tr><th>Name</th><th>Proximity</th><th>Influence</th><th>Support</th><th>Notes</th><th>Edit</th><th>Delete</th></tr>
 
-<% for (var i=0; i < people.length; i++) { %>
-    <tr>
-        <td><%=people[i].name%></td>
-        <td><%=proximity[people[i].proximity]%></td>
-        <td><%=influence[people[i].influence]%></td>
-        <td>
-            <% for (var j=0; j < people[i].supportType.length; j++) { %>
-                <%=supportType[people[i].supportType[j]]%>, 
+        <% for (var i=0; i < people.length; i++) { %>
+            <tr>
+                <td><%=people[i].name%></td>
+                <td><%=proximity[people[i].proximity]%></td>
+                <td><%=influence[people[i].influence]%></td>
+                <td>
+                    <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                        <%=supportType[people[i].supportType[j]].display%>, 
+                    <% } %>
+                </td>
+                <td><%=people[i].notes%></td>
+                <td><button class="btn-edit-person" data-id="<%=people[i].cid%>"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                <td><button class="btn-delete-person-confirm" data-id="<%=people[i].cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+            </tr>
+        <% } %>
+        </table>
+    </div>
+    <div class="col">
+        <% for (var p in supportType) { %>
+            <h4>
+                <i class="fa fa-<%=supportType[p].icon%>" aria-hidden="true"></i>
+                <%=supportType[p].display%>
+            </h4>
+            <div class="support-type-container">
+            <% var count = people.length -1; %>
+            <% for (var i=0; i < people.length; i++) { %>
+                <% if (people[i].supportType.indexOf(p) > -1) { %>
+                    <%=people[i].name%><% if (i < count) { %>, <% } %>
+                <% } %> 
             <% } %>
-        </td>
-        <td><%=people[i].notes%></td>
-        <td><button class="btn-edit-person" data-id="<%=people[i].cid%>"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-        <td><button class="btn-delete-person-confirm" data-id="<%=people[i].cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
-    </tr>
-<% } %>
-</table>
+            </div>
+        <% } %>
+    </div>
+</div>
 
 <div id="personModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Person Attribute Modal" aria-hidden="true">
     <div class="modal-dialog">
