@@ -5,3 +5,7 @@
 .form-group.is-invalid .invalid-feedback {
     display: block;
 }
+
+.support-type-container {
+    margin-bottom: 40px;
+}
