@@ -227,17 +227,17 @@ var SocialSupportMapView = Backbone.View.extend({
         this.$el.find('.ssnm-map-container').html(markup);
     },
     createMap: function(evt) {
+        evt.preventDefault();
+
         var $form = jQuery(evt.currentTarget).parents('form');
 
         var topic = utils.validateFormValue($form, 'input[name="topic"]');
         var owner = utils.validateFormValue($form, 'input[name="owner"]');
 
-        if (!topic || !owner) {
-            evt.preventDefault();
-            return false;
+        if (topic && owner) {
+            this.model.set({'topic': topic, 'owner': owner});
         }
-
-        this.model.set({'topic': topic, 'owner': owner});
+        return false;
     },
     editMap: function() {
         new MapModal({
