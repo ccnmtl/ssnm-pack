@@ -25,7 +25,7 @@
 <br />
 <div>Topic: <input type="text" name="map-topic" value="<%= topic %>" /></div>
 <br />
-<div>Owner: <input type="text" name="map-nickname" value="<%= owner %>" /></div>
+<div>Owner: <input type="text" name="map-owner" value="<%= owner %>" /></div>
 
 <div class="row">
     <div class="col">
@@ -36,16 +36,16 @@
         <tr><th>Name</th><th>Proximity</th><th>Influence</th><th>Support</th><th>Notes</th><th>Edit</th><th>Delete</th></tr>
 
         <% for (var i=0; i < people.length; i++) { %>
-            <tr>
-                <td><%=people[i].name%></td>
-                <td><%=proximity[people[i].proximity]%></td>
-                <td><%=influence[people[i].influence]%></td>
-                <td>
-                    <% for (var j=0; j < people[i].supportType.length; j++) { %>
-                        <%=supportType[people[i].supportType[j]].display%>, 
-                    <% } %>
-                </td>
-                <td><%=people[i].notes%></td>
+        <tr class="person-container">
+            <td class="person-name"><%=people[i].name%></td>
+            <td class="person-proximity"><%=proximity[people[i].proximity]%></td>
+            <td class="person-influence"><%=influence[people[i].influence]%></td>
+            <td class="person-support-type">
+                <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                    <%=supportType[people[i].supportType[j]]%>, 
+                <% } %>
+            </td>
+            <td class="person-notes"><%=people[i].notes%></td>
                 <td><button class="btn-edit-person" data-id="<%=people[i].cid%>"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
                 <td><button class="btn-delete-person-confirm" data-id="<%=people[i].cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
             </tr>
@@ -69,6 +69,7 @@
         <% } %>
     </div>
 </div>
+
 
 <div id="personModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Person Attribute Modal" aria-hidden="true">
     <div class="modal-dialog">
