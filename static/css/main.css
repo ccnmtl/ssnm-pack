@@ -1,11 +1,813 @@
-.interactive-container {
-    min-width: 860px;
-}
-
 .form-group.is-invalid .invalid-feedback {
     display: block;
 }
 
-.support-type-container {
-    margin-bottom: 40px;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600|Roboto:400,500');
+
+.interactive-container {
+    padding: 0 15px;
+    margin: 0;
+    border: 0;
+}
+
+.interactive-title {
+    margin-left: -15px;
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.map-workspace {
+    width: 330px;
+    margin: 0 -15px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.map-info {
+    font: 600 18px/150% 'Raleway', sans-serif;
+    margin-bottom: 5px;
+}
+
+.map-info dl.row dd {
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.map-info dl.row,
+.map-info dl.row dd,
+.map-info dl.row dt {
+    margin-bottom: 0;
+}
+
+.map-circles-space {
+    margin: 0 0 30px 0;
+    padding: 0;
+    width: 328px;
+    height: 328px;
+    background-color: #fff;
+    float: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.map-people {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 328px;
+    height: 328px;
+    background-color: transparent;
+    float: none;
+    z-index: 200;
+    overflow: hidden;
+}
+
+.map-actions {
+    width: 50px;
+    height: 150px;
+    max-height: 200px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    float: none;
+    z-index: 300;
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+.map-support-types {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    float: none;
+    z-index: 500;
+    height: 30px; /* needs to be responsive */
+    position: absolute; /* needs to be responsive */
+    top: 328px; /* needs to be responsive */
+    right: 0; /* needs to be responsive */
+    left: 0; /* needs to be responsive */
+}
+
+.map-support-types.slide-up {
+    top: 100px;
+    height: 280px;
+    -moz-transition:all 0.2s linear;
+    -webkit-transition:all 0.2s linear;
+    -o-transition:all 0.2s linear;
+ }
+
+.map-support-types.slide-down {
+    top: 350px; /* needs to be responsive */
+    height: 30px;
+    -moz-transition:all 0.2s linear;
+    -webkit-transition:all 0.2s linear;
+    -o-transition:all 0.2s linear;
+ }
+
+.toggle-slidenav {
+    display: block; /* needs to be responsive */
+    cursor: pointer;
+}
+
+.toggle-staticnav {
+    display: none; /* needs to be responsive */
+    cursor: default;
+}
+
+.map-legend {
+    margin: 0 -15px;
+    padding: 0;
+    background-color: #fff;
+    width: 330px;
+}
+
+/* PERSON INFLUENCE */
+
+.person-container.very-helpful {
+    background-color: #6c6;
+    border: 2px solid #000;
+    /* top: 80px; left: 120px; for testing */
+}
+
+.person-container.very-helpful a {
+    color: #060;
+}
+
+.person-container.somewhat-helpful {
+    background-color: #ff6;
+    border: 2px dashed #000;
+    /* top: 130px; left: 150px; for testing */
+}
+
+.person-container.somewhat-helpful a {
+    color: #f60;
+}
+
+.person-container.not-helpful {
+    background-color: #f66;
+    border: 2px dotted #000;
+    /* top: 180px; left: 180px; for testing */
+}
+
+.person-container.not-helpful a {
+    color: #900;
+}
+
+/* CIRCLES */
+
+.circle-map {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-center {
+    z-index: 140;
+    top: 210px;
+    left: 70px;
+    background-color: #fff;
+    height: 46px;
+    width: 46px;
+}
+
+.circle-very-close {
+    z-index: 130;
+    top: 140px;
+    left: 0;
+    height: 186px;
+    width: 186px;
+}
+
+.circle-somewhat-close {
+    z-index: 120;
+    top: 70px;
+    left: -70px;
+    height: 326px;
+    width: 326px;
+}
+
+.circle-not-close {
+    z-index: 110;
+    top: 0;
+    left: -140px;
+    height: 466px;
+    width: 466px;
+}
+
+.circle-very-close,
+.legend-very-close {
+    background-color: #80b3da;
+}
+
+.circle-somewhat-close,
+.legend-somewhat-close {
+    background-color: #5894C2;
+}
+
+.circle-not-close,
+.legend-not-close {
+    background-color: #3977A7;
+}
+
+/* CIRCLE LEGEND */
+
+.map-legend section {
+    padding: 5px 0 0 0;
+    width: 150px;
+    float: none;
+}
+
+.map-legend h2,
+.map-legend dl,
+.map-legend dl dt,
+.map-legend dl dd {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.map-legend dl {
+    height: 16px;
+}
+
+.map-legend dl dt {
+    height: 16px;
+    width: 16px;
+    display: block;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.map-legend dl dd {
+    margin: 0 12px 5px 20px;
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    float: none;
+}
+
+.map-legend dl dt span {
+    display: none;
+}
+
+.map-legend h2 {
+    line-height: 16px;
+    font-weight: bold;
+    float: none;
+    margin-right: 12px;
+    margin-bottom: 5px;
+}
+
+/* INFLUENCE LEGEND */
+
+.legend-very-helpful {
+    background-color: #6c6;
+    border: 2px solid #000;
+}
+
+.legend-somewhat-helpful {
+    background-color: #ff6;
+    border: 2px dashed #000;
+}
+
+.legend-not-helpful {
+    background-color: #f66;
+    border: 2px dotted #000;
+}
+
+/* ACTION BUTTONS */
+
+.btn-map-action {
+    margin: 0 0 10px 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+}
+
+.icon-map-action {
+    display: inline-block;
+    padding: 5px;
+    background-color: #b3daff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 30px;
+    color: #039;
+}
+
+.text-map-action {
+    display: none;
+}
+
+/* SUPPORT TYPES BOX */
+
+.map-support-types h2 {
+    border-top: 1px solid #ccc;
+    margin: 0 0 20px 5px;
+    padding: 0;
+    padding-top: 3px;
+    font: 500 18px 'Roboto', sans-serif;
+}
+
+.map-support-types section {
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+
+.map-support-types section h3 {
+    margin: 0;
+    padding: 0;
+    font: 600 16px/20px 'Raleway', sans-serif;
+}
+
+.map-support-types section h3 .fa {
+    color: #666;
+    margin-right: 5px;
+}
+
+.map-actions .fa-custom,
+.map-support-types .fa-custom {
+    font-size: 1.333333em;
+    line-height: 0.75em;
+    vertical-align: -15%;
+}
+
+.map-support-types ul {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    line-height: 120%;
+}
+
+.map-support-types li {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 100%;
+}
+
+.person-container {
+    position: absolute;
+    width: 60px; /* responsive */
+    padding: 2px; /* responsive */
+    margin: 0;
+    height: 30px; /* responsive */
+    border: 0;
+    /* overflow: hidden; */
+    border-radius: 5px;
+    z-index: 200;
+}
+.person-name {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px; /* responsive */
+    line-height: 120%;
+    font-weight: bold; /* responsive */
+}
+.person-influence {
+    display: none;
+}
+.person-proximity {
+    display: none;
+}
+.person-support-type {
+    display: none; /* responsive */
+}
+.person-notes {
+    float: right; /* responsive */
+    margin-top: -20px; /* responsive */
+    display: none; /* responsive */
+}
+
+@media (min-width: 492px) {
+    .map-workspace {
+        width: 492px;
+    }
+    .map-info {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .map-circles-space {
+        margin-bottom: 40px;
+        width: 490px;
+        height: 490px;
+        float: none;
+    }
+    .map-people {
+        width: 490px;
+        height: 490px;
+    }
+    .map-actions {
+        width: 50px;
+        height: 150px;
+        max-height: 200px;
+        padding-top: 0;
+        float: none;
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+    .map-support-types {
+        width: 490px;
+        float: none;
+        display: block;
+        top: 490px; /* needs to be responsive */
+        height: 40px;
+    }
+    .map-support-types.slide-up {
+        top: 202px;
+        height: 340px;
+     }
+    .map-support-types.slide-down {
+        top: 502px; /* needs to be responsive */
+        height: 40px;
+     }
+    .map-legend {
+        width: 492px;
+    }
+    .circle-center {
+        z-index: 140;
+        top: 315px;
+        left: 105px;
+        height: 70px;
+        width: 70px;
+    }
+    .circle-very-close {
+        z-index: 130;
+        top: 210px;
+        left: 0;
+        height: 280px;
+        width: 280px;
+    }
+    .circle-somewhat-close {
+        z-index: 120;
+        top: 105px;
+        left: -105px;
+        height: 490px;
+        width: 490px;
+    }
+    .circle-not-close {
+        z-index: 110;
+        top: 0;
+        left: -210px;
+        height: 700px;
+        width: 700px;
+    }
+    .map-support-types h2 {
+        border-top: 1px solid #ccc;
+        margin: 0 0 20px 10px;
+        padding: 0;
+        padding-top: 7px;
+        font: 500 20px 'Roboto', sans-serif;
+    }
+    .map-support-types section {
+        margin: 0 0 0 20px;
+    }
+    .map-support-types section h3 {
+        font: 600 16px/30px 'Raleway', sans-serif;
+    }
+    .map-support-types ul {
+        margin: 0 20px 20px 40px;
+    }
+    .map-legend section {
+        padding: 5px 0 0 0;
+        width: 400px;
+        float: right;
+        text-align: right;
+    }
+    .map-legend h2,
+    .map-legend dl,
+    .map-legend dl dt,
+    .map-legend dl dd {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+    }
+    .map-legend dl {
+        height: 16px;
+    }
+    .map-legend dl dt {
+        height: 16px;
+        width: 16px;
+        display: block;
+        float: left;
+    }
+    .map-legend dl dd {
+        margin: 0 12px 0 3px;
+        height: 16px;
+        line-height: 16px;
+        display: block;
+        float: left;
+    }
+    .map-legend dl dt span {
+        display: none;
+    }
+    .map-legend h2 {
+        line-height: 16px;
+        font-weight: bold;
+        float: left;
+        margin-right: 12px;
+        margin-bottom: 0;
+    }
+    .person-container {
+        position: absolute;
+        width: 90px; /* responsive */
+        padding: 4px;
+        margin: 0;
+        height: 30px; /* responsive */
+        border: 0;
+        /* overflow: hidden; */
+        border-radius: 5px;
+        z-index: 200;
+    }
+    .person-name {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 14px;
+        line-height: 120%;
+        font-weight: bold;
+    }
+    .person-influence {
+        display: none;
+    }
+    .person-proximity {
+        display: none;
+    }
+    .person-support-type {
+        display: none; /* responsive */
+    }
+    .person-notes {
+        float: right; /* responsive */
+        margin-top: -20px; /* responsive */
+        display: none; /* responsive */
+    }
+}
+
+@media (min-width: 690px) {
+    .map-workspace {
+        width: 664px;
+    }
+    .map-info {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .map-circles-space {
+        margin-bottom: 50px;
+        width: 662px;
+        height: 662px;
+        float: none;
+    }
+    .map-people {
+        width: 664px;
+        height: 664px;
+    }
+    .map-actions {
+        width: 150px;
+        height: 120px;
+    }
+    .map-support-types {
+        width: 662px;
+        float: none;
+        display: block;
+        top: 664px; /* needs to be responsive */
+        height: 50px;
+    }
+    .map-support-types.slide-up {
+        top: 372px;
+        height: 340px;
+     }
+    .map-support-types.slide-down {
+        top: 664px; /* needs to be responsive */
+        height: 50px;
+     }
+    .map-legend {
+        width: 664px;
+    }
+    .circle-center {
+        z-index: 140;
+        top: 426px;
+        left: 142px;
+        height: 94px;
+        width: 94px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .circle-very-close {
+        z-index: 130;
+        top: 284px;
+        left: 0;
+        height: 378px;
+        width: 378px;
+    }
+    .circle-somewhat-close {
+        z-index: 120;
+        top: 142px;
+        left: -142px;
+        height: 662px;
+        width: 662px;
+    }
+    .circle-not-close {
+        z-index: 110;
+        top: 0;
+        left: -284px;
+        height: 946px;
+        width: 946px;
+    }
+    .icon-map-action {
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+        line-height: 20px;
+    }
+    .text-map-action {
+        display: inline;
+    }
+    .map-support-types h2 {
+        font-size: 26px;
+    }
+    .map-support-types section {
+        margin: 0 0 0 20px;
+        padding: 0;
+    }
+    .map-support-types section h3 {
+        font-size: 20px;
+    }
+    .map-support-types ul {
+        margin: 0 20px 20px 45px;
+    }
+    .person-container {
+        position: absolute;
+        width: 120px;
+        padding: 4px;
+        margin: 0;
+        height: 50px;
+        border: 0;
+        /* overflow: hidden; */
+        border-radius: 5px;
+        z-index: 200;
+    }
+    .person-name {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 14px;
+        line-height: 120%;
+        font-weight: bold;
+    }
+    .person-influence {
+        display: none;
+    }
+    .person-proximity {
+        display: none;
+    }
+    .person-support-type {
+        display: block;
+    }
+    .person-notes {
+        float: right;
+        margin-top: -20px;
+        display: block;
+    }
+}
+
+@media (min-width: 910px) {
+    .map-workspace {
+        width: 910px;
+    }
+    .map-circles-space {
+        width: 700px;
+        height: 700px;
+        float: left;
+        margin-bottom: 0;
+    }
+    .map-people {
+        width: 700px;
+        height: 700px;
+    }
+    .map-actions {
+        width: 208px;
+        height: 200px;
+        max-height: 200px;
+        padding-top: 20px;
+        float: left;
+        position: static;
+    }
+    .map-support-types,
+    .map-support-types.slide-up,
+    .map-support-types.slide-down {
+        width: 208px;
+        height: 500px;
+        max-height: 500px;
+        position: static;
+        float: right;
+    }
+    .toggle-slidenav {
+        display: none;
+    }
+    .toggle-staticnav {
+        display: block;
+    }
+    .map-legend {
+        width: 910px;
+    }
+    .circle-center {
+        z-index: 140;
+        top: 450px;
+        left: 150px;
+        height: 100px;
+        width: 100px;
+    }
+    .circle-very-close {
+        z-index: 130;
+        top: 300px;
+        left: 0;
+        height: 400px;
+        width: 400px;
+    }
+    .circle-somewhat-close {
+        z-index: 120;
+        top: 150px;
+        left: -150px;
+        height: 700px;
+        width: 700px;
+    }
+    .circle-not-close {
+        z-index: 110;
+        top: 0;
+        left: -300px;
+        height: 1000px;
+        width: 1000px;
+    }
+    .btn-map-action {
+        margin: 0 0 15px 20px;
+    }
+    .icon-map-action {
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+        line-height: 30px;
+        color: #039;
+    }
+    .map-support-types h2 {
+        border: 0;
+        margin: 0 0 10px 20px;
+        padding: 0;
+        font-size: 20px;
+    }
+    .map-support-types section h3 {
+        font-size: 16px;
+    }
+    .map-support-types ul {
+        margin: 0 20px 20px 40px;
+    }
+}
+
+@media (min-width: 1110px) {
+    .map-workspace {
+        width: 1080px;
+    }
+    .map-actions {
+        width: 378px;
+        height: 250px;
+        max-height: 250px;
+        padding-top: 50px;
+    }
+    .map-support-types,
+    .map-support-types.slide-up,
+    .map-support-types.slide-down {
+        width: 378px;
+        height: 450px;
+        max-height: 450px;
+    }
+    .map-legend {
+        width: 1080px;
+    }
+    .btn-map-action {
+        margin-left: 50px;
+    }
+    .map-support-types h2 {
+        margin: 0 0 20px 40px;
+        font-size: 26px;
+    }
+    .map-support-types section {
+        margin-left: 50px;
+    }
+    .map-support-types section h3 {
+        font-size: 20px;
+    }
+    .map-support-types ul {
+        margin: 0 20px 20px 45px;
+    }
 }
