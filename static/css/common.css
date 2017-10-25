@@ -1,12 +1,13 @@
 header {
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
+    border: 0;
+    padding: 0;
 }
 
-.interactive-module-title {
-    margin: 0;
-    padding: 0;
-    font-size: 24px;
+.interactive-title {
+    margin-left: -15px;
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
 }
 
 .btn-print {

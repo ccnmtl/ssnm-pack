@@ -43,6 +43,7 @@ var MapModal = Backbone.View.extend({
 
         this.model.set({'topic': topic, 'owner': owner});
         jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
     }
 });
 
@@ -118,6 +119,7 @@ var PersonModal = Backbone.View.extend({
         this.people.add(this.model);
         this.$el.modal('hide');
         jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
         this.people.trigger('change', this.people, {});
     },
     setAttributes: function() {
@@ -143,6 +145,31 @@ var PersonModal = Backbone.View.extend({
     }
 });
 
+var PersonViewModal = Backbone.View.extend({
+    events: {
+        //'click .btn-save': 'onSave',
+    },
+    initialize: function(options) {
+        _.bindAll(this, 'render');
+
+        this.people = options.people;
+
+        this.template = require('../static/templates/personViewModal.html');
+        this.render();
+    },
+    render: function() {
+        var json = {
+            person: this.model.toJSON(),
+            proximity: models.Proximity,
+            influence: models.Influence,
+            supportType: models.SupportType
+        };
+        var markup = this.template(json);
+        this.$el.find('.modal-content').html(markup);
+        this.$el.modal('show');
+    }
+});
+
 var SocialSupportMapView = Backbone.View.extend({
     events: {
         'click .btn-export': 'exportMap',
@@ -153,12 +180,14 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-add-person': 'addPerson',
         'click .btn-delete-person-confirm': 'deletePersonConfirm',
         'click .btn-delete-person': 'deletePerson',
+        'click .btn-view-person': 'viewPerson',
         'click .btn-edit-person': 'editPerson'
     },
     initialize: function(options) {
         _.bindAll(this, 'render',
             'createMap', 'editMap', 'importMap', 'exportMap',
-            'addPerson', 'editPerson', 'deletePersonConfirm', 'deletePerson');
+            'addPerson', 'viewPerson', 'editPerson', 'deletePersonConfirm',
+            'deletePerson');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -185,6 +214,7 @@ var SocialSupportMapView = Backbone.View.extend({
 
         jQuery(dlg).modal('hide');
         jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
     },
     importMap: function(evt) {
         var self = this;
@@ -199,6 +229,7 @@ var SocialSupportMapView = Backbone.View.extend({
 
             jQuery(dlg).modal('hide');
             jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+            jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
         };
         reader.readAsText(this.file);
     },
@@ -262,6 +293,16 @@ var SocialSupportMapView = Backbone.View.extend({
             people: this.model.get('people')
         });
     },
+    viewPerson: function(evt) {
+        var cid = jQuery(evt.currentTarget).data('id');
+        var person = this.model.get('people').get(cid);
+
+        new PersonViewModal({
+            el: this.$el.find('#personViewModal'),
+            model: person,
+            people: this.model.get('people')
+        });
+    },
     deletePersonConfirm: function(evt) {
         var $elt = jQuery(evt.currentTarget);
         var cid = $elt.data('id');
@@ -275,6 +316,7 @@ var SocialSupportMapView = Backbone.View.extend({
     deletePerson: function(evt) {
         jQuery('#confirmDeleteModal').modal('hide');
         jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
+        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
 
         var cid = jQuery(evt.currentTarget).data('id');
         var person = this.model.get('people').get(cid);

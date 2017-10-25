@@ -23,7 +23,7 @@ var SupportType = {
     },
     'advice': {
         'display': 'Advice',
-        'icon': 'comments'
+        'icon': 'commenting'
     },
     'social': {
         'display': 'Social',
@@ -31,7 +31,7 @@ var SupportType = {
     },
     'practical': {
         'display': 'Practical',
-        'icon': 'wrench'
+        'icon': 'cog'
     }
 };
 
