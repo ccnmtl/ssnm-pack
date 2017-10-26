@@ -67,33 +67,31 @@ describe('SocialSupportNetworkApp', function() {
         });
 
         it('has a map view', function() {
-            assert.equal(jQuery('input[name="map-topic"]').val(), 'Something');
-            assert.equal(jQuery('input[name="map-owner"]').val(), 'Someone');
+            assert.equal(jQuery('a#map-topic').html(), 'Something');
+            assert.equal(jQuery('a#map-owner').html(), 'Someone');
         });
 
         it('can edit map attributes', function(done) {
-            jQuery('.btn-edit-map').click();
+            jQuery('a#map-topic').click();
 
             waitFor(function() {
-                return jQuery('#editMapModal').is(':visible');
+                var $elt = jQuery('.editable-input input[type="text"]'); 
+                return $elt.is(':visible');
             }, done);
         });
 
         it('can change map attributes', function(done) {
-            jQuery('input[name="topic"]').val('Something Else');
-            jQuery('input[name="owner"]').val('Someone Else');
-            jQuery('.btn-save').click();
+            var $elt = jQuery('.editable-input input[type="text"]'); 
+            $elt.val('Something Else');
+            jQuery('.editable-submit').click();
 
             waitFor(function() {
-                return jQuery('#editMapModal').is(':hidden');
+                return $elt.is(':hidden');
             }, done);
         });
 
         it('has an updated map view', function() {
-            assert.equal(
-                jQuery('input[name="map-topic"]').val(), 'Something Else');
-            assert.equal(
-                jQuery('input[name="map-owner"]').val(), 'Someone Else');
+            assert.equal(jQuery('a#map-topic').html(), 'Something Else');
         });
 
         it('can add a person', function(done) {
@@ -131,48 +129,30 @@ describe('SocialSupportNetworkApp', function() {
 
         it('can view a person', function() {
             assert.equal(jQuery('.person-container').length, 1);
-            assert.equal(jQuery('.person-name').html(), 'alpha');
+            assert.equal(jQuery('.person-name a').html(), 'alpha');
         });
 
-        it('can edit a person', function(done) {
-            jQuery('.btn-edit-person').click();
+        it('can edit a person', function() {
+            // @todo
+        });
+
+        it('can change person attributes', function() {
+            // @todo
+        });
+
+        it('can see the updated person', function() {
+            // @todo
+        });
+
+        it('can remove a person from the view 1', function(done) {
+            jQuery('a.btn-view-person').click();
 
             waitFor(function() {
-                return jQuery('#personModal').is(':visible');
+                return jQuery('#personViewModal').is(':visible');
             }, done);
         });
 
-        it('can enter person attributes', function(done) {
-            jQuery('#personModal').find('[name="name"]').val('beta');
-            jQuery('.btn-next').click();
-
-            jQuery('#personModal').find(
-                '[name="proximity"][value="not-close"]').prop('checked', true);
-            jQuery('.btn-next').click();
-
-            jQuery('#personModal').find(
-                '[name="influence"][value="not-helpful"]').prop(
-                'checked', true);
-            jQuery('.btn-next').click();
-
-            jQuery('#personModal').find(
-                '[name="supportType"]').prop('checked', true);
-            jQuery('.btn-next').click();
-
-            // notes are not required
-            jQuery('.btn-save').click();
-
-            waitFor(function() {
-                return jQuery('#personModal').is(':hidden');
-            }, done);
-        });
-
-        it('can view the updated person', function() {
-            assert.equal(jQuery('.person-container').length, 1);
-            assert.equal(jQuery('.person-name').html(), 'beta');
-        });
-
-        it('can remove a person', function(done) {
+        it('can remove a person from the view 2', function(done) {
             jQuery('.btn-delete-person-confirm').click();
 
             waitFor(function() {
