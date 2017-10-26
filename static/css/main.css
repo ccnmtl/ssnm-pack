@@ -41,6 +41,15 @@
     margin-bottom: 0;
 }
 
+.editable-field:after {
+    font-family: "FontAwesome";
+    content: "\f040";
+    color: #000 !important;
+    padding-left: 10px;
+    font-size: smaller;
+    border: none;
+}
+
 .map-circles-space {
     margin: 0 0 30px 0;
     padding: 0;

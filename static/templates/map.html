@@ -2,15 +2,21 @@
                 <dl class="row">
                     <dt>Topic:</dt>
                         <dd>
-                        <a href="#" onclick="return false" class="btn-edit-map"><%= topic %>
-                        <i class="fa fa-pencil" style="margin-left: 10px;" aria-hidden="true"></i></a>
+                        <a href="#"
+                            class="editable-field"
+                            id="map-topic"
+                            data-type="text"
+                            data-title="Edit map topic"><%= topic %></a>
                         </dd>
                 </dl>
                 <dl class="row">
                     <dt>Owner:</dt>
                         <dd>
-                        <a href="#" onclick="return false" class="btn-edit-map"><%= owner %>
-                        <i class="fa fa-pencil" style="margin-left: 10px;" aria-hidden="true"></i></a>
+                        <a href="#"
+                            class="editable-field"
+                            id="map-owner"
+                            data-type="text"
+                            data-title="Edit map owner"><%= owner %></a>
                         </dd>
                 </dl>
             </div><!-- /.map-info -->
