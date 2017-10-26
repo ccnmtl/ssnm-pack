@@ -7,6 +7,7 @@ require('./static.js');
 require('!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css');
 require('!style-loader!css-loader!../static/css/common.css');
 require('!style-loader!css-loader!../static/css/main.css');
+require('!style-loader!css-loader!../static/css/bootstrap-editable.css');
 
 require('jquery');
 
