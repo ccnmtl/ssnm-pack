@@ -10,6 +10,7 @@ var utils = require('./utils.js');
 window.jQuery = window.$ = jQuery;
 window.Popper = require('popper.js');
 require('bootstrap');
+require('../static/js/bootstrap-editable.min.js');
 
 var FileSaver = require('filesaver.js');
 
@@ -202,6 +203,8 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.get('people').bind('change', this.render);
 
         this.render();
+        
+        jQuery.fn.editable.defaults.mode = 'inline';
     },
     exportMap: function(evt) {
         var dlg = jQuery(evt.currentTarget).parents('.modal');
@@ -247,15 +250,28 @@ var SocialSupportMapView = Backbone.View.extend({
         var markup;
         if (this.model.isEmpty()) {
             markup = this.createMapTemplate({});
+            this.$el.find('.ssnm-map-container').html(markup);
+
         } else {
             var json = this.model.toJSON();
             json.proximity = models.Proximity;
             json.influence = models.Influence;
             json.supportType = models.SupportType;
             markup = this.mapTemplate(json);
-        }
+            this.$el.find('.ssnm-map-container').html(markup);
 
-        this.$el.find('.ssnm-map-container').html(markup);
+            var self = this;
+            jQuery('#map-topic').editable({
+                success: function(response, newValue) {
+                    self.model.set('topic', newValue);
+                }
+            });
+            jQuery('#map-owner').editable({
+                success: function(response, newValue) {
+                    self.model.set('owner', newValue);
+                }
+            });
+        }
     },
     createMap: function(evt) {
         evt.preventDefault();
