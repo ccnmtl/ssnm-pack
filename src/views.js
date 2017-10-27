@@ -167,6 +167,7 @@ var PersonViewModal = Backbone.View.extend({
             influence: models.Influence,
             supportType: models.SupportType
         };
+        console.log(json);
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
         this.$el.modal('show');
@@ -177,21 +178,13 @@ var PersonViewModal = Backbone.View.extend({
             }
         });
         jQuery('#person-proximity-edit').editable({
-            source: [
-                {value: 'very-close', text: 'Very Close'},
-                {value: 'somewhat-close', text: 'Somewhat Close'},
-                {value: 'not-close', text: 'Not Close'}
-            ],
+            source: json.proximity,
             success: function(response, newValue) {
                 self.model.set('proximity', newValue);
             }
         });
         jQuery('#person-influence-edit').editable({
-            source: [
-                {value: 'very-helpful', text: 'Very Helpful'},
-                {value: 'somewhat-helpful', text: 'Somewhat Helpful'},
-                {value: 'not-helpful', text: 'Not Helpful'}
-            ],
+            source: json.influence,
             success: function(response, newValue) {
                 self.model.set('influence', newValue);
             }
