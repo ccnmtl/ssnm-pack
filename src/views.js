@@ -177,12 +177,14 @@ var PersonViewModal = Backbone.View.extend({
             }
         });
         jQuery('#person-proximity-edit').editable({
+            value: json.person.proximity,
             source: json.proximity,
             success: function(response, newValue) {
                 self.model.set('proximity', newValue);
             }
         });
         jQuery('#person-influence-edit').editable({
+            value: json.person.influence,
             source: json.influence,
             success: function(response, newValue) {
                 self.model.set('influence', newValue);
