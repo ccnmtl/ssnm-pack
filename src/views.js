@@ -167,7 +167,6 @@ var PersonViewModal = Backbone.View.extend({
             influence: models.Influence,
             supportType: models.SupportType
         };
-        console.log(json);
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
         this.$el.modal('show');
