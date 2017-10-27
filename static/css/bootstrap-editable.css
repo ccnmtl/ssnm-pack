@@ -687,3 +687,7 @@ a.editable-click.editable-disabled:hover {
     content: "Cancel";
     color: #fff;
 }
+
+.map-info .editable-input input.form-control {
+    padding-right: 35px !important;
+}
