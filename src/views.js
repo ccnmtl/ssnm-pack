@@ -157,6 +157,8 @@ var PersonViewModal = Backbone.View.extend({
 
         this.template = require('../static/templates/personViewModal.html');
         this.render();
+
+        jQuery.fn.editable.defaults.mode = 'inline';
     },
     render: function() {
         var json = {
@@ -168,6 +170,26 @@ var PersonViewModal = Backbone.View.extend({
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
         this.$el.modal('show');
+        var self = this;
+        jQuery('#person-name-edit').editable({
+            success: function(response, newValue) {
+                self.model.set('name', newValue);
+            }
+        });
+        jQuery('#person-proximity-edit').editable({
+            value: json.person.proximity,
+            source: json.proximity,
+            success: function(response, newValue) {
+                self.model.set('proximity', newValue);
+            }
+        });
+        jQuery('#person-influence-edit').editable({
+            value: json.person.influence,
+            source: json.influence,
+            success: function(response, newValue) {
+                self.model.set('influence', newValue);
+            }
+        });
     }
 });
 
