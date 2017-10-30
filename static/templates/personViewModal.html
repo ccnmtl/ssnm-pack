@@ -34,9 +34,13 @@
                 </dd>
             <dt>Support types:</dt>
                 <dd>
-                <% for (var j=0; j < person.supportType.length; j++) { %>
+                    <a href="#"
+                    class="editable-field"
+                    id="person-supporttype-edit"
+                    data-type="checklist"
+                    data-title="Edit support types"><% for (var j=0; j < person.supportType.length; j++) { %>
                 <%=supportType[person.supportType[j]].display%>, 
-                <% } %>
+                <% } %></a>
                 </dd>
             <dt>Notes:</dt>
                 <dd>

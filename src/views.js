@@ -188,6 +188,13 @@ var PersonViewModal = Backbone.View.extend({
                 self.model.set('influence', newValue);
             }
         });
+        jQuery('#person-supporttype-edit').editable({
+            value: json.person.supportType,
+            source: json.supportType,
+            success: function(response, newValue) {
+                self.model.set('supportType', newValue);
+            }
+        });
         jQuery('#person-notes-edit').editable({
             success: function(response, newValue) {
                 self.model.set('notes', newValue);
