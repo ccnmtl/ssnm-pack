@@ -157,8 +157,16 @@ var PersonViewModal = Backbone.View.extend({
 
         this.template = require('../static/templates/personViewModal.html');
         this.render();
-
-        jQuery.fn.editable.defaults.mode = 'inline';
+    },
+    getSupportTypeValues: function() {
+        var options = [];
+        for (var key in models.SupportType) {
+            if (models.SupportType.hasOwnProperty(key)) {
+                options.push({value: key,
+                    text: models.SupportType[key].display});
+            }
+        }
+        return options;
     },
     render: function() {
         var json = {
@@ -188,6 +196,18 @@ var PersonViewModal = Backbone.View.extend({
             source: json.influence,
             success: function(response, newValue) {
                 self.model.set('influence', newValue);
+            }
+        });
+        jQuery('#person-supporttype-edit').editable({
+            value: json.person.supportType,
+            source: this.getSupportTypeValues(),
+            success: function(response, newValue) {
+                self.model.set('supportType', newValue);
+            }
+        });
+        jQuery('#person-notes-edit').editable({
+            success: function(response, newValue) {
+                self.model.set('notes', newValue);
             }
         });
     }

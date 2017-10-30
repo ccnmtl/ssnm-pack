@@ -13,9 +13,6 @@
       </div>
       <div class="modal-body">
         <div class="clearfix pull-right">
-        <!--
-        <button class="btn-edit-person btn btn-success" data-id="<%=person.cid%>" data-dismiss="modal"><i class="fa fa-pencil" aria-hidden="true""></i> Edit</button>
-        -->
         <button class="btn-delete-person-confirm btn btn-danger" data-id="<%=person.cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
         </div>
         <dl class="clearfix">
@@ -37,13 +34,21 @@
                 </dd>
             <dt>Support types:</dt>
                 <dd>
-                <% for (var j=0; j < person.supportType.length; j++) { %>
+                    <a href="#"
+                    class="editable-field"
+                    id="person-supporttype-edit"
+                    data-type="checklist"
+                    data-title="Edit support types"><% for (var j=0; j < person.supportType.length; j++) { %>
                 <%=supportType[person.supportType[j]].display%>, 
-                <% } %>
+                <% } %></a>
                 </dd>
             <dt>Notes:</dt>
                 <dd>
-                <%=person.notes%>
+                    <a href="#"
+                    class="editable-field"
+                    id="person-notes-edit"
+                    data-type="textarea"
+                    data-title="Edit notes"><%=person.notes%></a>
                 </dd>
         </dl>
       </div>
