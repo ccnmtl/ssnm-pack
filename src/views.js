@@ -157,8 +157,6 @@ var PersonViewModal = Backbone.View.extend({
 
         this.template = require('../static/templates/personViewModal.html');
         this.render();
-
-        jQuery.fn.editable.defaults.mode = 'inline';
     },
     render: function() {
         var json = {
