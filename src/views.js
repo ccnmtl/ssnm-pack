@@ -10,7 +10,7 @@ var utils = require('./utils.js');
 window.jQuery = window.$ = jQuery;
 window.Popper = require('popper.js');
 require('bootstrap');
-require('../static/js/bootstrap-editable.min.js');
+require('../static/js/bootstrap-editable.js');
 
 var FileSaver = require('filesaver.js');
 
