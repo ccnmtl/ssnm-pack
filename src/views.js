@@ -158,6 +158,16 @@ var PersonViewModal = Backbone.View.extend({
         this.template = require('../static/templates/personViewModal.html');
         this.render();
     },
+    getSupportTypeValues: function() {
+        var options = [];
+        for (var key in models.SupportType) {
+            if (models.SupportType.hasOwnProperty(key)) {
+                options.push({value: key,
+                              text: models.SupportType[key].display});
+            }
+        }
+        return options;
+    },
     render: function() {
         var json = {
             person: this.model.toJSON(),
@@ -190,7 +200,7 @@ var PersonViewModal = Backbone.View.extend({
         });
         jQuery('#person-supporttype-edit').editable({
             value: json.person.supportType,
-            source: json.supportType,
+            source: this.getSupportTypeValues(),
             success: function(response, newValue) {
                 self.model.set('supportType', newValue);
             }
