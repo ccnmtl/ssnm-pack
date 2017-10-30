@@ -163,7 +163,7 @@ var PersonViewModal = Backbone.View.extend({
         for (var key in models.SupportType) {
             if (models.SupportType.hasOwnProperty(key)) {
                 options.push({value: key,
-                              text: models.SupportType[key].display});
+                    text: models.SupportType[key].display});
             }
         }
         return options;
