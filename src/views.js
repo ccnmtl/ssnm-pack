@@ -215,6 +215,7 @@ var PersonViewModal = Backbone.View.extend({
 
 var SocialSupportMapView = Backbone.View.extend({
     events: {
+        'click .toggle-slidenav': 'supportTypeMenu',
         'click .btn-export': 'exportMap',
         'click .btn-import': 'importMap',
         'change :file': 'onFileSelected',
@@ -227,7 +228,7 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-edit-person': 'editPerson'
     },
     initialize: function(options) {
-        _.bindAll(this, 'render',
+        _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'editMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'editPerson', 'deletePersonConfirm',
             'deletePerson');
@@ -256,6 +257,13 @@ var SocialSupportMapView = Backbone.View.extend({
         this.render();
 
         jQuery.fn.editable.defaults.mode = 'inline';
+    },
+    supportTypeMenu: function() {
+        if(jQuery('.map-support-types').hasClass('slide-up')) {
+            jQuery('.map-support-types').addClass('slide-down').removeClass('slide-up'); 
+        } else {
+            jQuery('.map-support-types').removeClass('slide-down').addClass('slide-up'); 
+        }
     },
     exportMap: function(evt) {
         var dlg = jQuery(evt.currentTarget).parents('.modal');
