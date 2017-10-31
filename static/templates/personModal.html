@@ -26,7 +26,7 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="proximity">How close are you to this person?</label>
-                <small class="form-text text-muted">Some explanation on what proximity means here</small>
+                <small class="form-text text-muted">This can mean how connected do you feel, or how often you see this person, or both.</small>
                 <br />
                 <% for (var p in proximity) { %>
                     <div class="form-check">
@@ -84,7 +84,10 @@
                             <input type="checkbox" class="form-check-input"
                                 name="supportType" value="<%=p%>"
                                 <% if (person.supportType.indexOf(p) > -1) { %>checked<% } %> />
-                                <%=supportType[p].display%>
+                                <%=supportType[p].display%><br />
+                                <small class="form-text text-muted">
+                                <%=supportType[p].description%>
+                                </small>
                         </label>
                     </div>
                 <% } %>
@@ -103,6 +106,7 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="supportType">What else can you say about this person?</label>
+                <small class="form-text text-muted">This is a place for you to make note of anything else you would like to say about this person as part of your network. What makes her/him special in your life, as a social support? Is there anything special or particular about their influence on or presence in your life? For example, “best friend for 25 years.” Is there a special reminder you want to note here related to why you feel they are supportive around your current issue for work? </small>
                 <br />
                 <textarea name="notes" class="form-control"><%= person.notes %></textarea>
             </div>

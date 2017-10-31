@@ -20,18 +20,22 @@ var SupportType = {
     'empathy': {
         'display': 'Empathy',
         'icon': 'heart',
+        'description': 'Emotional support is the ability to show empathy, compassion, and genuine concern for another person. Someone emotionally supportive listens and understands when you tell them about how you feel and demonstrates genuine concern for you. Does this person listen to you?'
     },
     'advice': {
         'display': 'Advice',
-        'icon': 'commenting'
+        'icon': 'commenting',
+        'description': 'Advice or informational support involves the provision of advice, suggestions, and information that we can use to address our problems.  Would you ask this person for advice? Do you trust their judgment?'
     },
     'social': {
         'display': 'Social',
-        'icon': 'users'
+        'icon': 'users',
+        'description': 'Sharing leisure or other activities with someone. Information and company that helps you to feel good about yourself. Do you like to “hangout” with this person?'
     },
     'practical': {
         'display': 'Practical',
-        'icon': 'cog'
+        'icon': 'cog',
+        'description': 'The provision of tangible aid and services that directly assist us in making our days and our lives more manageable.  Is this someone you can ask for a ride? For money? To take care of your children?'
     }
 };
 
