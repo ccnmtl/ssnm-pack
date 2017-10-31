@@ -244,15 +244,6 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.get('people').bind('remove', this.render);
         this.model.get('people').bind('change', this.render);
 
-        var person = new models.Person({
-            name: 'Dr. Robotic',
-            proximity: 'very-close',
-            influence: 'very-helpful',
-            supportType: ['empathy', 'advice'],
-            notes: 'He is very vile'
-        });
-        this.model.get('people').add(person);
-
         this.render();
 
         jQuery.fn.editable.defaults.mode = 'inline';
@@ -374,15 +365,17 @@ var SocialSupportMapView = Backbone.View.extend({
         var cid = $elt.data('id');
         var person = this.model.get('people').get(cid);
 
-        jQuery('#confirmDeleteModal').find('.name').html(person.get('name'));
-        jQuery('#confirmDeleteModal').find(
-            '.btn-delete-person').attr('data-id', cid);
-        jQuery('#confirmDeleteModal').modal('show');
+        var $modal = this.$el.find('#confirmDeleteModal');
+        $modal.find('.name').html(person.get('name'));
+        $modal.find('.btn-delete-person').attr('data-id', cid);
+        $modal.modal('show');
     },
     deletePerson: function(evt) {
-        jQuery('#confirmDeleteModal').modal('hide');
-        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
-        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
+        this.$el.find('#confirmDeleteModal').modal('hide');
+
+        // bootstrap4 bug workaround
+        jQuery('.modal-backdrop').remove();
+        jQuery('body').removeClass('modal-open').removeAttr('style');
 
         var cid = jQuery(evt.currentTarget).data('id');
         var person = this.model.get('people').get(cid);

@@ -119,8 +119,15 @@ describe('SocialSupportNetworkApp', function() {
                 '[name="supportType"]').prop('checked', true);
             jQuery('.btn-next').click();
 
-            // notes are not required
-            jQuery('.btn-save').click();
+            jQuery('#personModal').find('[name="notes"]').val('beta');
+
+            waitFor(function() {
+                return jQuery('#personModal .btn-save').is(':visible');
+            }, done);
+        });
+
+        it('can save a person attributes', function(done) {
+            jQuery('#personModal').find('.btn-save').click();
 
             waitFor(function() {
                 return jQuery('#personModal').is(':hidden');
@@ -156,20 +163,17 @@ describe('SocialSupportNetworkApp', function() {
             jQuery('.btn-delete-person-confirm').click();
 
             waitFor(function() {
-                return jQuery('#confirmDeleteModal').is(':visible');
+                return jQuery(
+                    '#confirmDeleteModal .btn-delete-person').is(':visible');
             }, done);
         });
 
         it('can confirm remove a person', function(done) {
-            jQuery('.btn-delete-person').click();
+            jQuery('#confirmDeleteModal .btn-delete-person').click();
 
             waitFor(function() {
-                return jQuery('#confirmDeleteModal').is(':hidden');
+                return jQuery('.person-container').length === 0;
             }, done);
-        });
-
-        it('can no longer see the person', function() {
-            assert.equal(jQuery('.person-container').length, 0);
         });
     });
 });
