@@ -244,8 +244,17 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.get('people').bind('remove', this.render);
         this.model.get('people').bind('change', this.render);
 
+        var person = new models.Person({
+            name: 'Dr. Robotic',
+            proximity: 'very-close',
+            influence: 'very-helpful',
+            supportType: ['empathy', 'advice'],
+            notes: 'He is very vile'
+        });
+        this.model.get('people').add(person);
+
         this.render();
-        
+
         jQuery.fn.editable.defaults.mode = 'inline';
     },
     exportMap: function(evt) {
@@ -293,7 +302,6 @@ var SocialSupportMapView = Backbone.View.extend({
         if (this.model.isEmpty()) {
             markup = this.createMapTemplate({});
             this.$el.find('.ssnm-map-container').html(markup);
-
         } else {
             var json = this.model.toJSON();
             json.proximity = models.Proximity;
@@ -303,12 +311,12 @@ var SocialSupportMapView = Backbone.View.extend({
             this.$el.find('.ssnm-map-container').html(markup);
 
             var self = this;
-            jQuery('#map-topic').editable({
+            this.$el.find('#map-topic').editable({
                 success: function(response, newValue) {
                     self.model.set('topic', newValue);
                 }
             });
-            jQuery('#map-owner').editable({
+            this.$el.find('#map-owner').editable({
                 success: function(response, newValue) {
                     self.model.set('owner', newValue);
                 }
