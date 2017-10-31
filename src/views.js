@@ -225,13 +225,14 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person-confirm': 'deletePersonConfirm',
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
-        'click .btn-edit-person': 'editPerson'
+        'click .btn-edit-person': 'editPerson',
+        'click .btn-print': 'onPrint'
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'editMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'editPerson', 'deletePersonConfirm',
-            'deletePerson');
+            'deletePerson', 'onPrint');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -396,6 +397,9 @@ var SocialSupportMapView = Backbone.View.extend({
         var person = this.model.get('people').get(cid);
 
         this.model.get('people').remove(person);
+    },
+    onPrint : function(evt) {
+        window.print();
     }
 });
 
