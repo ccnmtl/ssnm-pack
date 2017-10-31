@@ -63,7 +63,7 @@
                         <% var count = people.length -1; %>
                         <% for (var i=0; i < people.length; i++) { %>
                             <% if (people[i].supportType.indexOf(p) > -1) { %>
-                                <li><%=people[i].name%><% if (i < count) { %>, <% } %></li>
+                                <li><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a><% if (i < count) { %>, <% } %></li>
                             <% } %> 
                         <% } %>
                         </ul>

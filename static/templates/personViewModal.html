@@ -38,8 +38,10 @@
                     class="editable-field"
                     id="person-supporttype-edit"
                     data-type="checklist"
-                    data-title="Edit support types"><% for (var j=0; j < person.supportType.length; j++) { %>
-                <%=supportType[person.supportType[j]].display%>, 
+                    data-title="Edit support types">
+                    <% var count = person.supportType.length -1; %>
+                    <% for (var j=0; j < person.supportType.length; j++) { %>
+                <%=supportType[person.supportType[j]].display%><% if (j < count) { %>, <% } %> 
                 <% } %></a>
                 </dd>
             <dt>Notes:</dt>
