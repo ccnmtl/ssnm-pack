@@ -48,7 +48,7 @@ var MapModal = Backbone.View.extend({
     }
 });
 
-var PersonModal = Backbone.View.extend({
+var PersonAddModal = Backbone.View.extend({
     events: {
         'click .btn-next': 'onNext',
         'click .btn-prev': 'onPrev',
@@ -225,13 +225,12 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person-confirm': 'deletePersonConfirm',
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
-        'click .btn-edit-person': 'editPerson',
         'click .btn-print': 'onPrint'
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'editMap', 'importMap', 'exportMap',
-            'addPerson', 'viewPerson', 'editPerson', 'deletePersonConfirm',
+            'addPerson', 'viewPerson', 'deletePersonConfirm',
             'deletePerson', 'onPrint');
 
         this.createMapTemplate =
@@ -343,19 +342,9 @@ var SocialSupportMapView = Backbone.View.extend({
         });
     },
     addPerson: function() {
-        new PersonModal({
+        new PersonAddModal({
             el: this.$el.find('#personModal'),
             model: new models.Person({}),
-            people: this.model.get('people')
-        });
-    },
-    editPerson: function(evt) {
-        var cid = jQuery(evt.currentTarget).data('id');
-        var person = this.model.get('people').get(cid);
-
-        new PersonModal({
-            el: this.$el.find('#personModal'),
-            model: person,
             people: this.model.get('people')
         });
     },
