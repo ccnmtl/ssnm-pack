@@ -20,12 +20,28 @@
                         </dd>
                 </dl>
             </div><!-- /.map-info -->
-
             <div class="map-workspace clearfix">
+                <div class="map-people">
+                    <% for (var i=0; i < people.length; i++) { %>
+                    <div class="person-container <%=people[i].influence%>" data-id="<%=people[i].cid%>">
+                        <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a></div>
+                        <% if ( people[i].notes ) { %>
+                        <div class="person-notes"><i class="fa fa-file-text"></i></div>
+                        <% } %>
+                        <div class="person-proximity"><%=proximity[people[i].proximity]%></div>
+                        <div class="person-influence"><%=influence[people[i].influence]%></div>
+                        <div class="person-support-type">
+                            <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                            <i class="fa fa-<%=supportType[people[i].supportType[j]].icon%>"></i><span class="sr-only"><%=supportType[people[i].supportType[j]].display%></span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div><!-- /.map-people -->
+
                 <div class="map-circles-space">
-                    <div class="circle-map circle-center">
-                    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-                    Peppercorn
+                    <div class="circle-map circle-center text-center">
+                        <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
                     </div>
                     <div class="circle-map circle-very-close">
                     </div>
@@ -70,27 +86,6 @@
                     </section>
                 <% } %>
                 </div><!-- /.map-support-types -->
-
-                <div class="map-people">
-                    <% for (var i=0; i < people.length; i++) { %>
-                    <div class="person-container <%=people[i].influence%>" style="">
-                        <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a></div>
-                        <% if ( people[i].notes ) { %>
-                        <div class="person-notes"><i class="fa fa-file-text"></i></div>
-                        <% } %>
-                        <div class="person-proximity"><%=proximity[people[i].proximity]%></div>
-                        <div class="person-influence"><%=influence[people[i].influence]%></div>
-                        <div class="person-support-type">
-                            <% for (var j=0; j < people[i].supportType.length; j++) { %>
-                            <i class="fa fa-<%=supportType[people[i].supportType[j]].icon%>"></i><span class="sr-only"><%=supportType[people[i].supportType[j]].display%></span>
-                            <% } %>
-                        </div>
-                        <!--     <div><button class="btn-edit-person" data-id="<%=people[i].cid%>"><i class="fa fa-pencil" aria-hidden="true"></i></button></div>
-                            <div><button class="btn-delete-person-confirm" data-id="<%=people[i].cid%>"><i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
-                        -->
-                    </div>
-                    <% } %>
-                </div><!-- /.map-people -->
             </div><!-- /.map-workspace -->
 
             <div class="map-legend" aria-hidden="true">
