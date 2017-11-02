@@ -15,39 +15,6 @@ require('../static/js/bootstrap-editable.js');
 var FileSaver = require('filesaver.js');
 
 
-var MapModal = Backbone.View.extend({
-    events: {
-        'click .btn-save': 'onSave',
-    },
-    initialize: function(options) {
-        _.bindAll(this, 'render', 'onSave');
-
-        this.template = require('../static/templates/editMap.html');
-        this.render();
-    },
-    render: function() {
-        var json = this.model.toJSON();
-        var markup = this.template(json);
-        this.$el.find('.modal-content').html(markup);
-        this.$el.modal('show');
-    },
-    onSave: function(evt) {
-        var $form = jQuery(evt.currentTarget).parents('.modal').find('form');
-
-        var topic = utils.validateFormValue($form, 'input[name="topic"]');
-        var owner = utils.validateFormValue($form, 'input[name="owner"]');
-
-        if (!topic || !owner) {
-            evt.preventDefault();
-            return false;
-        }
-
-        this.model.set({'topic': topic, 'owner': owner});
-        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
-        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
-    }
-});
-
 var PersonAddModal = Backbone.View.extend({
     events: {
         'click .btn-next': 'onNext',
@@ -220,7 +187,6 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-import': 'importMap',
         'change :file': 'onFileSelected',
         'click .btn-create-map': 'createMap',
-        'click .btn-edit-map': 'editMap',
         'click .btn-add-person': 'addPerson',
         'click .btn-delete-person-confirm': 'deletePersonConfirm',
         'click .btn-delete-person': 'deletePerson',
@@ -229,7 +195,7 @@ var SocialSupportMapView = Backbone.View.extend({
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
-            'createMap', 'editMap', 'importMap', 'exportMap',
+            'createMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
             'deletePerson', 'onPrint');
 
@@ -334,12 +300,6 @@ var SocialSupportMapView = Backbone.View.extend({
             this.model.set({'topic': topic, 'owner': owner});
         }
         return false;
-    },
-    editMap: function() {
-        new MapModal({
-            el: this.$el.find('#editMapModal'),
-            model: this.model
-        });
     },
     addPerson: function() {
         new PersonAddModal({
