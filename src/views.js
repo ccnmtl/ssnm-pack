@@ -101,7 +101,7 @@ var PersonAddModal = Backbone.View.extend({
                     this.tagName === 'TEXTAREA' ||
                         this.tagName === 'SELECT') {
                     self.model.set(
-                        p, jQuery(this).val().trim(), {silent:true});
+                        p, jQuery(this).val().trim(), {silent: true});
                 } else if (this.type === 'checkbox' &&
                            jQuery(this).is(':checked')) {
                     var a = self.model.get(p);
@@ -221,9 +221,11 @@ var SocialSupportMapView = Backbone.View.extend({
     },
     supportTypeMenu: function() {
         if(jQuery('.map-support-types').hasClass('slide-up')) {
-            jQuery('.map-support-types').addClass('slide-down').removeClass('slide-up'); 
+            jQuery('.map-support-types')
+                .addClass('slide-down').removeClass('slide-up');
         } else {
-            jQuery('.map-support-types').removeClass('slide-down').addClass('slide-up'); 
+            jQuery('.map-support-types')
+                .removeClass('slide-down').addClass('slide-up');
         }
     },
     exportMap: function(evt) {
@@ -236,8 +238,6 @@ var SocialSupportMapView = Backbone.View.extend({
         FileSaver.saveAs(f, fName);
 
         jQuery(dlg).modal('hide');
-        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
-        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
     },
     importMap: function(evt) {
         var self = this;
@@ -251,8 +251,10 @@ var SocialSupportMapView = Backbone.View.extend({
             self.model.decrypt(contents, pwd);
 
             jQuery(dlg).modal('hide');
-            jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
-            jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
+
+            // bootstrap4 bug workaround
+            jQuery('.modal-backdrop').remove();
+            jQuery('body').removeClass('modal-open').removeAttr('style');
         };
         reader.readAsText(this.file);
     },
@@ -396,7 +398,7 @@ var SocialSupportMapView = Backbone.View.extend({
 
         this.model.get('people').remove(person);
     },
-    onPrint : function(evt) {
+    onPrint: function(evt) {
         window.print();
     }
 });

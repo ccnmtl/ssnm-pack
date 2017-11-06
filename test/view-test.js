@@ -75,13 +75,13 @@ describe('SocialSupportNetworkApp', function() {
             jQuery('a#map-topic').click();
 
             waitFor(function() {
-                var $elt = jQuery('.editable-input input[type="text"]'); 
+                var $elt = jQuery('.editable-input input[type="text"]');
                 return $elt.is(':visible');
             }, done);
         });
 
         it('can change map attributes', function(done) {
-            var $elt = jQuery('.editable-input input[type="text"]'); 
+            var $elt = jQuery('.editable-input input[type="text"]');
             $elt.val('Something Else');
             jQuery('.editable-submit').click();
 
