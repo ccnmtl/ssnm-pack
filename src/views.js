@@ -12,6 +12,7 @@ window.Popper = require('popper.js');
 require('bootstrap');
 require('../static/js/bootstrap-editable.js');
 
+
 var FileSaver = require('filesaver.js');
 
 
@@ -23,7 +24,7 @@ var PersonAddModal = Backbone.View.extend({
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'onNext', 'onPrev', 'onSave',
-            'isStepComplete');
+            'isStepComplete', 'destroy');
 
         this.people = options.people;
 
@@ -33,6 +34,10 @@ var PersonAddModal = Backbone.View.extend({
         this.$el.modal('show');
 
         this.state.bind('change:step', this.render);
+    },
+    destroy: function() {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
     },
     render: function() {
         var json = {
@@ -86,9 +91,6 @@ var PersonAddModal = Backbone.View.extend({
         this.setAttributes();
         this.people.add(this.model);
         this.$el.modal('hide');
-        jQuery('.modal-backdrop').remove(); // bootstrap4 bug workaround
-        jQuery('body').removeClass('modal-open').removeAttr('style'); // bootstrap4 bug workaround
-        this.people.trigger('change', this.people, {});
     },
     setAttributes: function() {
         var self = this;
@@ -197,7 +199,7 @@ var SocialSupportMapView = Backbone.View.extend({
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
-            'deletePerson', 'onPrint');
+            'deletePerson', 'onPrint', 'positionPeople');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -206,6 +208,7 @@ var SocialSupportMapView = Backbone.View.extend({
             require('../static/templates/map.html');
 
         this.model = new models.SocialSupportMap();
+
         this.model.bind('change', this.render);
         this.model.get('people').bind('add', this.render);
         this.model.get('people').bind('remove', this.render);
@@ -214,6 +217,7 @@ var SocialSupportMapView = Backbone.View.extend({
         this.render();
 
         jQuery.fn.editable.defaults.mode = 'inline';
+        $(window).on('resize', this.positionPeople);
     },
     supportTypeMenu: function() {
         if(jQuery('.map-support-types').hasClass('slide-up')) {
@@ -262,18 +266,67 @@ var SocialSupportMapView = Backbone.View.extend({
         this.$el.find('.selected-file').html(file.name);
         this.file = file;
     },
+    shells: {
+        'very-close': {
+            'startingAngle': 270,
+            'increment': 60
+        },
+        'somewhat-close': {
+            'startingAngle': 240,
+            'increment': 30
+        },
+        'not-close': {
+            'startingAngle': 255,
+            'increment': 25
+        }
+    },
+    positionPeople: function() {
+        // reset mapping
+        for (var key in this.shells) {
+            if (this.shells.hasOwnProperty(key)) {
+                this.shells[key].angle = this.shells[key].startingAngle;
+            }
+        }
+
+        // base center from the interior circle
+        var ctr = utils.eltCenter(this.$el.find('.circle-center'));
+
+        // position people based on current layout
+        var self = this;
+        this.model.get('people').forEach(function(person) {
+            var sel = '.person-container[data-id="' + person.cid + '"]';
+            var $elt = self.$el.find(sel);
+
+            var proximity = person.get('proximity');
+            var radius = utils.radius(self.$el.find('.circle-' + proximity));
+            var radians = utils.radians(self.shells[proximity].angle);
+            self.shells[proximity].angle += self.shells[proximity].increment;
+
+            $elt.css({
+                'left': radius * Math.cos(radians) + ctr.x - $elt.width() / 2,
+                'top': radius * Math.sin(radians) + ctr.y - $elt.height() / 2
+            });
+        });
+    },
+    context: function() {
+        var ctx = this.model.toJSON();
+        ctx.proximity = models.Proximity;
+        ctx.influence = models.Influence;
+        ctx.supportType = models.SupportType;
+        return ctx;
+    },
     render: function() {
         var markup;
         if (this.model.isEmpty()) {
             markup = this.createMapTemplate({});
             this.$el.find('.ssnm-map-container').html(markup);
         } else {
-            var json = this.model.toJSON();
-            json.proximity = models.Proximity;
-            json.influence = models.Influence;
-            json.supportType = models.SupportType;
-            markup = this.mapTemplate(json);
+            // render the map layer
+            markup = this.mapTemplate(this.context());
             this.$el.find('.ssnm-map-container').html(markup);
+
+            // position the people
+            this.positionPeople();
 
             var self = this;
             this.$el.find('#map-topic').editable({
@@ -302,10 +355,13 @@ var SocialSupportMapView = Backbone.View.extend({
         return false;
     },
     addPerson: function() {
-        new PersonAddModal({
+        var view = new PersonAddModal({
             el: this.$el.find('#personModal'),
             model: new models.Person({}),
             people: this.model.get('people')
+        });
+        this.$el.find('#personModal').on('hidden.bs.modal', function(e) {
+            view.destroy();
         });
     },
     viewPerson: function(evt) {
