@@ -233,6 +233,28 @@ var SocialSupportMapView = Backbone.View.extend({
         var pwd = jQuery(dlg).find('.export-password').val();
         var fName = jQuery(dlg).find('.export-filename').val();
 
+        jQuery(dlg).find('.is-invalid').removeClass('is-invalid');
+
+        var error = false;
+
+        if (!fName) {
+            var $elt = jQuery(dlg).find('.export-filename');
+            $elt.addClass('is-invalid');
+            $elt.parents('.form-group').addClass('is-invalid');
+            error = true;
+        }
+
+        if (!pwd) {
+            $elt = jQuery(dlg).find('.export-password');
+            $elt.addClass('is-invalid');
+            $elt.parents('.form-group').addClass('is-invalid');
+            error = true;
+        }
+
+        if (error) {
+            return;
+        }
+
         var cipher = this.model.encrypt(pwd);
         var f = new File([cipher], fName, {type: 'text/plain;charset=utf-8'});
         FileSaver.saveAs(f, fName);
