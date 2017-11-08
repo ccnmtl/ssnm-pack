@@ -242,19 +242,44 @@ var SocialSupportMapView = Backbone.View.extend({
     importMap: function(evt) {
         var self = this;
         var dlg = this.$el.find('#importModal');
+        jQuery(dlg).find('.is-invalid').removeClass('is-invalid');
+
+        var error = false;
+
+        if (!this.file) {
+            var $btn = jQuery(dlg).find('input[type="file"]');
+            $btn.addClass('is-invalid');
+            $btn.parents('.form-group').addClass('is-invalid');
+            error = true;
+        }
+
+        var $pwd = jQuery(dlg).find('.import-password');
+        var password = $pwd.val();
+        if (!password) {
+            $pwd.addClass('is-invalid');
+            $pwd.parents('.form-group').addClass('is-invalid');
+            error = true;
+        }
+
+        if (error) {
+            return;
+        }
 
         var reader = new FileReader();
         reader.onload = function(e) {
-            var contents = e.target.result;
-            var pwd = jQuery(dlg).find('.import-password').val();
+            try {
+                self.model.decrypt(e.target.result, password);
 
-            self.model.decrypt(contents, pwd);
+                jQuery(dlg).modal('hide');
 
-            jQuery(dlg).modal('hide');
-
-            // bootstrap4 bug workaround
-            jQuery('.modal-backdrop').remove();
-            jQuery('body').removeClass('modal-open').removeAttr('style');
+                // bootstrap4 bug workaround
+                jQuery('.modal-backdrop').remove();
+                jQuery('body').removeClass('modal-open').removeAttr('style');
+            } catch(err) {
+                var $elt = jQuery(dlg).find('.file-read-error');
+                $elt.addClass('is-invalid');
+                $elt.parents('.form-group').addClass('is-invalid');
+            }
         };
         reader.readAsText(this.file);
     },
