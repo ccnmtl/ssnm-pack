@@ -22,7 +22,7 @@
                     class="editable-field"
                     id="person-proximity-edit"
                     data-type="select"
-                    data-title="Edit proximity"><%=proximity[person.proximity]%></a>              
+                    data-title="Edit proximity"><%=proximity[person.proximity]%></a>
                 </dd>
             <dt>Influence:</dt>
                 <dd>
@@ -30,7 +30,7 @@
                     class="editable-field"
                     id="person-influence-edit"
                     data-type="select"
-                    data-title="Edit influence"><%=influence[person.influence]%></a>              
+                    data-title="Edit influence"><%=influence[person.influence]%></a>
                 </dd>
             <dt>Support types:</dt>
                 <dd>
@@ -41,7 +41,7 @@
                     data-title="Edit support types">
                     <% var count = person.supportType.length -1; %>
                     <% for (var j=0; j < person.supportType.length; j++) { %>
-                <%=supportType[person.supportType[j]].display%><% if (j < count) { %>, <% } %> 
+                <%=supportType[person.supportType[j]].display%><% if (j < count) { %><br /><% } %> 
                 <% } %></a>
                 </dd>
             <dt>Notes:</dt>
