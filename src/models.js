@@ -74,6 +74,16 @@ var Person = Backbone.Model.extend({
 
 var PersonList = Backbone.Collection.extend({
     model: Person,
+    bySupportType: function(supportType) {
+        var results = [];
+        this.forEach(function(person) {
+            var a = person.get('supportType');
+            if (a && a.indexOf(supportType) > -1) {
+                results.push(person);
+            }
+        });
+        return results;
+    }
 });
 
 

@@ -375,6 +375,7 @@
     border-radius: 5px;
     z-index: 200;
 }
+
 .person-name {
     margin: 0;
     padding: 0;
@@ -412,6 +413,25 @@
 
 .editable-checklist label {
     justify-content: left;
+}
+
+.dehighlight {
+    opacity: .2;
+}
+
+i.fa.highlight.highlight {
+    color: black;
+    font-weight: bold;
+}
+
+h3.highlight {
+    font-weight: bold !important;
+}
+
+.person-container.highlight {
+    -moz-box-shadow: 5px 5px 5px black;
+    -webkit-box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px black;
 }
 
 @media (min-width: 492px) {

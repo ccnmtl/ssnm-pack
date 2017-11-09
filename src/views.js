@@ -195,14 +195,16 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person-confirm': 'deletePersonConfirm',
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
-        'click .btn-print': 'onPrint'
+        'click .btn-print': 'onPrint',
+        'click i.fa': 'toggleHighlight'
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
             'deletePerson', 'onPrint', 'positionPeople',
-            'readSession', 'writeSession');
+            'readSession', 'writeSession',
+            'toggleHighlight', 'removeHighlight');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -482,6 +484,31 @@ var SocialSupportMapView = Backbone.View.extend({
     },
     onPrint: function(evt) {
         window.print();
+    },
+    removeHighlight: function() {
+        this.$el.find('.highlight').removeClass('highlight');
+        this.$el.find('.dehighlight').removeClass('dehighlight');
+    },
+    toggleHighlight: function(evt) {
+        var highlighted = jQuery(evt.currentTarget).hasClass('highlight');
+
+        this.removeHighlight();
+
+        if (!highlighted) {
+            this.$el.find('.person-container').addClass('dehighlight');
+
+            jQuery(evt.currentTarget).addClass('highlight');
+            jQuery(evt.currentTarget).parent().addClass('highlight');
+
+            var supportType = jQuery(evt.currentTarget).data('id');
+            var people = this.model.get('people').bySupportType(supportType);
+            for (var i = 0; i < people.length; i++) {
+                var person = people[i];
+                var $elt = this.$el.find(
+                    '.person-container[data-id="' + person.cid + '"]');
+                $elt.removeClass('dehighlight');
+            }
+        }
     }
 });
 
