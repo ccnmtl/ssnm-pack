@@ -1,6 +1,6 @@
 {
   "name": "ssnm-pack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Social Support Network Map is a tool to help students and mental health professionals create digital social support maps.",
   "main": "src/index.js",
   "scripts": {
