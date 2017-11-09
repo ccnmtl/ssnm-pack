@@ -69,22 +69,22 @@
                 <div class="map-support-types">
                     <h2 class="toggle-slidenav"><i class="fa fa-fw fa-align-justify" aria-hidden="true"></i> Support Type</h2>
                     <h2 class="toggle-staticnav">Support Type</h2>
-                <% for (var p in supportType) { %>
-                    <section>
-                        <h3>
-                        <i class="fa fa-<%=supportType[p].icon%> fa-custom fa-fw"></i>
-                        <%=supportType[p].display%>
-                        </h3>
-                        <ul class="support-type-container">
-                        <% var count = people.length -1; %>
-                        <% for (var i=0; i < people.length; i++) { %>
-                            <% if (people[i].supportType.indexOf(p) > -1) { %>
-                                <li><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a><% if (i < count) { %>, <% } %></li>
-                            <% } %> 
-                        <% } %>
-                        </ul>
-                    </section>
-                <% } %>
+                    <% for (var p in supportType) { %>
+                        <section>
+                            <h3>
+                            <i class="fa fa-<%=supportType[p].icon%> fa-custom fa-fw" data-id="<%=p%>"></i>
+                            <%=supportType[p].display%>
+                            </h3>
+                            <ul class="support-type-container">
+                            <% var count = people.length -1; %>
+                            <% for (var i=0; i < people.length; i++) { %>
+                                <% if (people[i].supportType.indexOf(p) > -1) { %>
+                                    <li><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a><% if (i < count) { %>, <% } %></li>
+                                <% } %> 
+                            <% } %>
+                            </ul>
+                        </section>
+                    <% } %>
                 </div><!-- /.map-support-types -->
             </div><!-- /.map-workspace -->
 
