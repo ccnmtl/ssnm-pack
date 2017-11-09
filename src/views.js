@@ -175,6 +175,8 @@ var PersonViewModal = Backbone.View.extend({
             }
         });
         jQuery('#person-notes-edit').editable({
+            value: json.person.notes,
+            emptytext: 'Add details',
             success: function(response, newValue) {
                 self.model.set('notes', newValue);
             }
