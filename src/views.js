@@ -199,7 +199,8 @@ var SocialSupportMapView = Backbone.View.extend({
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'importMap', 'exportMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
-            'deletePerson', 'onPrint', 'positionPeople');
+            'deletePerson', 'onPrint', 'positionPeople',
+            'readSession', 'writeSession');
 
         this.createMapTemplate =
             require('../static/templates/createMap.html');
@@ -214,7 +215,9 @@ var SocialSupportMapView = Backbone.View.extend({
         this.model.get('people').bind('remove', this.render);
         this.model.get('people').bind('change', this.render);
 
-        this.render();
+        if (!this.readSession()) {
+            this.render();
+        }
 
         jQuery.fn.editable.defaults.mode = 'inline';
         $(window).on('resize', this.positionPeople);
@@ -227,6 +230,34 @@ var SocialSupportMapView = Backbone.View.extend({
             jQuery('.map-support-types')
                 .removeClass('slide-down').addClass('slide-up');
         }
+    },
+    readSession: function() {
+        /* eslint-disable scanjs-rules/identifier_sessionStorage */
+        if (utils.storageAvailable('sessionStorage')) {
+            var dt = new Date();
+            var str =
+                dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate();
+            var cipher = sessionStorage.getItem('ssnmmap');
+
+            if (cipher) {
+                this.model.decrypt(cipher, str);
+                return true;
+            }
+        }
+        /* eslint-enable scanjs-rules/identifier_sessionStorage */
+        return false;
+    },
+    writeSession: function() {
+        /* eslint-disable scanjs-rules/identifier_sessionStorage */
+        /* eslint-disable scanjs-rules/property_sessionStorage */
+        if (utils.storageAvailable('sessionStorage')) {
+            var dt = new Date();
+            var str =
+                dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate();
+            window.sessionStorage.setItem('ssnmmap', this.model.encrypt(str));
+        }
+        /* eslint-enable scanjs-rules/identifier_sessionStorage */
+        /* eslint-enable scanjs-rules/property_sessionStorage */
     },
     exportMap: function(evt) {
         var dlg = jQuery(evt.currentTarget).parents('.modal');
@@ -370,6 +401,8 @@ var SocialSupportMapView = Backbone.View.extend({
             markup = this.createMapTemplate({});
             this.$el.find('.ssnm-map-container').html(markup);
         } else {
+            this.writeSession();
+
             // render the map layer
             markup = this.mapTemplate(this.context());
             this.$el.find('.ssnm-map-container').html(markup);
