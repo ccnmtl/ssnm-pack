@@ -398,6 +398,22 @@
     display: none; /* responsive */
 }
 
+.editable-unsaved {
+    font-weight: normal !important;
+}
+
+.editable-checklist {
+    margin-right: 20px;
+}
+
+.editable-checklist span {
+    margin-left: 5px !important;
+}
+
+.editable-checklist label {
+    justify-content: left;
+}
+
 @media (min-width: 492px) {
     .map-workspace {
         width: 492px;
