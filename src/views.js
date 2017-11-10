@@ -196,11 +196,12 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
         'click .btn-print': 'onPrint',
-        'click .map-support-types i.fa': 'toggleHighlight'
+        'click .map-support-types i.fa': 'toggleHighlight',
+        'click .btn-new-map': 'newMap'
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
-            'createMap', 'importMap', 'exportMap',
+            'createMap', 'importMap', 'exportMap', 'newMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
             'deletePerson', 'onPrint', 'positionPeople',
             'readSession', 'writeSession',
@@ -212,12 +213,7 @@ var SocialSupportMapView = Backbone.View.extend({
         this.mapTemplate =
             require('../static/templates/map.html');
 
-        this.model = new models.SocialSupportMap();
-
-        this.model.bind('change', this.render);
-        this.model.get('people').bind('add', this.render);
-        this.model.get('people').bind('remove', this.render);
-        this.model.get('people').bind('change', this.render);
+        this.createModel();
 
         if (!this.readSession()) {
             this.render();
@@ -225,6 +221,17 @@ var SocialSupportMapView = Backbone.View.extend({
 
         jQuery.fn.editable.defaults.mode = 'inline';
         $(window).on('resize', this.positionPeople);
+    },
+    createModel: function() {
+        if (this.model) {
+            this.model.destroy();
+        }
+
+        this.model = new models.SocialSupportMap();
+        this.model.bind('change', this.render);
+        this.model.get('people').bind('add', this.render);
+        this.model.get('people').bind('remove', this.render);
+        this.model.get('people').bind('change', this.render);
     },
     supportTypeMenu: function() {
         if(jQuery('.map-support-types').hasClass('slide-up')) {
@@ -260,6 +267,17 @@ var SocialSupportMapView = Backbone.View.extend({
                 dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate();
             window.sessionStorage.setItem('ssnmmap', this.model.encrypt(str));
         }
+        /* eslint-enable scanjs-rules/identifier_sessionStorage */
+        /* eslint-enable scanjs-rules/property_sessionStorage */
+    },
+    newMap: function(evt) {
+        /* eslint-disable scanjs-rules/identifier_sessionStorage */
+        /* eslint-disable scanjs-rules/property_sessionStorage */
+        this.$el.find('#confirmNewMapModal').modal('hide');
+        window.sessionStorage.removeItem('ssnmmap');
+
+        this.createModel();
+        this.render();
         /* eslint-enable scanjs-rules/identifier_sessionStorage */
         /* eslint-enable scanjs-rules/property_sessionStorage */
     },
