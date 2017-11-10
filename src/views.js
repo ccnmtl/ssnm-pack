@@ -444,6 +444,7 @@ var SocialSupportMapView = Backbone.View.extend({
                 }
             });
         }
+        this.$el.show();
     },
     createMap: function(evt) {
         evt.preventDefault();
