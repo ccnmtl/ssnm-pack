@@ -207,6 +207,8 @@ var SocialSupportMapView = Backbone.View.extend({
             'readSession', 'writeSession',
             'toggleHighlight', 'removeHighlight');
 
+        jQuery.fn.editable.defaults.mode = 'inline';
+
         this.createMapTemplate =
             require('../static/templates/createMap.html');
 
@@ -219,7 +221,6 @@ var SocialSupportMapView = Backbone.View.extend({
             this.render();
         }
 
-        jQuery.fn.editable.defaults.mode = 'inline';
         $(window).on('resize', this.positionPeople);
     },
     createModel: function() {
@@ -422,12 +423,15 @@ var SocialSupportMapView = Backbone.View.extend({
         if (this.model.isEmpty()) {
             markup = this.createMapTemplate({});
             this.$el.find('.ssnm-map-container').html(markup);
+            this.$el.show();
         } else {
             this.writeSession();
 
             // render the map layer
             markup = this.mapTemplate(this.context());
             this.$el.find('.ssnm-map-container').html(markup);
+
+            this.$el.show();
 
             // position the people
             this.positionPeople();
@@ -444,7 +448,6 @@ var SocialSupportMapView = Backbone.View.extend({
                 }
             });
         }
-        this.$el.show();
     },
     createMap: function(evt) {
         evt.preventDefault();
