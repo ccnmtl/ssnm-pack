@@ -53,8 +53,25 @@ function storageAvailable(type) {
     }
 }
 
+function getUrlParameter(sParam, defaultValue) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1));
+    var sURLVariables = sPageURL.split('&');
+
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ?
+                defaultValue : sParameterName[1];
+        }
+    }
+    return defaultValue;
+}
+
+
 module.exports.validateFormValue = validateFormValue;
 module.exports.eltCenter = eltCenter;
 module.exports.radius = radius;
 module.exports.radians = radians;
 module.exports.storageAvailable = storageAvailable;
+module.exports.getUrlParameter = getUrlParameter;

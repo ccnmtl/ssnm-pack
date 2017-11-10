@@ -222,6 +222,11 @@ var SocialSupportMapView = Backbone.View.extend({
         }
 
         $(window).on('resize', this.positionPeople);
+
+        if (utils.getUrlParameter('title', '1') === '0') {
+            this.$el.find('header').hide();
+        }
+
     },
     createModel: function() {
         if (this.model) {
