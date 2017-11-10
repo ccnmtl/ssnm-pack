@@ -196,7 +196,7 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
         'click .btn-print': 'onPrint',
-        'click i.fa': 'toggleHighlight'
+        'click .map-support-types i.fa': 'toggleHighlight'
     },
     initialize: function(options) {
         _.bindAll(this, 'render', 'supportTypeMenu',
