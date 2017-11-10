@@ -104,14 +104,13 @@ var SocialSupportMap = Backbone.Model.extend({
         this.set({people: new PersonList()});
     },
     fromJSON: function(json) {
-        this.set('topic', json.topic);
-        this.set('owner', json.owner);
-
         var people = this.get('people');
         people.reset();
         for (var i=0; i < json.people.length; i++) {
-            people.add(new Person(json.people[i]));
+            people.add(new Person(json.people[i]), {silent: true});
         }
+        this.set('topic', json.topic, {silent: true});
+        this.set('owner', json.owner);
     },
     toJSON: function() {
         var json = Backbone.Model.prototype.toJSON.call(this);
