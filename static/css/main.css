@@ -98,7 +98,7 @@
 }
 
 .map-actions {
-    width: 50px;
+    width: 35px;
     height: 150px;
     max-height: 200px;
     margin: 0;
@@ -330,9 +330,9 @@
     padding: 5px;
     background-color: #b3daff;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    line-height: 30px;
+    width: 26px;
+    height: 26px;
+    line-height: 16px;
     color: #039;
 }
 
@@ -366,11 +366,10 @@
     margin-right: 5px;
 }
 
-.map-actions .fa-custom,
-.map-support-types .fa-custom {
-    font-size: 1.333333em;
-    line-height: 0.75em;
-    vertical-align: -15%;
+.map-actions .fa-custom {
+    font-size: 1em;
+    line-height: 1em;
+    vertical-align: 0%;
 }
 
 .map-support-types ul {
@@ -482,8 +481,13 @@ h3.highlight {
         float: none;
         display: block;
         position: absolute;
-        top: 10px;
+        top: 5px;
         right: 0;
+    }
+    .map-actions .fa-custom {
+        font-size: 1.333333em;
+        line-height: 0.75em;
+        vertical-align: -15%;
     }
     .map-support-types {
         width: 490px;
@@ -530,6 +534,12 @@ h3.highlight {
         left: -210px;
         height: 700px;
         width: 700px;
+    }
+    .icon-map-action {
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+        line-height: 30px;
     }
     .map-support-types h2 {
         border-top: 1px solid #ccc;
@@ -641,8 +651,13 @@ h3.highlight {
         height: 664px;
     }
     .map-actions {
-        width: 150px;
-        height: 120px;
+        width: 140px;
+        height: 160px;
+    }
+    .map-actions .fa-custom {
+        font-size: 1em;
+        line-height: 1em;
+        vertical-align: 0%;
     }
     .map-support-types {
         width: 662px;
@@ -694,9 +709,9 @@ h3.highlight {
     }
     .icon-map-action {
         padding: 5px;
-        width: 30px;
-        height: 30px;
-        line-height: 20px;
+        width: 26px;
+        height: 26px;
+        line-height: 16px;
     }
     .text-map-action {
         display: inline;
@@ -765,18 +780,23 @@ h3.highlight {
     }
     .map-actions {
         width: 208px;
-        height: 200px;
-        max-height: 200px;
+        height: 250px;
+        max-height: 250px;
         padding-top: 20px;
         float: left;
         position: static;
+    }
+    .map-actions .fa-custom {
+        font-size: 1.333333em;
+        line-height: 0.75em;
+        vertical-align: -15%;
     }
     .map-support-types,
     .map-support-types.slide-up,
     .map-support-types.slide-down {
         width: 208px;
-        height: 500px;
-        max-height: 500px;
+        height: 450px;
+        max-height: 450px;
         position: static;
         float: right;
     }
@@ -849,7 +869,6 @@ h3.highlight {
         width: 378px;
         height: 250px;
         max-height: 250px;
-        padding-top: 50px;
     }
     .map-support-types,
     .map-support-types.slide-up,
