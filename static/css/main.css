@@ -134,7 +134,7 @@
  }
 
 .map-support-types.slide-down {
-    top: 350px; /* needs to be responsive */
+    top: 328px; /* needs to be responsive */
     height: 30px;
     -moz-transition:all 0.2s linear;
     -webkit-transition:all 0.2s linear;
@@ -356,14 +356,33 @@
 }
 
 .map-support-types section h3 {
-    margin: 0;
-    padding: 0;
+    border-top: 1px solid #efefef;
+    margin: 0 10px 0 0;
+    padding: 5px 0 0 0;
     font: 600 16px/20px 'Raleway', sans-serif;
 }
 
-.map-support-types section h3 .fa {
+.map-support-types section h3 .support-icon {
     color: #666;
     margin-right: 5px;
+    cursor: pointer;
+}
+
+.map-support-types section h3:hover .support-icon {
+    color: #000;
+    text-shadow: 0px 0px 10px #39f;
+}
+
+.map-support-types section h3.support-type-header {
+    cursor: pointer;
+}
+
+.map-support-types section h3.highlight {
+    background-color: #ccebff;
+}
+
+.map-support-types section h3.highlight .support-icon {
+    color: #000;
 }
 
 .map-actions .fa-custom {
@@ -374,7 +393,7 @@
 
 .map-support-types ul {
     list-style: none;
-    margin: 0 0 20px 0;
+    margin: 0 0 5px 0;
     padding: 0;
     line-height: 120%;
 }
@@ -440,14 +459,6 @@
     opacity: .2;
 }
 
-i.fa.highlight.highlight {
-    color: black;
-    font-weight: bold;
-}
-
-h3.highlight {
-    font-weight: bold !important;
-}
 
 .person-container.highlight {
     -moz-box-shadow: 5px 5px 5px black;
@@ -501,7 +512,7 @@ h3.highlight {
         height: 340px;
      }
     .map-support-types.slide-down {
-        top: 502px; /* needs to be responsive */
+        top: 490px; /* needs to be responsive */
         height: 40px;
      }
     .map-legend {
@@ -552,6 +563,8 @@ h3.highlight {
         margin: 0 0 0 20px;
     }
     .map-support-types section h3 {
+        border: 0;
+        padding: 0;
         font: 600 16px/30px 'Raleway', sans-serif;
     }
     .map-support-types ul {
@@ -794,9 +807,10 @@ h3.highlight {
     .map-support-types,
     .map-support-types.slide-up,
     .map-support-types.slide-down {
+        padding-top: 50px;
         width: 208px;
-        height: 450px;
-        max-height: 450px;
+        height: 400px;
+        max-height: 400px;
         position: static;
         float: right;
     }
@@ -873,9 +887,10 @@ h3.highlight {
     .map-support-types,
     .map-support-types.slide-up,
     .map-support-types.slide-down {
+        padding-top: 20px;
         width: 378px;
-        height: 450px;
-        max-height: 450px;
+        height: 430px;
+        max-height: 430px;
     }
     .map-legend {
         width: 1080px;

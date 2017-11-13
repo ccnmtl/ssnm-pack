@@ -196,7 +196,7 @@ var SocialSupportMapView = Backbone.View.extend({
         'click .btn-delete-person': 'deletePerson',
         'click .btn-view-person': 'viewPerson',
         'click .btn-print': 'onPrint',
-        'click .map-support-types i.fa': 'toggleHighlight',
+        'click .map-support-types .support-type-header': 'toggleHighlight',
         'click .btn-new-map': 'newMap'
     },
     initialize: function(options) {
@@ -243,9 +243,13 @@ var SocialSupportMapView = Backbone.View.extend({
         if(jQuery('.map-support-types').hasClass('slide-up')) {
             jQuery('.map-support-types')
                 .addClass('slide-down').removeClass('slide-up');
+            jQuery('.toggle-slidenav .fa')
+                .removeClass('fa-times').addClass('fa-align-justify');
         } else {
             jQuery('.map-support-types')
                 .removeClass('slide-down').addClass('slide-up');
+            jQuery('.toggle-slidenav .fa')
+                .removeClass('fa-align-justify').addClass('fa-times');
         }
     },
     readSession: function() {
@@ -525,7 +529,7 @@ var SocialSupportMapView = Backbone.View.extend({
             this.$el.find('.person-container').addClass('dehighlight');
 
             jQuery(evt.currentTarget).addClass('highlight');
-            jQuery(evt.currentTarget).parent().addClass('highlight');
+            //jQuery(evt.currentTarget).parent().addClass('highlight');
 
             var supportType = jQuery(evt.currentTarget).data('id');
             var people = this.model.get('people').bySupportType(supportType);

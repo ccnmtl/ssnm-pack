@@ -75,8 +75,8 @@
                     <h2 class="toggle-staticnav">Support Type</h2>
                     <% for (var p in supportType) { %>
                         <section>
-                            <h3>
-                            <i class="fa fa-<%=supportType[p].icon%> fa-lg fa-fw" data-id="<%=p%>"></i>
+                            <h3 class="support-type-header" data-id="<%=p%>">
+                            <i class="support-icon fa fa-<%=supportType[p].icon%> fa-lg fa-fw"></i>
                             <%=supportType[p].display%>
                             </h3>
                             <ul class="support-type-container">
