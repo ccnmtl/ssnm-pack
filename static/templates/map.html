@@ -65,8 +65,8 @@
                         <span class="text-map-action">Print</span>
                     </button>
                     <button type="button" class="btn-map-action" data-toggle="modal" data-target="#confirmNewMapModal">
-                        <span class="icon-map-action"><i class="fa fa-map fa-custom"></i></span>
-                        <span class="text-map-action">New Map</span>
+                        <span class="icon-map-action"><i class="fa fa-bullseye fa-custom"></i></span>
+                        <span class="text-map-action">New map</span>
                     </button>
                 </div><!-- /.map-actions -->
 
@@ -76,7 +76,7 @@
                     <% for (var p in supportType) { %>
                         <section>
                             <h3>
-                            <i class="fa fa-<%=supportType[p].icon%> fa-custom fa-fw" data-id="<%=p%>"></i>
+                            <i class="fa fa-<%=supportType[p].icon%> fa-lg fa-fw" data-id="<%=p%>"></i>
                             <%=supportType[p].display%>
                             </h3>
                             <ul class="support-type-container">
