@@ -459,6 +459,7 @@
     opacity: .2;
 }
 
+    .sizetest {display: none;}
 
 .person-container.highlight {
     -moz-box-shadow: 5px 5px 5px black;
@@ -643,6 +644,7 @@
         margin-top: -20px; /* responsive */
         display: none; /* responsive */
     }
+    .sizetest {display: inline-block;}
 }
 
 @media (min-width: 690px) {
@@ -775,6 +777,7 @@
         margin-top: -20px;
         display: block;
     }
+    .sizetest {display: none;}
 }
 
 @media (min-width: 910px) {
@@ -873,6 +876,7 @@
     .map-support-types ul {
         margin: 0 20px 20px 40px;
     }
+    .sizetest {display: none;}
 }
 
 @media (min-width: 1110px) {
@@ -910,5 +914,13 @@
     }
     .map-support-types ul {
         margin: 0 20px 20px 45px;
+    }
+    .sizetest {display: none;}
+}
+
+@media print {
+    .map-support-types,
+    .map-legend {
+        display: none;
     }
 }
