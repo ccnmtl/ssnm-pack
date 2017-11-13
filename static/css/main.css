@@ -17,6 +17,28 @@
     text-transform: uppercase;
 }
 
+.create-map-container label {
+    padding-top: 20px;
+    font: 600 18px/30px 'Raleway', sans-serif;
+    color: #039;
+}
+
+.create-step {
+    display: inline-block;
+    padding: 5px;
+    background-color: #b3daff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font: 600 26px/16px 'Raleway', sans-serif;
+    color: #039;
+    text-align: center;
+}
+
+.text-instructions {
+    font-size: 0.9rem;
+}
+
 .map-workspace {
     width: 330px;
     margin: 0 -15px;
