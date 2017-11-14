@@ -10,6 +10,38 @@ header {
     text-transform: uppercase;
 }
 
+#project-logo-header {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    float: none;
+    height: 80px;
+    background-color: transparent;
+    border-bottom: 1px solid #3977A7;
+}
+
+#primary-logo {
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    float: left;
+    display: inline-block;
+    background-color: #fff;
+}
+
+#primary-logo img {
+    height: 100%;
+}
+
+h1#page-banner {
+    margin: 0 0 0 290px;
+    padding: 0;
+    font-size: 50px;
+    font-weight: 200;
+    line-height: 50px;
+    color: #3977A7;
+}
+
 .btn-print {
     background-color: #ddd;
 }
