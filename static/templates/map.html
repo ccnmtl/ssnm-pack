@@ -41,7 +41,10 @@
 
                 <div class="map-circles-space">
                     <div class="circle-map circle-center text-center">
-                        <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+                        <div class="circle-owner">
+                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                        <div>Owner</div>
+                        </div>
                     </div>
                     <div class="circle-map circle-very-close">
                     </div>
@@ -117,3 +120,22 @@
                 </dl>
                 </section>
             </div><!-- /.map-legend -->
+            
+            
+            <div class="map-print">
+                <% for (var i=0; i < people.length; i++) { %>
+                <div style="border: 1px solid #ccc;">
+                <b><%=i%></b></br>
+                <%=people[i].influence%><br />
+                <%=people[i].name%><br />
+                <% if ( people[i].notes ) { %>
+                Notes: <%=people[i].notes%>
+                <% } %>
+                <%=proximity[people[i].proximity]%><br />
+                <%=influence[people[i].influence]%><br />
+                <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                    <%=supportType[people[i].supportType[j]].display%>,
+                <% } %>
+                </div>
+                <% } %>
+            </div>
