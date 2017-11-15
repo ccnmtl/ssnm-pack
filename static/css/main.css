@@ -209,6 +209,19 @@
     width: 46px;
 }
 
+.circle-owner {
+    margin-top: 6px;
+}
+
+.circle-owner div {
+    line-height: 0.8em;
+    font-size: 0.7rem;
+}
+
+.circle-owner .fa-user-circle {
+    font-size: 1.2rem;
+}
+
 .circle-very-close {
     z-index: 130;
     top: 140px;
@@ -526,6 +539,16 @@
         height: 70px;
         width: 70px;
     }
+    .circle-owner {
+        margin-top: 15px;
+    }
+    .circle-owner div {
+        line-height: 0.9em;
+        font-size: 0.8rem;
+    }
+    .circle-owner .fa-user-circle {
+        font-size: 2em;
+    }
     .circle-very-close {
         z-index: 130;
         top: 210px;
@@ -700,6 +723,13 @@
         width: 94px;
         text-align: center;
         vertical-align: middle;
+    }
+    .circle-owner {
+        margin-top: 30px;
+    }
+    .circle-owner div {
+        line-height: 1rem;
+        font-size: 1rem;
     }
     .circle-very-close {
         z-index: 130;
