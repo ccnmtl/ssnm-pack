@@ -480,6 +480,32 @@
     box-shadow: 5px 5px 5px black;
 }
 
+.map-workspace-print {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    width: 702px;
+    height: 702px;
+}
+
+.map-workspace-print .map-background {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;    
+}
+
+.map-workspace-print .map-people-print {
+    display: block;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    z-index: 300;
+}
+
 @media (min-width: 492px) {
     .map-workspace {
         width: 492px;

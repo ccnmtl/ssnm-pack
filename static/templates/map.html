@@ -17,10 +17,11 @@
                             id="map-owner"
                             data-type="text"
                             data-title="Edit map owner"><%= owner %></a>
+                            <div class="sizetest">I see you</div>
                         </dd>
                 </dl>
             </div><!-- /.map-info -->
-            <div class="map-workspace clearfix">
+            <div class="map-workspace d-print-none clearfix">
                 <div class="map-people">
                     <% for (var i=0; i < people.length; i++) { %>
                     <div class="person-container <%=people[i].influence%>" data-id="<%=people[i].cid%>">
@@ -121,8 +122,25 @@
                 </section>
             </div><!-- /.map-legend -->
             
-            
-            <div class="map-print">
+<h2 style="border-top: 1px solid #f00;">Visible for printing below</h2>
+
+            <div class="map-workspace-print">
+                <img class="map-background" src="../img/map-print-background.png" alt="" />
+                <div class="map-people-print">
+                    <div class="person-container not-helpful" data-id="c5" style="left: 36.0019px; top: 70.4815px;">
+                        <div class="person-name"><a href="#" data-id="c5" class="btn-view-person">Jackie</a></div>
+    
+                        <div class="person-proximity">Not Close</div>
+                        <div class="person-influence">Not Helpful</div>
+                        <div class="person-support-type">
+                            <i class="fa fa-heart"></i><span class="sr-only">Empathy</span>
+                        </div>
+                    </div>
+                </div><!-- /.map-people-print -->
+            </div><!-- /.map-workspace-print -->
+
+
+            <div class="map-print-detail">
                 <% for (var i=0; i < people.length; i++) { %>
                 <div style="border: 1px solid #ccc;">
                 <b><%=i%></b></br>
