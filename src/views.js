@@ -425,6 +425,7 @@ var SocialSupportMapView = Backbone.View.extend({
         ctx.proximity = models.Proximity;
         ctx.influence = models.Influence;
         ctx.supportType = models.SupportType;
+        ctx.mapBackground = './map-print-background.png';
         return ctx;
     },
     render: function() {
