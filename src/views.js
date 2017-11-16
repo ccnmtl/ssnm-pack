@@ -579,7 +579,7 @@ var SocialSupportMapView = Backbone.View.extend({
             // remove the dehighlight class from supportive individuals
             var supportType = jQuery(evt.currentTarget).data('id');
             var people =
-                this.model.get('people').filterbySupportType(supportType);
+                this.model.get('people').filterBySupportType(supportType);
             for (var i = 0; i < people.length; i++) {
                 var selector = '.person-container[data-id="'
                     + people[i].cid + '"]';
