@@ -136,7 +136,8 @@ describe('SocialSupportNetworkApp', function() {
 
         it('can view a person', function() {
             assert.equal(jQuery('.person-container').length, 1);
-            assert.equal(jQuery('.person-name a').html(), 'alpha');
+            assert(
+                jQuery('.person-name a').html().indexOf('alpha') > 0);
         });
 
         it('can edit a person', function() {
