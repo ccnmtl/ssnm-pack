@@ -64,15 +64,15 @@ describe('PersonList', function() {
     it('can be grouped', function() {
         var a = people.groupByProximity();
         assert.equal(Object.keys(a)[0], 'very-close');
-        assert.equal(a['very-close'][0].get('name'), 'A');
-        assert.equal(a['very-close'][1].get('name'), 'a');
-        assert.equal(a['very-close'][2].get('name'), 'B');
+        assert.equal(a['very-close'][0].name, 'A');
+        assert.equal(a['very-close'][1].name, 'a');
+        assert.equal(a['very-close'][2].name, 'B');
 
         assert.equal(Object.keys(a)[1], 'somewhat-close');
-        assert.equal(a['somewhat-close'][0].get('name'), 'C');
+        assert.equal(a['somewhat-close'][0].name, 'C');
 
         assert.equal(Object.keys(a)[2], 'not-close');
-        assert.equal(a['not-close'][0].get('name'), 'D');
+        assert.equal(a['not-close'][0].name, 'D');
     });
 });
 
