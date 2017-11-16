@@ -417,23 +417,22 @@
     line-height: 100%;
 }
 
-.person-container-print {
-    position: absolute;
-    width: 120px;
-    padding: 4px;
-    margin: 0;
-    height: 50px;
-    border-radius: 5px;
-    z-index: 200;
-}
-
 .person-container {
     position: absolute;
     width: 60px; /* responsive */
     padding: 2px; /* responsive */
     margin: 0;
     height: 30px; /* responsive */
-    /* overflow: hidden; */
+    border-radius: 5px;
+    z-index: 200;
+}
+
+.person-container-print {
+    position: absolute;
+    width: 120px;
+    padding: 4px;
+    margin: 0;
+    height: 50px;
     border-radius: 5px;
     z-index: 200;
 }
@@ -446,19 +445,32 @@
     line-height: 120%;
     font-weight: bold; /* responsive */
 }
+
 .person-influence {
     display: none;
 }
+
 .person-proximity {
     display: none;
 }
+
 .person-support-type {
     display: none; /* responsive */
 }
+
 .person-notes {
     float: right; /* responsive */
     margin-top: -20px; /* responsive */
     display: none; /* responsive */
+}
+
+.person-container-print .person-support-type,
+.person-container-print .person-notes {
+    display: block;
+}
+
+.person-container-print .person-name {
+    font-size: 14px;
 }
 
 .editable-unsaved {
