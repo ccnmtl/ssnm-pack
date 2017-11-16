@@ -31,7 +31,10 @@ var PersonAddModal = Backbone.View.extend({
         this.state = new models.PersonModalState();
         this.template = require('../static/templates/personModal.html');
         this.render();
-        this.$el.modal('show');
+        this.$el.modal({
+            backdrop: 'static',
+            show: true
+        });
 
         this.state.bind('change:step', this.render);
     },
@@ -146,7 +149,10 @@ var PersonViewModal = Backbone.View.extend({
         };
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
-        this.$el.modal('show');
+        this.$el.modal({
+            backdrop: 'static',
+            show: true
+        });
         var self = this;
         jQuery('#person-name-edit').editable({
             success: function(response, newValue) {
