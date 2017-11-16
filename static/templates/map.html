@@ -128,9 +128,7 @@
                 </section>
             </div><!-- /.map-legend -->
 
-            <h2 style="border-top: 1px solid #f00;">Visible for printing below</h2>
-
-            <div class="map-workspace-print">
+            <div class="map-workspace-print d-print-block">
                 <img class="map-background" src="<%= mapBackground %>" alt="" />
                 <div class="map-people-print">
                     <% for (var i=0; i < people.length; i++) { %>
@@ -153,7 +151,7 @@
             </div><!-- /.map-workspace-print -->
 
 
-            <div class="map-detail-print">
+            <div class="map-detail-print d-print-block">
                 <dl>
                 <% for (var p in peopleByProximity) { %>
                     <dt class="<%=[p]%>"><%=proximity[p]%></dt>

@@ -428,17 +428,6 @@
     overflow: hidden;
 }
 
-.person-container-print {
-    position: absolute;
-    width: 120px;
-    padding: 4px;
-    margin: 0;
-    height: 50px;
-    border-radius: 5px;
-    z-index: 200;
-    overflow: hidden;
-}
-
 .person-name {
     margin: 0;
     padding: 0;
@@ -466,51 +455,6 @@
     display: none; /* responsive */
 }
 
-.person-container-print .person-support-type,
-.person-container-print .person-notes {
-    display: block;
-    z-index: 100;
-    position: absolute;
-}
-
-.person-container-print .person-support-type {
-    top: 20px;
-    left: 2px;
-}
-
-.person-container-print .person-notes {
-    top: 20px;
-    right: 5px;
-}
-
-.person-container-print .person-name {
-    font-size: 14px;
-    z-index: 100;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-}
-
-.person-container-print .print-influence {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    border: 100px solid #ccc;
-    z-index: 0;
-}
-
-.person-container-print.very-helpful .print-influence {
-    border-color: #6c6;
-}
-
-.person-container-print.somewhat-helpful .print-influence {
-    border-color: #ff6;
-}
-
-.person-container-print.not-helpful .print-influence {
-    border-color: #f66;
-}
-
 .editable-unsaved {
     font-weight: normal !important;
 }
@@ -536,67 +480,6 @@
     -webkit-box-shadow: 5px 5px 5px black;
     box-shadow: 5px 5px 5px black;
 }
-
-.map-workspace-print {
-    display: block;
-    position: relative;
-    margin: 0 0 20px 0;
-    padding: 0;
-    border: 1px solid #ccc;
-    width: 702px;
-    height: 702px;
-}
-
-.map-workspace-print .map-background {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;    
-}
-
-.map-workspace-print .map-people-print {
-    display: block;
-    position: relative;
-    width: 700px;
-    height: 700px;
-    z-index: 300;
-}
-
-.map-detail-print {
-	page-break-before: always;
-}
-.map-detail-print dt {
-    font: 600 30px/150% 'Raleway', sans-serif;
-    padding: 10px 0 0 0;
-    margin: 20px 0 0 0;
-    border-top: 1px dotted #ccc;
- }
-
-.map-detail-print dd {
-    padding: 0 0 0 30px;
-    margin: 0;
-}
-
-.map-detail-print dd.detail-name {
-    padding: 20px 0 0 20px;
-    margin: 0;
-    font-weight: 600;
-    font-size: 20px;
-}
-
-dt.very-close {
-    color: #80b3da;
-}
-
-dt.somewhat-close {
-    color: #5894C2;
-}
-
-dt.not-close {
-    color: #3977A7;
-}
-
 
 @media (min-width: 492px) {
     .map-workspace {
@@ -1071,5 +954,103 @@ dt.not-close {
     .map-support-types,
     .map-legend {
         display: none;
+    }
+    .person-container-print {
+        position: absolute;
+        width: 120px;
+        padding: 4px;
+        margin: 0;
+        height: 50px;
+        border-radius: 5px;
+        z-index: 200;
+        overflow: hidden;
+    }
+    .person-container-print .person-support-type,
+    .person-container-print .person-notes {
+        display: block;
+        z-index: 100;
+        position: absolute;
+    }
+    .person-container-print .person-support-type {
+        top: 20px;
+        left: 2px;
+    }
+    .person-container-print .person-notes {
+        top: 20px;
+        right: 5px;
+    }
+    .person-container-print .person-name {
+        font-size: 14px;
+        z-index: 100;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+    }
+    .person-container-print .print-influence {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        border: 100px solid #ccc;
+        z-index: 0;
+    }
+    .person-container-print.very-helpful .print-influence {
+        border-color: #6c6;
+    }
+    .person-container-print.somewhat-helpful .print-influence {
+        border-color: #ff6;
+    }
+    .person-container-print.not-helpful .print-influence {
+        border-color: #f66;
+    }
+    .map-workspace-print {
+        display: block;
+        position: relative;
+        margin: 0 0 20px 0;
+        padding: 0;
+        border: 1px solid #ccc;
+        width: 702px;
+        height: 702px;
+    }
+    .map-workspace-print .map-background {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;    
+    }
+    .map-workspace-print .map-people-print {
+        display: block;
+        position: relative;
+        width: 700px;
+        height: 700px;
+        z-index: 300;
+    }
+    .map-detail-print {
+        page-break-before: always;
+    }
+    .map-detail-print dt {
+        font: 600 30px/150% 'Raleway', sans-serif;
+        padding: 10px 0 0 0;
+        margin: 20px 0 0 0;
+        border-top: 1px dotted #ccc;
+     }
+    .map-detail-print dd {
+        padding: 0 0 0 30px;
+        margin: 0;
+    }
+    .map-detail-print dd.detail-name {
+        padding: 20px 0 0 20px;
+        margin: 0;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    dt.very-close {
+        color: #80b3da;
+    }
+    dt.somewhat-close {
+        color: #5894C2;
+    }
+    dt.not-close {
+        color: #3977A7;
     }
 }
