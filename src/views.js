@@ -412,7 +412,7 @@ var SocialSupportMapView = Backbone.View.extend({
         // position people in the printable map container based on a
         // hard-coded center + hard-coded radii
         var self = this;
-        var ctr = {'x': 190, 'y': 500};
+        var ctr = {'x': 200, 'y': 500};
         var selector = '.person-container-print';
 
         this.model.get('people').forEach(function(person) {
