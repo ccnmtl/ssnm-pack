@@ -425,6 +425,7 @@
     height: 30px; /* responsive */
     border-radius: 5px;
     z-index: 200;
+    overflow: hidden;
 }
 
 .person-container-print {
@@ -435,6 +436,7 @@
     height: 50px;
     border-radius: 5px;
     z-index: 200;
+    overflow: hidden;
 }
 
 .person-name {
@@ -467,10 +469,46 @@
 .person-container-print .person-support-type,
 .person-container-print .person-notes {
     display: block;
+    z-index: 100;
+    position: absolute;
+}
+
+.person-container-print .person-support-type {
+    top: 20px;
+    left: 2px;
+}
+
+.person-container-print .person-notes {
+    top: 20px;
+    right: 5px;
 }
 
 .person-container-print .person-name {
     font-size: 14px;
+    z-index: 100;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.person-container-print .print-influence {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    border: 100px solid #ccc;
+    z-index: 0;
+}
+
+.person-container-print.very-helpful .print-influence {
+    border-color: #6c6;
+}
+
+.person-container-print.somewhat-helpful .print-influence {
+    border-color: #ff6;
+}
+
+.person-container-print.not-helpful .print-influence {
+    border-color: #f66;
 }
 
 .editable-unsaved {
@@ -492,8 +530,6 @@
 .dehighlight {
     opacity: .2;
 }
-
-    .sizetest {display: none;}
 
 .person-container.highlight {
     -moz-box-shadow: 5px 5px 5px black;
@@ -748,7 +784,6 @@ dt.not-close {
         margin-top: -20px; /* responsive */
         display: none; /* responsive */
     }
-    .sizetest {display: inline-block;}
 }
 
 @media (min-width: 690px) {
@@ -887,7 +922,6 @@ dt.not-close {
         margin-top: -20px;
         display: block;
     }
-    .sizetest {display: none;}
 }
 
 @media (min-width: 910px) {
@@ -986,7 +1020,6 @@ dt.not-close {
     .map-support-types ul {
         margin: 0 20px 20px 40px;
     }
-    .sizetest {display: none;}
 }
 
 @media (min-width: 1110px) {
@@ -1025,10 +1058,16 @@ dt.not-close {
     .map-support-types ul {
         margin: 0 20px 20px 45px;
     }
-    .sizetest {display: none;}
 }
 
 @media print {
+    .editable-field:after {
+        content: "";
+    }
+    .editable-field {
+        border: 0 !important;
+        color: #000 !important;
+    }
     .map-support-types,
     .map-legend {
         display: none;
