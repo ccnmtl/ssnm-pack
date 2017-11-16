@@ -74,7 +74,7 @@ var Person = Backbone.Model.extend({
 
 var PersonList = Backbone.Collection.extend({
     model: Person,
-    bySupportType: function(supportType) {
+    filterBySupportType: function(supportType) {
         var results = [];
         this.forEach(function(person) {
             var a = person.get('supportType');
@@ -82,6 +82,24 @@ var PersonList = Backbone.Collection.extend({
                 results.push(person);
             }
         });
+        return results;
+    },
+    groupByProximity: function() {
+        var p;
+        var results = {};
+        for (p in Proximity) {
+            results[p] = [];
+        }
+        this.forEach(function(person) {
+            var a = person.get('proximity');
+            results[a].push(person);
+        });
+        for (p in Proximity) {
+            results[p].sort(function(a, b) {
+                return a.get('name').toLowerCase() >
+                    b.get('name').toLowerCase();
+            });
+        }
         return results;
     }
 });
@@ -136,5 +154,6 @@ module.exports.Influence = Influence;
 module.exports.SupportType = SupportType;
 
 module.exports.Person = Person;
+module.exports.PersonList = PersonList;
 module.exports.PersonModalState = PersonModalState;
 module.exports.SocialSupportMap = SocialSupportMap;

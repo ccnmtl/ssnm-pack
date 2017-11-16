@@ -467,6 +467,7 @@ var SocialSupportMapView = Backbone.View.extend({
         ctx.influence = models.Influence;
         ctx.supportType = models.SupportType;
         ctx.mapBackground = './map-print-background.png';
+        ctx.peopleByProximity = this.model.get('people').groupByProximity();
         return ctx;
     },
     render: function() {
@@ -577,7 +578,8 @@ var SocialSupportMapView = Backbone.View.extend({
 
             // remove the dehighlight class from supportive individuals
             var supportType = jQuery(evt.currentTarget).data('id');
-            var people = this.model.get('people').bySupportType(supportType);
+            var people =
+                this.model.get('people').filterbySupportType(supportType);
             for (var i = 0; i < people.length; i++) {
                 var selector = '.person-container[data-id="'
                     + people[i].cid + '"]';
