@@ -504,7 +504,7 @@
 .map-workspace-print {
     display: block;
     position: relative;
-    margin: 0;
+    margin: 0 0 20px 0;
     padding: 0;
     border: 1px solid #ccc;
     width: 702px;
@@ -526,6 +526,41 @@
     height: 700px;
     z-index: 300;
 }
+
+.map-detail-print {
+	page-break-before: always;
+}
+.map-detail-print dt {
+    font: 600 30px/150% 'Raleway', sans-serif;
+    padding: 10px 0 0 0;
+    margin: 20px 0 0 0;
+    border-top: 1px dotted #ccc;
+ }
+
+.map-detail-print dd {
+    padding: 0 0 0 30px;
+    margin: 0;
+}
+
+.map-detail-print dd.detail-name {
+    padding: 20px 0 0 20px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+dt.very-close {
+    color: #80b3da;
+}
+
+dt.somewhat-close {
+    color: #5894C2;
+}
+
+dt.not-close {
+    color: #3977A7;
+}
+
 
 @media (min-width: 492px) {
     .map-workspace {
