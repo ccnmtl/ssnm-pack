@@ -160,33 +160,33 @@
 
 /* PERSON INFLUENCE */
 
-.person-container.very-helpful {
+.very-helpful {
     background-color: #6c6;
     border: 2px solid #000;
     /* top: 80px; left: 120px; for testing */
 }
 
-.person-container.very-helpful a {
+.very-helpful a {
     color: #060;
 }
 
-.person-container.somewhat-helpful {
+.somewhat-helpful {
     background-color: #ff6;
     border: 2px dashed #000;
     /* top: 130px; left: 150px; for testing */
 }
 
-.person-container.somewhat-helpful a {
+.somewhat-helpful a {
     color: #f60;
 }
 
-.person-container.not-helpful {
+.not-helpful {
     background-color: #f66;
     border: 2px dotted #000;
     /* top: 180px; left: 180px; for testing */
 }
 
-.person-container.not-helpful a {
+.not-helpful a {
     color: #900;
 }
 
@@ -417,13 +417,22 @@
     line-height: 100%;
 }
 
+.person-container-print {
+    position: absolute;
+    width: 120px;
+    padding: 4px;
+    margin: 0;
+    height: 50px;
+    border-radius: 5px;
+    z-index: 200;
+}
+
 .person-container {
     position: absolute;
     width: 60px; /* responsive */
     padding: 2px; /* responsive */
     margin: 0;
     height: 30px; /* responsive */
-    border: 0;
     /* overflow: hidden; */
     border-radius: 5px;
     z-index: 200;
@@ -478,6 +487,32 @@
     -moz-box-shadow: 5px 5px 5px black;
     -webkit-box-shadow: 5px 5px 5px black;
     box-shadow: 5px 5px 5px black;
+}
+
+.map-workspace-print {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    width: 702px;
+    height: 702px;
+}
+
+.map-workspace-print .map-background {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;    
+}
+
+.map-workspace-print .map-people-print {
+    display: block;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    z-index: 300;
 }
 
 @media (min-width: 492px) {
@@ -640,7 +675,6 @@
         padding: 4px;
         margin: 0;
         height: 30px; /* responsive */
-        border: 0;
         /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;
@@ -780,7 +814,6 @@
         padding: 4px;
         margin: 0;
         height: 50px;
-        border: 0;
         /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;
