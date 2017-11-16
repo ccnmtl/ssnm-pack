@@ -534,6 +534,7 @@ var SocialSupportMapView = Backbone.View.extend({
             model: person,
             people: this.model.get('people')
         });
+        return false;
     },
     deletePersonConfirm: function(evt) {
         var $elt = jQuery(evt.currentTarget);
