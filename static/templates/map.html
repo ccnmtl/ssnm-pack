@@ -122,20 +122,26 @@
                 </section>
             </div><!-- /.map-legend -->
 
-<h2 style="border-top: 1px solid #f00;">Visible for printing below</h2>
+            <h2 style="border-top: 1px solid #f00;">Visible for printing below</h2>
 
             <div class="map-workspace-print">
                 <img class="map-background" src="<%= mapBackground %>" alt="" />
                 <div class="map-people-print">
-                    <div class="person-container not-helpful" data-id="c5" style="left: 36.0019px; top: 70.4815px;">
-                        <div class="person-name"><a href="#" data-id="c5" class="btn-view-person">Jackie</a></div>
-    
-                        <div class="person-proximity">Not Close</div>
-                        <div class="person-influence">Not Helpful</div>
+                    <% for (var i=0; i < people.length; i++) { %>
+                    <div class="person-container-print <%=people[i].influence%>" data-id="<%=people[i].cid%>">
+                        <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a></div>
+                        <% if ( people[i].notes ) { %>
+                        <div class="person-notes"><i class="fa fa-file-text"></i></div>
+                        <% } %>
+                        <div class="person-proximity"><%=proximity[people[i].proximity]%></div>
+                        <div class="person-influence"><%=influence[people[i].influence]%></div>
                         <div class="person-support-type">
-                            <i class="fa fa-heart"></i><span class="sr-only">Empathy</span>
+                            <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                            <i class="fa fa-<%=supportType[people[i].supportType[j]].icon%>"></i><span class="sr-only"><%=supportType[people[i].supportType[j]].display%></span>
+                            <% } %>
                         </div>
                     </div>
+                    <% } %>
                 </div><!-- /.map-people-print -->
             </div><!-- /.map-workspace-print -->
 

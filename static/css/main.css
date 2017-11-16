@@ -160,33 +160,33 @@
 
 /* PERSON INFLUENCE */
 
-.person-container.very-helpful {
+.very-helpful {
     background-color: #6c6;
     border: 2px solid #000;
     /* top: 80px; left: 120px; for testing */
 }
 
-.person-container.very-helpful a {
+.very-helpful a {
     color: #060;
 }
 
-.person-container.somewhat-helpful {
+.somewhat-helpful {
     background-color: #ff6;
     border: 2px dashed #000;
     /* top: 130px; left: 150px; for testing */
 }
 
-.person-container.somewhat-helpful a {
+.somewhat-helpful a {
     color: #f60;
 }
 
-.person-container.not-helpful {
+.not-helpful {
     background-color: #f66;
     border: 2px dotted #000;
     /* top: 180px; left: 180px; for testing */
 }
 
-.person-container.not-helpful a {
+.not-helpful a {
     color: #900;
 }
 
@@ -417,13 +417,22 @@
     line-height: 100%;
 }
 
+.person-container-print {
+    position: absolute;
+    width: 120px;
+    padding: 4px;
+    margin: 0;
+    height: 50px;
+    border-radius: 5px;
+    z-index: 200;
+}
+
 .person-container {
     position: absolute;
     width: 60px; /* responsive */
     padding: 2px; /* responsive */
     margin: 0;
     height: 30px; /* responsive */
-    border: 0;
     /* overflow: hidden; */
     border-radius: 5px;
     z-index: 200;
@@ -666,7 +675,6 @@
         padding: 4px;
         margin: 0;
         height: 30px; /* responsive */
-        border: 0;
         /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;
@@ -806,7 +814,6 @@
         padding: 4px;
         margin: 0;
         height: 50px;
-        border: 0;
         /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;

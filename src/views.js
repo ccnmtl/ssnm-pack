@@ -203,7 +203,8 @@ var SocialSupportMapView = Backbone.View.extend({
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'importMap', 'exportMap', 'newMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
-            'deletePerson', 'onPrint', 'positionPeople',
+            'deletePerson', 'onPrint',
+            'renderPeople', 'renderPrintView',
             'readSession', 'writeSession',
             'toggleHighlight', 'removeHighlight');
 
@@ -221,12 +222,11 @@ var SocialSupportMapView = Backbone.View.extend({
             this.render();
         }
 
-        $(window).on('resize', this.positionPeople);
+        $(window).on('resize', this.renderPeople);
 
         if (utils.getUrlParameter('title', '1') === '0') {
             this.$el.find('header').hide();
         }
-
     },
     createModel: function() {
         if (this.model) {
@@ -381,18 +381,21 @@ var SocialSupportMapView = Backbone.View.extend({
     shells: {
         'very-close': {
             'startingAngle': 270,
-            'increment': 60
+            'increment': 60,
+            'printRadius': 125
         },
         'somewhat-close': {
             'startingAngle': 240,
-            'increment': 30
+            'increment': 30,
+            'printRadius': 275
         },
         'not-close': {
             'startingAngle': 255,
-            'increment': 25
+            'increment': 25,
+            'printRadius': 425
         }
     },
-    positionPeople: function() {
+    renderPrintView: function(people) {
         // reset mapping
         for (var key in this.shells) {
             if (this.shells.hasOwnProperty(key)) {
@@ -400,13 +403,45 @@ var SocialSupportMapView = Backbone.View.extend({
             }
         }
 
-        // base center from the interior circle
-        var ctr = utils.eltCenter(this.$el.find('.circle-center'));
-
-        // position people based on current layout
+        // position people in the printable map container based on a
+        // hard-coded center + hard-coded radii
         var self = this;
+        var ctr = {'x': 190, 'y': 500};
+        var selector = '.person-container-print';
+
         this.model.get('people').forEach(function(person) {
-            var sel = '.person-container[data-id="' + person.cid + '"]';
+            var sel = selector + '[data-id="' + person.cid + '"]';
+            var $elt = self.$el.find(sel);
+
+            var proximity = person.get('proximity');
+            var radius = self.shells[proximity].printRadius;
+            var radians = utils.radians(self.shells[proximity].angle);
+            self.shells[proximity].angle += self.shells[proximity].increment;
+
+            $elt.css({
+                'left': radius * Math.cos(radians) + ctr.x - $elt.width() / 2,
+                'top': radius * Math.sin(radians) + ctr.y - $elt.height() / 2
+            });
+        });
+    },
+    renderPeople: function(people) {
+        // reset mapping
+        for (var key in this.shells) {
+            if (this.shells.hasOwnProperty(key)) {
+                this.shells[key].angle = this.shells[key].startingAngle;
+            }
+        }
+
+        // position people in the responsive container based on the
+        // center of the owner circle and radiating outward to the
+        // three shells. Using a hard-coded startingAngle & incrementing
+        // arc. These variables possibly could be calculated.
+        var self = this;
+        var ctr = utils.eltCenter(this.$el.find('.circle-center'));
+        var selector = '.person-container';
+
+        this.model.get('people').forEach(function(person) {
+            var sel = selector + '[data-id="' + person.cid + '"]';
             var $elt = self.$el.find(sel);
 
             var proximity = person.get('proximity');
@@ -444,7 +479,8 @@ var SocialSupportMapView = Backbone.View.extend({
             this.$el.show();
 
             // position the people
-            this.positionPeople();
+            this.renderPeople();
+            this.renderPrintView();
 
             var self = this;
             this.$el.find('#map-topic').editable({
@@ -527,18 +563,19 @@ var SocialSupportMapView = Backbone.View.extend({
         this.removeHighlight();
 
         if (!highlighted) {
+            // highlight the selector
+            jQuery(evt.currentTarget).addClass('highlight');
+
+            // dehighlight all person containers
             this.$el.find('.person-container').addClass('dehighlight');
 
-            jQuery(evt.currentTarget).addClass('highlight');
-            //jQuery(evt.currentTarget).parent().addClass('highlight');
-
+            // remove the dehighlight class from supportive individuals
             var supportType = jQuery(evt.currentTarget).data('id');
             var people = this.model.get('people').bySupportType(supportType);
             for (var i = 0; i < people.length; i++) {
-                var person = people[i];
-                var $elt = this.$el.find(
-                    '.person-container[data-id="' + person.cid + '"]');
-                $elt.removeClass('dehighlight');
+                var selector = '.person-container[data-id="'
+                    + people[i].cid + '"]';
+                this.$el.find(selector).removeClass('dehighlight');
             }
         }
     }
