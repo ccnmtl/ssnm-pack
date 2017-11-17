@@ -951,9 +951,30 @@
         border: 0 !important;
         color: #000 !important;
     }
-    .map-support-types,
     .map-legend {
         display: none;
+    }
+    .map-support-types {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        width: 100%;
+        float: none;
+        z-index: 500;
+        height: auto; /* needs to be responsive */
+        position: static !important; /* needs to be responsive */
+        page-break-before: always;
+    }
+    .map-support-types li a {
+        font-size: 14px;
+        color: #000 !important;
+    }
+    .map-support-types h2 {
+        border: 0;
+        font: 600 30px/150% 'Raleway', sans-serif;
+    }
+    .map-support-types section h3 {
+        font: 600 20px/20px 'Raleway', sans-serif;
     }
     .person-container-print {
         position: absolute;
@@ -1025,9 +1046,9 @@
         height: 700px;
         z-index: 300;
     }
-    .map-detail-print {
+    /* .map-detail-print {
         page-break-before: always;
-    }
+    }*/
     .map-detail-print dt {
         font: 600 30px/150% 'Raleway', sans-serif;
         padding: 10px 0 0 0;
