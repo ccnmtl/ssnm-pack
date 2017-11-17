@@ -537,8 +537,7 @@ var SocialSupportMapView = Backbone.View.extend({
         return false;
     },
     deletePersonConfirm: function(evt) {
-        var $elt = jQuery(evt.currentTarget);
-        var cid = $elt.data('id');
+        var cid = jQuery(evt.currentTarget).attr('data-id');
         var person = this.model.get('people').get(cid);
 
         var $modal = this.$el.find('#confirmDeleteModal');
@@ -553,7 +552,7 @@ var SocialSupportMapView = Backbone.View.extend({
         jQuery('.modal-backdrop').remove();
         jQuery('body').removeClass('modal-open').removeAttr('style');
 
-        var cid = jQuery(evt.currentTarget).data('id');
+        var cid = jQuery(evt.currentTarget).attr('data-id');
         var person = this.model.get('people').get(cid);
 
         this.model.get('people').remove(person);
