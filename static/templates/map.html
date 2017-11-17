@@ -153,20 +153,30 @@
             </div><!-- /.map-workspace-print -->
 
 
-            <div class="map-print-detail">
-                <% for (var i=0; i < people.length; i++) { %>
-                <div style="border: 1px solid #ccc;">
-                <b><%=i%></b></br>
-                <%=people[i].influence%><br />
-                <%=people[i].name%><br />
-                <% if ( people[i].notes ) { %>
-                Notes: <%=people[i].notes%>
+            <div class="map-detail-print">
+                <dl>
+                <% for (var p in peopleByProximity) { %>
+                    <dt class="<%=[p]%>"><%=proximity[p]%></dt>
+                    <% var people = peopleByProximity[p] %>
+                    <% if ( people.length > 0 ) { %>
+                        <% for (var i=0; i < people.length; i++) { %>
+                        <dd class="detail-name"><%=people[i].name%></dd>
+                        <dd><strong>Influence:</strong> <%=influence[people[i].influence]%></dd>
+                        <dd><strong>Support types:</strong> 
+                        <% var count = people[i].supportType.length - 1; %>
+                        <% for (var j=0; j < people[i].supportType.length; j++) { %>
+                            <%=supportType[people[i].supportType[j]].display%><% if (j < count) { %>, <% } %>
+                        <% } %></dd>
+                        <dd><strong>Notes:</strong>
+                        <% if ( people[i].notes ) { %>
+                        <%=people[i].notes%>
+                        <% } else { %>
+                        <em class="text-secondary">There are no notes for this person.</em>
+                        <% } %></dd>
+                        <% } %>
+                    <% } else { %>
+                        <dd><em class="text-secondary">There is no one in this proximity.</em></dd>
+                    <% } %>
                 <% } %>
-                <%=proximity[people[i].proximity]%><br />
-                <%=influence[people[i].influence]%><br />
-                <% for (var j=0; j < people[i].supportType.length; j++) { %>
-                    <%=supportType[people[i].supportType[j]].display%>,
-                <% } %>
-                </div>
-                <% } %>
+                </dl>
             </div>

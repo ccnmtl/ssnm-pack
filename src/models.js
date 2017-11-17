@@ -92,12 +92,12 @@ var PersonList = Backbone.Collection.extend({
         }
         this.forEach(function(person) {
             var a = person.get('proximity');
-            results[a].push(person);
+            results[a].push(person.toJSON());
         });
         for (p in Proximity) {
             results[p].sort(function(a, b) {
-                return a.get('name').toLowerCase() >
-                    b.get('name').toLowerCase();
+                return a.name.toLowerCase() >
+                    b.name.toLowerCase();
             });
         }
         return results;
