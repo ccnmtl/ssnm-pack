@@ -17,7 +17,6 @@
                             id="map-owner"
                             data-type="text"
                             data-title="Edit map owner"><%= owner %></a>
-                            <div class="sizetest">I see you</div>
                         </dd>
                 </dl>
             </div><!-- /.map-info -->
@@ -136,6 +135,7 @@
                 <div class="map-people-print">
                     <% for (var i=0; i < people.length; i++) { %>
                     <div class="person-container-print <%=people[i].influence%>" data-id="<%=people[i].cid%>">
+                        <div class="print-influence"></div>
                         <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a></div>
                         <% if ( people[i].notes ) { %>
                         <div class="person-notes"><i class="fa fa-file-text"></i></div>
