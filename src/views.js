@@ -103,12 +103,12 @@ var PersonAddModal = Backbone.View.extend({
                     (this.type === 'radio' && jQuery(this).is(':checked')) ||
                     this.tagName === 'TEXTAREA' ||
                         this.tagName === 'SELECT') {
-                    self.model.set(
-                        p, jQuery(this).val().trim(), {silent: true});
+                    var value = utils.sanitize(jQuery(this).val().trim());
+                    self.model.set(p, value, {silent: true});
                 } else if (this.type === 'checkbox' &&
                            jQuery(this).is(':checked')) {
                     var a = self.model.get(p);
-                    var val = jQuery(this).val();
+                    var val = utils.sanitize(jQuery(this).val());
                     if (a.indexOf(val) < 0) {
                         a.push(val);
                     }
@@ -156,7 +156,7 @@ var PersonViewModal = Backbone.View.extend({
         var self = this;
         jQuery('#person-name-edit').editable({
             success: function(response, newValue) {
-                self.model.set('name', newValue);
+                self.model.set('name', utils.sanitize(newValue));
             }
         });
         jQuery('#person-proximity-edit').editable({
@@ -184,7 +184,7 @@ var PersonViewModal = Backbone.View.extend({
             value: json.person.notes,
             emptytext: 'Add details',
             success: function(response, newValue) {
-                self.model.set('notes', newValue);
+                self.model.set('notes', utils.sanitize(newValue));
             }
         });
     }
@@ -492,12 +492,12 @@ var SocialSupportMapView = Backbone.View.extend({
             var self = this;
             this.$el.find('#map-topic').editable({
                 success: function(response, newValue) {
-                    self.model.set('topic', newValue);
+                    self.model.set('topic', utils.sanitize(newValue));
                 }
             });
             this.$el.find('#map-owner').editable({
                 success: function(response, newValue) {
-                    self.model.set('owner', newValue);
+                    self.model.set('owner', utils.sanitize(newValue));
                 }
             });
         }

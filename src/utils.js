@@ -1,9 +1,16 @@
 /* global module: true */
 
+var sanitize = function(value) {
+    // http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(value));
+    return div.innerHTML;
+};
+
 function validateFormValue($form, selector) {
     var $elt = $form.find(selector);
     if ($elt.val().length > 0) {
-        return $elt.val();
+        return sanitize($elt.val());
     }
 
     $elt.addClass('is-invalid');
@@ -75,3 +82,4 @@ module.exports.radius = radius;
 module.exports.radians = radians;
 module.exports.storageAvailable = storageAvailable;
 module.exports.getUrlParameter = getUrlParameter;
+module.exports.sanitize = sanitize;
