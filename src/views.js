@@ -313,7 +313,7 @@ var SocialSupportMapView = Backbone.View.extend({
             error = true;
         }
 
-        if (!pwd) {
+        if (!pwd || pwd.length < 8) {
             $elt = jQuery(dlg).find('.export-password');
             $elt.addClass('is-invalid');
             $elt.parents('.form-group').addClass('is-invalid');
