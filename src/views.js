@@ -468,12 +468,15 @@ var SocialSupportMapView = Backbone.View.extend({
         ctx.supportType = models.SupportType;
         ctx.mapBackground = './map-print-background.png';
         ctx.peopleByProximity = this.model.get('people').groupByProximity();
+        ctx.showImportExport = utils.isImportExportSupported();
         return ctx;
     },
     render: function() {
         var markup;
         if (this.model.isEmpty()) {
-            markup = this.createMapTemplate({});
+            markup = this.createMapTemplate({
+                'showImportExport': utils.isImportExportSupported()
+            });
             this.$el.find('.ssnm-map-container').html(markup);
             this.$el.show();
         } else {

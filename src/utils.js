@@ -1,4 +1,5 @@
 /* global module: true */
+var UAParser = require('ua-parser-js');
 
 var sanitize = function(value) {
     // http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
@@ -75,6 +76,23 @@ function getUrlParameter(sParam, defaultValue) {
     return defaultValue;
 }
 
+function isImportExportSupported() {
+    var ua = new UAParser();
+    var browser = ua.getBrowser();
+    console.log(browser);
+    if (browser.name === 'IE' || browser.name === 'Edge') {
+        return false;
+    }
+
+    var device = ua.getDevice();
+    console.log(device);
+    if (device.vendor === 'Apple' && (
+            device.type === 'mobile' || device.type === 'tablet')) {
+        return false;
+    }
+    return true;
+}
+
 
 module.exports.validateFormValue = validateFormValue;
 module.exports.eltCenter = eltCenter;
@@ -83,3 +101,4 @@ module.exports.radians = radians;
 module.exports.storageAvailable = storageAvailable;
 module.exports.getUrlParameter = getUrlParameter;
 module.exports.sanitize = sanitize;
+module.exports.isImportExportSupported = isImportExportSupported;
