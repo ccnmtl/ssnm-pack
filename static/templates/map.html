@@ -66,10 +66,12 @@
                         <span class="icon-map-action"><i class="fa fa-plus fa-custom"></i></span>
                         <span class="text-map-action">Add a person</span>
                     </button>
+                    <% if (showImportExport) { %>
                     <button type="button" class="btn-map-action btn-export-modal" data-toggle="modal" data-target="#exportModal" data-backdrop="static">
                         <span class="icon-map-action"><i class="fa fa-download fa-custom"></i></span>
                         <span class="text-map-action">Export</span>
                     </button>
+                    <% } %>
                     <button type="button" class="btn-map-action btn-print">
                         <span class="icon-map-action"><i class="fa fa-print fa-custom"></i></span>
                         <span class="text-map-action">Print</span>
