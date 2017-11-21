@@ -79,15 +79,13 @@ function getUrlParameter(sParam, defaultValue) {
 function isImportExportSupported() {
     var ua = new UAParser();
     var browser = ua.getBrowser();
-    console.log(browser);
     if (browser.name === 'IE' || browser.name === 'Edge') {
         return false;
     }
 
     var device = ua.getDevice();
-    console.log(device);
     if (device.vendor === 'Apple' && (
-            device.type === 'mobile' || device.type === 'tablet')) {
+        device.type === 'mobile' || device.type === 'tablet')) {
         return false;
     }
     return true;
