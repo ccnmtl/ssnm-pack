@@ -23,10 +23,10 @@
             <div class="map-workspace d-print-none clearfix">
                 <div class="map-people">
                     <% for (var i=0; i < people.length; i++) { %>
-                    <div class="person-container <%=people[i].influence%>" data-id="<%=people[i].cid%>">
+                    <div class="person-container <%=people[i].influence%> <%=people[i].proximity %>" data-id="<%=people[i].cid%>">
                         <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person">
                         <% if (people[i].name.length > 6) { %>
-                        <%=people[i].name.substr(0, 6)%>...
+                        <%=people[i].name.substr(0, 6)%>
                         <% } else { %>
                         <%=people[i].name%>
                         <% } %>

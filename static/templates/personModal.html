@@ -32,7 +32,8 @@
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="radio" class="form-check-input"
-                                name="proximity" value="<%=p%>" <% if (person.proximity === p) { %>checked<% } %> />
+                                name="proximity" value="<%=p%>" <% if (person.proximity === p) { %>checked<% } %>
+                                <% if (shellLimits[p].full) { %>disabled="disabled"<% } %> />
                                 <%=proximity[p]%>
                         </label>
                     </div>
