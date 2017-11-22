@@ -76,6 +76,7 @@ function getUrlParameter(sParam, defaultValue) {
     return defaultValue;
 }
 
+
 function isImportExportSupported() {
     var ua = new UAParser();
     var browser = ua.getBrowser();
@@ -91,6 +92,26 @@ function isImportExportSupported() {
     return true;
 }
 
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+function trackEvent(eventName, extraParams) {
+    if (window.gtag !== undefined) {
+        var params = {
+            'event_category': 'ssnm',
+            'event_label': 'interaction'
+        };
+        jQuery.extend(params, extraParams);
+
+        window.gtag('event', eventName, params);
+    }
+}
 
 module.exports.validateFormValue = validateFormValue;
 module.exports.eltCenter = eltCenter;
@@ -100,3 +121,5 @@ module.exports.storageAvailable = storageAvailable;
 module.exports.getUrlParameter = getUrlParameter;
 module.exports.sanitize = sanitize;
 module.exports.isImportExportSupported = isImportExportSupported;
+module.exports.guid = guid;
+module.exports.trackEvent = trackEvent;
