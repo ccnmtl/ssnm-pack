@@ -27,7 +27,7 @@ var PersonAddModal = Backbone.View.extend({
             'isStepComplete', 'destroy');
 
         this.people = options.people;
-
+        this.shellLimits = options.shellLimits;
         this.state = new models.PersonModalState();
         this.template = require('../static/templates/personModal.html');
         this.render();
@@ -43,15 +43,16 @@ var PersonAddModal = Backbone.View.extend({
         this.$el.removeData().unbind();
     },
     render: function() {
-        var json = {
+        var context = {
             person: this.model.toJSON(),
             state: this.state.toJSON(),
             proximity: models.Proximity,
             influence: models.Influence,
-            supportType: models.SupportType
+            supportType: models.SupportType,
+            shellLimits: this.shellLimits
         };
 
-        var markup = this.template(json);
+        var markup = this.template(context);
         this.$el.find('.modal-content').html(markup);
     },
     isStepComplete: function() {
@@ -133,7 +134,7 @@ var PersonViewModal = Backbone.View.extend({
         _.bindAll(this, 'render');
 
         this.people = options.people;
-
+        this.shellLimits = options.shellLimits;
         this.template = require('../static/templates/personViewModal.html');
         this.render();
     },
@@ -152,7 +153,8 @@ var PersonViewModal = Backbone.View.extend({
             person: this.model.toJSON(),
             proximity: models.Proximity,
             influence: models.Influence,
-            supportType: models.SupportType
+            supportType: models.SupportType,
+            shellLimits: this.shellLimits
         };
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
@@ -216,7 +218,7 @@ var SocialSupportMapView = Backbone.View.extend({
         _.bindAll(this, 'render', 'supportTypeMenu',
             'createMap', 'importMap', 'exportMap', 'newMap',
             'addPerson', 'viewPerson', 'deletePersonConfirm',
-            'deletePerson', 'onPrint',
+            'deletePerson', 'onPrint', 'shellLimits',
             'renderPeople', 'renderPrintView',
             'readSession', 'writeSession',
             'toggleHighlight', 'removeHighlight');
@@ -429,6 +431,19 @@ var SocialSupportMapView = Backbone.View.extend({
             'printRadius': 425
         }
     },
+    maxPerShell: 6,
+    shellLimits: function() {
+        this.allFull = 1;
+        for (var key in this.shells) {
+            if (this.shells.hasOwnProperty(key)) {
+                var selector = '.map-people .person-container.' + key;
+                this.shells[key].full =
+                    this.$el.find(selector).length >= this.maxPerShell;
+                this.allFull &= this.shells[key].full;
+            }
+        }
+        return this.shells;
+    },
     renderPrintView: function(people) {
         // reset mapping
         for (var key in this.shells) {
@@ -519,6 +534,10 @@ var SocialSupportMapView = Backbone.View.extend({
             // position the people
             this.renderPeople();
             this.renderPrintView();
+            this.shellLimits();
+            if (this.allFull) {
+                this.$el.find('.btn-add-person').hide();
+            }
 
             var self = this;
             this.$el.find('#map-topic').editable({
@@ -550,7 +569,8 @@ var SocialSupportMapView = Backbone.View.extend({
         var view = new PersonAddModal({
             el: this.$el.find('#personModal'),
             model: new models.Person({}),
-            people: this.model.get('people')
+            people: this.model.get('people'),
+            shellLimits: this.shellLimits()
         });
         this.$el.find('#personModal').on('hidden.bs.modal', function(e) {
             view.destroy();
@@ -563,7 +583,8 @@ var SocialSupportMapView = Backbone.View.extend({
         new PersonViewModal({
             el: this.$el.find('#personViewModal'),
             model: person,
-            people: this.model.get('people')
+            people: this.model.get('people'),
+            shellLimits: this.shellLimits()
         });
         return false;
     },
