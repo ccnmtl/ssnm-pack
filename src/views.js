@@ -93,6 +93,13 @@ var PersonAddModal = Backbone.View.extend({
     onSave: function(evt) {
         this.setAttributes();
         this.people.add(this.model);
+
+        utils.trackEvent('add_person', {
+            'support_type': this.model.get('supportType'),
+            'influence': this.model.get('influence'),
+            'proximity': this.model.get('proximity'),
+            'notes': this.model.get('notes').length > 0
+        });
         this.$el.modal('hide');
     },
     setAttributes: function() {
@@ -225,6 +232,7 @@ var SocialSupportMapView = Backbone.View.extend({
         this.createModel();
 
         if (!this.readSession()) {
+            this.createSessionId();
             this.render();
         }
 
@@ -258,6 +266,18 @@ var SocialSupportMapView = Backbone.View.extend({
                 .removeClass('fa-align-justify').addClass('fa-times');
         }
     },
+    createSessionId: function() {
+        if (window.gtag) {
+            var sid = utils.guid();
+            this.model.set('sessionId', sid);
+            window.gtag('set', {'user_id': sid});
+        }
+    },
+    setSessionId: function(sessionId) {
+        if (window.gtag !== undefined) {
+            window.gtag('set', {'user_id': sessionId});
+        }
+    },
     readSession: function() {
         /* eslint-disable scanjs-rules/identifier_sessionStorage */
         if (utils.storageAvailable('sessionStorage')) {
@@ -268,6 +288,7 @@ var SocialSupportMapView = Backbone.View.extend({
 
             if (cipher) {
                 this.model.decrypt(cipher, str);
+                this.setSessionId(this.model.get('sessionId'));
                 return true;
             }
         }
@@ -328,6 +349,9 @@ var SocialSupportMapView = Backbone.View.extend({
         var f = new File([cipher], fName, {type: 'text/plain;charset=utf-8'});
         FileSaver.saveAs(f, fName);
 
+        // map was exported
+        utils.trackEvent('export_map', {});
+
         jQuery(dlg).modal('hide');
     },
     importMap: function(evt) {
@@ -366,6 +390,10 @@ var SocialSupportMapView = Backbone.View.extend({
                 // bootstrap4 bug workaround
                 jQuery('.modal-backdrop').remove();
                 jQuery('body').removeClass('modal-open').removeAttr('style');
+
+                // map was imported
+                utils.trackEvent('import_map', {});
+
             } catch(err) {
                 var $elt = jQuery(dlg).find('.file-read-error');
                 $elt.addClass('is-invalid');
@@ -588,6 +616,10 @@ var SocialSupportMapView = Backbone.View.extend({
                     + people[i].cid + '"]';
                 this.$el.find(selector).removeClass('dehighlight');
             }
+
+            utils.trackEvent('highlight_support_type', {
+                'support_type': supportType,
+            });
         }
     }
 });
