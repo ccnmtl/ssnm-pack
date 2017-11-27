@@ -26,7 +26,7 @@
                     <div class="person-container <%=people[i].influence%> <%=people[i].proximity %>" data-id="<%=people[i].cid%>">
                         <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person">
                         <% if (people[i].name.length > 6) { %>
-                        <%=people[i].name.substr(0, 6)%>
+                        <%=people[i].name.substr(0, 6)%>&hellip;
                         <% } else { %>
                         <%=people[i].name%>
                         <% } %>
@@ -50,7 +50,7 @@
                     <div class="circle-map circle-center text-center">
                         <div class="circle-owner">
                         <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
-                        <div>Owner</div>
+                        <div>Me</div>
                         </div>
                     </div>
                     <div class="circle-map circle-very-close">
@@ -121,11 +121,11 @@
                 <h2>Influence:</h2>
                 <dl class="clearfix">
                     <dt class="legend-very-helpful"><span>Green</span></dt>
-                    <dd>Very helpful</dd>
+                    <dd>Positive</dd>
                     <dt class="legend-somewhat-helpful"><span>Yellow</span></dt>
-                    <dd>Somewhat helpful</dd>
+                    <dd>In-between/Neutral</dd>
                     <dt class="legend-not-helpful"><span>Red</span></dt>
-                    <dd>Not helpful</dd>
+                    <dd>Negative</dd>
                 </dl>
                 </section>
             </div><!-- /.map-legend -->
@@ -136,7 +136,15 @@
                     <% for (var i=0; i < people.length; i++) { %>
                     <div class="person-container-print <%=people[i].influence%>" data-id="<%=people[i].cid%>">
                         <div class="print-influence"></div>
-                        <div class="person-name"><a href="#" data-id="<%=people[i].cid%>" class="btn-view-person"><%=people[i].name%></a></div>
+                        <div class="person-name">
+                        <a href="#" data-id="<%=people[i].cid%>" class="btn-view-person">
+                        <% if (people[i].name.length > 6) { %>
+                        <%=people[i].name.substr(0, 6)%>&hellip;
+                        <% } else { %>
+                        <%=people[i].name%>
+                        <% } %>
+                        </a>
+                        </div>
                         <% if ( people[i].notes ) { %>
                         <div class="person-notes"><i class="fa fa-file-text"></i></div>
                         <% } %>
