@@ -243,6 +243,10 @@ var SocialSupportMapView = Backbone.View.extend({
         if (utils.getUrlParameter('title', '1') === '0') {
             this.$el.find('header').hide();
         }
+
+        if (utils.getUrlParameter('footer', '1') === '0') {
+            this.$el.find('footer').hide();
+        }
     },
     createModel: function() {
         if (this.model) {
