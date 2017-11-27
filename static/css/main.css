@@ -1078,4 +1078,7 @@ button {
     dt.not-close {
         color: #3977A7;
     }
+    footer {
+        display: block !important;
+    }
 }
