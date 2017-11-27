@@ -11,43 +11,38 @@ var Proximity = {
 };
 
 var Influence = {
-    'very-helpful': 'Very Helpful',
-    'somewhat-helpful': 'Somewhat Helpful',
-    'not-helpful': 'Not Helpful'
+    'very-helpful': 'Positive',
+    'somewhat-helpful': 'In-between/Neutral',
+    'not-helpful': 'Negative'
 };
 
 var SupportType = {
     'empathy': {
         'display': 'Empathy',
         'icon': 'heart',
-        'description': 'Emotional support is the ability to show empathy, ' +
-        'compassion, and genuine concern for another person. Someone ' +
-        'emotionally supportive listens and understands when you tell them ' +
-        'about how you feel and demonstrates genuine concern for you. Does ' +
-        'this person listen to you?'
+        'description': 'Emotional support is showing empathy, ' +
+        'compassion, and genuine concern. This person listens to you and ' +
+        'understands when you tell them about how you feel.'
     },
     'advice': {
         'display': 'Advice',
         'icon': 'commenting',
-        'description': 'Advice or informational support involves the ' +
-        'provision of advice, suggestions, and information that we can use ' +
-        'to address our problems.  Would you ask this person for advice? ' +
-        'Do you trust their judgment?'
+        'description': 'Advice or informational support is suggestions or ' +
+        'information that you can use to work on problems. You would ask ' +
+        'this person for advice and trust their judgment.'
     },
     'social': {
         'display': 'Social',
         'icon': 'users',
-        'description': 'Sharing leisure or other activities with someone. ' +
-        'Information and company that helps you to feel good about yourself.' +
-        ' Do you like to “hangout” with this person?'
+        'description': 'Social support is company that helps you to feel ' +
+        'good about yourself. This is a person you like to hang out with.'
     },
     'practical': {
         'display': 'Practical',
         'icon': 'cog',
-        'description': 'The provision of tangible aid and services that ' +
-        'directly assist us in making our days and our lives more manageable.' +
-        ' Is this someone you can ask for a ride? For money? To take care ' +
-        'of your children?'
+        'description': 'Practical support is help that makes your life ' +
+        'more manageable. You can ask this person for things like money, ' +
+        'a ride, or help taking care of your children.'
     }
 };
 
