@@ -26,6 +26,7 @@ var PersonAddModal = Backbone.View.extend({
         _.bindAll(this, 'render', 'onNext', 'onPrev', 'onSave',
             'isStepComplete', 'destroy');
 
+        this.map = options.map;
         this.people = options.people;
         this.shellLimits = options.shellLimits;
         this.state = new models.PersonModalState();
@@ -44,6 +45,7 @@ var PersonAddModal = Backbone.View.extend({
     },
     render: function() {
         var context = {
+            map: this.map.toJSON(),
             person: this.model.toJSON(),
             state: this.state.toJSON(),
             proximity: models.Proximity,
@@ -573,6 +575,7 @@ var SocialSupportMapView = Backbone.View.extend({
         var view = new PersonAddModal({
             el: this.$el.find('#personModal'),
             model: new models.Person({}),
+            map: this.model,
             people: this.model.get('people'),
             shellLimits: this.shellLimits()
         });
