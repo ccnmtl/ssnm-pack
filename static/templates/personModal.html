@@ -1,4 +1,4 @@
-<form novalidate>
+
     <div class="step" <% if (state.step !== 1) { %>style="display: none" <% } %> >
         <div class="modal-header">
             <h5>Step 1 of 5: Who is this?</h5>
@@ -113,14 +113,14 @@ like to say about this person?</label>
             </div>
         </div>
     </div>
-</form>
+
 <div class="modal-footer">
     <% if (state.step > 1) { %>
-        <button class="btn btn-primary btn-prev">Prev</button>
+        <button type="button" class="btn btn-primary btn-prev">Prev</button>
     <% } %>
     <% if (state.step < state.lastStep) { %>
-        <button class="btn btn-primary btn-next">Next</button>
+        <button type="button" class="btn btn-primary btn-next">Next</button>
     <% } else { %>
-        <button class="btn btn-primary btn-save">Save</button>
+        <button type="button" class="btn btn-primary btn-save">Save</button>
     <% } %>
 </div>
