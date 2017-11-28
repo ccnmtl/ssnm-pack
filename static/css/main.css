@@ -489,6 +489,23 @@ button:disabled {
     box-shadow: 5px 5px 5px black;
 }
 
+/* POPOVER CUSTOM */
+
+.map-workspace .popover.bs-popover-auto[x-placement^=left] .arrow::after,
+.map-workspace .popover.bs-popover-left .arrow::after {
+    border-left-color: #ff6;
+}
+
+.map-workspace .popover.bs-popover-auto[x-placement^=left] .arrow,
+.map-workspace .popover.bs-popover-left .arrow {
+    top: 19px !important;
+}
+
+.map-workspace .popover {
+    background-color: #ff6;
+    z-index: 200;
+}
+
 @media (min-width: 492px) {
     .map-workspace {
         width: 492px;
