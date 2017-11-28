@@ -558,6 +558,9 @@ var SocialSupportMapView = Backbone.View.extend({
                     self.model.set('owner', utils.sanitize(newValue));
                 }
             });
+            jQuery(function() {
+                jQuery('.btn-add-person').popover('show');
+            });
         }
     },
     createMap: function(evt) {

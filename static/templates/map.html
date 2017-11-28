@@ -62,7 +62,14 @@
                 </div><!-- /.map-circles-space -->
 
                 <div class="map-actions">
-                    <button type="button" class="btn-map-action btn-add-person" <% if (shellsFull) { %>disabled="disabled" <% } %>>
+                    <button type="button" class="btn-map-action btn-add-person"
+                        <% if (people.length < 1) { %>
+                        data-content="Start here"
+                        data-container=".map-workspace"
+                        data-placement="left"
+                        rel="popover"
+                        <% } %>
+                        <% if (shellsFull) { %>disabled="disabled" <% } %>>
                         <span class="icon-map-action"><i class="fa fa-plus fa-custom"></i></span>
                         <span class="text-map-action">Add a person</span>
                     </button>
