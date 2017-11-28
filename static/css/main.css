@@ -3,7 +3,11 @@
 }
 
 button {
-    cursor: pointer;    
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,600|Roboto:400,500');
