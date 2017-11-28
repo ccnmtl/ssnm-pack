@@ -136,6 +136,8 @@ var PersonViewModal = Backbone.View.extend({
         _.bindAll(this, 'render');
 
         this.people = options.people;
+        this.proximityChoices = options.proximityChoices;
+        this.shellsFull = options.shellsFull;
         this.shellLimits = options.shellLimits;
         this.template = require('../static/templates/personViewModal.html');
         this.render();
@@ -156,7 +158,8 @@ var PersonViewModal = Backbone.View.extend({
             proximity: models.Proximity,
             influence: models.Influence,
             supportType: models.SupportType,
-            shellLimits: this.shellLimits
+            shellLimits: this.shellLimits,
+            shellsFull: this.shellsFull
         };
         var markup = this.template(json);
         this.$el.find('.modal-content').html(markup);
@@ -172,7 +175,7 @@ var PersonViewModal = Backbone.View.extend({
         });
         jQuery('#person-proximity-edit').editable({
             value: json.person.proximity,
-            source: json.proximity,
+            source: this.proximityChoices,
             success: function(response, newValue) {
                 self.model.set('proximity', newValue);
             }
@@ -439,16 +442,17 @@ var SocialSupportMapView = Backbone.View.extend({
     },
     maxPerShell: 6,
     shellLimits: function() {
-        this.allFull = 1;
         for (var key in this.shells) {
             if (this.shells.hasOwnProperty(key)) {
                 var selector = '.map-people .person-container.' + key;
                 this.shells[key].full =
                     this.$el.find(selector).length >= this.maxPerShell;
-                this.allFull &= this.shells[key].full;
             }
         }
         return this.shells;
+    },
+    shellsFull: function() {
+        return this.model.get('people').length >= (this.maxPerShell * 3);
     },
     renderPrintView: function(people) {
         // reset mapping
@@ -518,6 +522,7 @@ var SocialSupportMapView = Backbone.View.extend({
         ctx.mapBackground = './map-print-background.png';
         ctx.peopleByProximity = this.model.get('people').groupByProximity();
         ctx.showImportExport = utils.isImportExportSupported();
+        ctx.shellsFull = this.shellsFull();
         return ctx;
     },
     render: function() {
@@ -541,9 +546,6 @@ var SocialSupportMapView = Backbone.View.extend({
             this.renderPeople();
             this.renderPrintView();
             this.shellLimits();
-            if (this.allFull) {
-                this.$el.find('.btn-add-person').hide();
-            }
 
             var self = this;
             this.$el.find('#map-topic').editable({
@@ -587,11 +589,21 @@ var SocialSupportMapView = Backbone.View.extend({
         var cid = jQuery(evt.currentTarget).data('id');
         var person = this.model.get('people').get(cid);
 
+        var limits = this.shellLimits();
+        var choices = {};
+        for (var key in limits) {
+            if (limits.hasOwnProperty(key) &&
+                   (person.get('proximity') === key || !limits[key].full)) {
+                choices[key] = models.Proximity[key];
+            }
+        }
+
         new PersonViewModal({
             el: this.$el.find('#personViewModal'),
             model: person,
             people: this.model.get('people'),
-            shellLimits: this.shellLimits()
+            proximityChoices: choices,
+            shellsFull: this.shellsFull()
         });
         return false;
     },

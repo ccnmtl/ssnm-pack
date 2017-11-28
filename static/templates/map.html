@@ -62,7 +62,7 @@
                 </div><!-- /.map-circles-space -->
 
                 <div class="map-actions">
-                    <button type="button" class="btn-map-action btn-add-person">
+                    <button type="button" class="btn-map-action btn-add-person" <% if (shellsFull) { %>disabled="disabled" <% } %>>
                         <span class="icon-map-action"><i class="fa fa-plus fa-custom"></i></span>
                         <span class="text-map-action">Add a person</span>
                     </button>

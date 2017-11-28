@@ -19,10 +19,13 @@
             <dt>Proximity:</dt>
                 <dd>
                     <a href="#"
-                    class="editable-field"
-                    id="person-proximity-edit"
-                    data-type="select"
-                    data-title="Edit proximity"><%=proximity[person.proximity]%></a>
+                        class="editable-field"
+                        id="person-proximity-edit"
+                        data-type="select"
+                        <% if (shellsFull) { %>
+                            data-disabled="true"
+                        <% } %>
+                        data-title="Edit proximity"><%=proximity[person.proximity]%></a>
                 </dd>
             <dt>Influence:</dt>
                 <dd>
