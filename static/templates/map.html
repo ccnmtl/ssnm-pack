@@ -50,7 +50,7 @@
                     <div class="circle-map circle-center text-center">
                         <div class="circle-owner">
                         <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
-                        <div>Me</div>
+                        <div aria-hidden="true">Me</div>
                         </div>
                     </div>
                     <div class="circle-map circle-very-close">
@@ -65,7 +65,7 @@
                     <button type="button" class="btn-map-action btn-add-person"
                         <% if (people.length < 1) { %>
                         data-content="Start here"
-                        data-container=".map-workspace"
+                        data-container=".map-actions"
                         data-placement="left"
                         rel="popover"
                         <% } %>

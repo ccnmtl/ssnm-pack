@@ -5,12 +5,12 @@
     <% } %>
 
     <form>
-        <div class="form-group topic">
-            <label for="topic"><span class="create-step">1</span>
+        <div class="form-group topic" aria-labelledby="mapTopic">
+            <label for="topic" id="mapTopic"><span class="create-step" aria-hidden="true">1</span>
             What would you like to name this map?</label>
-            <input type="input" name="topic" class="form-control" aria-describedby="topicHelp">
+            <input type="input" name="topic" class="form-control" aria-describedby="mapTopicHelp">
             <div class="invalid-feedback">Please add a topic for your map.</div>
-            <p class="text-secondary text-instructions">
+            <p class="text-secondary text-instructions" id="mapTopicHelp">
             Consider whether you will integrate an “issue for work.”
             Some examples:<br />
             “My total social network” (regardless any issue I am dealing with)<br />
@@ -20,10 +20,10 @@
             </p>
         </div>
 
-        <div class="form-group owner">
+        <div class="form-group owner" aria-labelledby="mapOwner">
             <label for="owner" id="mapOwner"><span class="create-step" aria-hidden="true">2</span>
             Who is the owner of this map?</label>
-            <input type="input" name="owner" class="form-control" aria-describedby="topicHelp">
+            <input type="input" name="owner" class="form-control">
             <div class="invalid-feedback">Please add an owner for your map.</div>
         </div>
 
@@ -31,7 +31,7 @@
     </form>
 </div>
 
-<div id="importModal" class="modal fade">
+<div class="modal fade" id="importModal" role="dialog" aria-labelledby="importModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
