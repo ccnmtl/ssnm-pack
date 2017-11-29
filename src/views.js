@@ -129,9 +129,6 @@ var PersonAddModal = Backbone.View.extend({
 });
 
 var PersonViewModal = Backbone.View.extend({
-    events: {
-        //'click .btn-save': 'onSave',
-    },
     initialize: function(options) {
         _.bindAll(this, 'render');
 
