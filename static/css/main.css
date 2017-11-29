@@ -171,7 +171,6 @@ button:disabled {
 .very-helpful {
     background-color: #6c6;
     border: 2px solid #000;
-    /* top: 80px; left: 120px; for testing */
 }
 
 .very-helpful a {
@@ -181,7 +180,6 @@ button:disabled {
 .somewhat-helpful {
     background-color: #ff6;
     border: 2px dashed #000;
-    /* top: 130px; left: 150px; for testing */
 }
 
 .somewhat-helpful a {
@@ -191,7 +189,6 @@ button:disabled {
 .not-helpful {
     background-color: #f66;
     border: 2px dotted #000;
-    /* top: 180px; left: 180px; for testing */
 }
 
 .not-helpful a {
@@ -666,7 +663,6 @@ button:disabled {
         padding: 4px;
         margin: 0;
         height: 30px; /* responsive */
-        /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;
     }
@@ -804,7 +800,6 @@ button:disabled {
         padding: 4px;
         margin: 0;
         height: 50px;
-        /* overflow: hidden; */
         border-radius: 5px;
         z-index: 200;
     }
@@ -1071,9 +1066,6 @@ button:disabled {
         height: 700px;
         z-index: 300;
     }
-    /* .map-detail-print {
-        page-break-before: always;
-    }*/
     .map-detail-print dt {
         font: 600 30px/150% 'Raleway', sans-serif;
         padding: 10px 0 0 0;
