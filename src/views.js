@@ -417,7 +417,8 @@ var SocialSupportMapView = Backbone.View.extend({
             return;
         }
 
-        this.$el.find('.selected-file').html(file.name);
+        this.$el.find('.selected-file').html('Filename: <em>'
+            + file.name+'</em>');
         this.file = file;
     },
     shells: {
