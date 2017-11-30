@@ -47,6 +47,38 @@ button:disabled {
     font-size: 0.9rem;
 }
 
+.importfile {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn-file {
+    cursor: pointer;
+    background-color: #b3daff;
+    color: #039;
+    font-weight: bold ;
+    border-color: #b3daff;
+    margin-right: 10px;
+}
+
+.importfile:focus + .btn-file,
+.importfile + .btn-file:hover {
+	background-color: #80c1ff;
+    border-color: #80c1ff;
+    color: #039;
+}
+
+.importfile:focus + .btn-file {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.selected-file { font-size: 0.9rem; }
+
 .map-workspace {
     width: 330px;
     margin: 0 -15px;
