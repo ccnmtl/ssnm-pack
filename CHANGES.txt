@@ -1,3 +1,9 @@
+0.1.5 (2017-11-30)
+=================
+* code cleanup
+* bug fixes
+* accessibility check
+
 0.1.4 (2017-11-28)
 =================
 * minimum chars for passwords
