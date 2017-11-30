@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>CTL Interactives: Social Support Network Map</title>
@@ -44,13 +44,14 @@
             <header class="clearfix d-print-none">
                 <h1 class="interactive-title">Social Support Network Map</h1>
             </header>
+            <h1 class="sr-only">Social Support Network Map</h1>
 
             <div id="project-logo-header" class="d-print-block" role="presentation">
                 <span id="primary-logo"><img src="./logo-primary.png" alt="Social Support Network Map" /></span>
-                <h1 id="page-banner" class="hidden-print">Social Support Network Map</h1>
+                <h1 id="page-banner">Social Support Network Map</h1>
             </div>
 
-            <div class="ssnm-map-container"></div><!-- /.ssnm-map-container -->
+            <div class="ssnm-map-container" role="main"></div><!-- /.ssnm-map-container -->
 
             <!-- Person View Modal -->
             <div class="modal fade" id="personViewModal" tabindex="-1" role="dialog" aria-labelledby="personViewModalLabel" aria-hidden="true">
@@ -61,13 +62,13 @@
             </div>
 
             <!-- Person Add/Edit Modal -->
-            <div id="personModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Person Attribute Modal" aria-hidden="true">
+            <div id="personModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="PersonAttributeModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content"></div>
                 </div>
             </div>
 
-            <div id="editMapModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Person Attribute Modal" aria-hidden="true">
+            <div id="editMapModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="PersonAttributeModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content"></div>
                 </div>
