@@ -6,7 +6,7 @@ Social Support Network Map: Standalone Interactive Exercise
 #### Overview
 Social Support mapping grows out of a long social work tradition of starting where a person is and recognizing strengths. It helps a person tap into and use his or her own natural support network to deal with challenging life issues. At a time when mental health interventions are increasingly complicated, it remains a simple and accessible, yet powerful tool to support individuals and families.
 
-The Social Support Network Map is a tool to help students and mental health professionals create digital social support maps. This tool helps you create an image that shows important people in the life of you or your client, tag those people as negative, neutral or positive supports, and assign them support attributes. It will help guide a discussion of if, where and how to engage supports for help.
+The Social Support Network Map is an ecomap tool to help students and mental health professionals create digital social support maps. This tool helps you create an image that shows important people in the life of you or your client, tag those people as negative, neutral or positive supports, and assign them support attributes. It will help guide a discussion of if, where and how to engage supports for help.
 
 The Social Support Network Map was created in 2005 as a collaboration with Professor Susan Witte at the School of Social Work as an interactive learning tool for classroom instruction.
 
