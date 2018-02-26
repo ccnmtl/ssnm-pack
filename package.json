@@ -42,6 +42,11 @@
     "url": "https://github.com/ccnmtl/ssnm-pack/issues"
   },
   "license": "GPL-3.0",
+  "greenkeeper": {
+    "ignore": [
+      "webpack"
+    ]
+  },
   "devDependencies": {
     "chai": "^4.0.2",
     "eslint": "~4.18.0",
