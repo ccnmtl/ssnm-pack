@@ -137,7 +137,7 @@
                 </section>
             </div><!-- /.map-legend -->
 
-            <div class="map-workspace-print d-print-block">
+            <div class="map-workspace-print d-none d-print-block">
                 <img class="map-background" src="<%= mapBackground %>" alt="" />
                 <div class="map-people-print">
                     <% for (var i=0; i < people.length; i++) { %>
@@ -167,7 +167,7 @@
                 </div><!-- /.map-people-print -->
             </div><!-- /.map-workspace-print -->
 
-            <div class="map-support-types d-print-block">
+            <div class="map-support-types d-none d-print-block">
                 <h2>Support Type</h2>
                 <% for (var p in supportType) { %>
                     <section>
@@ -187,7 +187,7 @@
                 <% } %>
             </div><!-- /.map-support-types-print -->
 
-            <div class="map-detail-print d-print-block">
+            <div class="map-detail-print d-none d-print-block">
                 <dl>
                 <% for (var p in peopleByProximity) { %>
                     <dt class="<%=[p]%>"><%=proximity[p]%></dt>
