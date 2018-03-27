@@ -1,3 +1,8 @@
+0.1.8 (2018-03-27)
+=================
+* Fixed print version problem (d-print-block)
+* Updated to Bootstrap 4.0.0
+
 0.1.5 (2017-11-30)
 =================
 * code cleanup
