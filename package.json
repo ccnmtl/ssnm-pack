@@ -65,7 +65,7 @@
     "jquery": "^3.2.1",
     "popper.js": "1.14.3",
     "style-loader": "^0.21.0",
-    "ua-parser-js": "0.7.17",
+    "ua-parser-js": "0.7.18",
     "underscore": "1.9.0",
     "underscore-template-loader": "^1.0.0",
     "webpack": "^4.1.0"
