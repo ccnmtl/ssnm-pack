@@ -142,3 +142,6 @@ footer {
 .form-group.has-error .error-block {
     display: block;
 }
+
+#cu-privacy-notice { display: none; }
+#cu-privacy-notice.required { display: block; }
