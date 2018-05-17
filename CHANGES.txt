@@ -1,3 +1,7 @@
+0.1.9 (2018-05-17)
+==================
+* Cookie policy update
+
 0.1.8 (2018-03-27)
 =================
 * Fixed print version problem (d-print-block)
