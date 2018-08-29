@@ -1,3 +1,7 @@
+0.2.1 (2018-08-29)
+==================
+* Change FontAwesome CDN
+
 0.2.0 (2018-05-17)
 ==================
 * Turned on Analytics anonymizeIp
