@@ -1,6 +1,5 @@
-/* global jQuery: true, module: true, CryptoJS: true */
+/* global module: true, CryptoJS: true */
 
-jQuery = require('jquery');
 var Backbone = require('backbone');
 var CryptoJS = require('crypto-js');
 
