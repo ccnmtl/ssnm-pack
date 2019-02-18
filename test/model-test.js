@@ -1,4 +1,4 @@
-/* global describe: true, it: true, Blob: true, before: true */
+/* global describe: true, it: true, before: true */
 
 var assert = require('chai').assert;
 var models = require('../src/models.js');
