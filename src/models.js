@@ -1,4 +1,4 @@
-/* global module: true, CryptoJS: true */
+/* global module: true */
 
 var Backbone = require('backbone');
 var CryptoJS = require('crypto-js');
