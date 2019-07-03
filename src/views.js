@@ -1,7 +1,8 @@
-/* global jQuery: true, module: true */
+/* global module: true */
 /* exported SocialSupportMapView */
 
-jQuery = require('jquery');
+// eslint-disable-next-line no-redeclare
+var jQuery = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var models = require('./models.js');
@@ -142,7 +143,7 @@ var PersonViewModal = Backbone.View.extend({
     getSupportTypeValues: function() {
         var options = [];
         for (var key in models.SupportType) {
-            if (models.SupportType.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(models.SupportType, key)) {
                 options.push({value: key,
                     text: models.SupportType[key].display});
             }
@@ -441,7 +442,7 @@ var SocialSupportMapView = Backbone.View.extend({
     maxPerShell: 6,
     shellLimits: function() {
         for (var key in this.shells) {
-            if (this.shells.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(this.shells, key)) {
                 var selector = '.map-people .person-container.' + key;
                 this.shells[key].full =
                     this.$el.find(selector).length >= this.maxPerShell;
@@ -455,7 +456,7 @@ var SocialSupportMapView = Backbone.View.extend({
     renderPrintView: function(people) {
         // reset mapping
         for (var key in this.shells) {
-            if (this.shells.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(this.shells, key)) {
                 this.shells[key].angle = this.shells[key].startingAngle;
             }
         }
@@ -484,7 +485,7 @@ var SocialSupportMapView = Backbone.View.extend({
     renderPeople: function(people) {
         // reset mapping
         for (var key in this.shells) {
-            if (this.shells.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(this.shells, key)) {
                 this.shells[key].angle = this.shells[key].startingAngle;
             }
         }
@@ -593,7 +594,7 @@ var SocialSupportMapView = Backbone.View.extend({
         var limits = this.shellLimits();
         var choices = {};
         for (var key in limits) {
-            if (limits.hasOwnProperty(key) &&
+            if (Object.prototype.hasOwnProperty.call(limits, key) &&
                    (person.get('proximity') === key || !limits[key].full)) {
                 choices[key] = models.Proximity[key];
             }
