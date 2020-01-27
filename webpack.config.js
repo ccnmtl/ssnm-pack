@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
     entry: __dirname + '/src/index.js',
     output: {
@@ -21,13 +23,23 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
-                    'file-loader'
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false
+                        }
+                    }
                 ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use: [
-                    'file-loader'
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false
+                        }
+                    }
                 ]
             }
         ]
