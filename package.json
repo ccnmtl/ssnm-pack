@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "backbone": "1.4.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.5.0",
     "css-loader": "^3.0.0",
     "crypto-js": "3.3.0",
     "file-loader": "^6.0.0",
