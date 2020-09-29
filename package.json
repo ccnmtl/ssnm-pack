@@ -7,7 +7,7 @@
     "serve": "webpack-dev-server --mode development --hot --inline --open",
     "test": "npm run test-unit && npm run test-client",
     "test-unit": "mocha test/model-test.js",
-    "test-client": "./node_modules/phantomjs-prebuilt/bin/phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js dist/view-test.html",
+    "test-client": "mocha-chrome test/view-test.html",
     "build": "webpack && webpack --config test/test.webpack.config.js"
   },
   "repository": {
@@ -16,10 +16,8 @@
   },
   "keywords": [
     "webpack",
-    "phantomjs",
     "mocha",
     "chai",
-    "phantomjs",
     "jquery",
     "client",
     "ctl"
@@ -50,8 +48,7 @@
     "eslint-plugin-security": "^1.4.0",
     "loglevel": "^1.4.1",
     "mocha": "^8.1.3",
-    "mocha-phantomjs-core": "^2.1.2",
-    "phantomjs-prebuilt": "^2.1.15",
+    "mocha-chrome": "^2.2.0",
     "webpack-dev-server": "^3.0.0",
     "webpack-cli": "~3.3.0"
   },
