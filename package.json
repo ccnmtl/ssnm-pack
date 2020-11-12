@@ -4,7 +4,7 @@
   "description": "The Social Support Network Map is an ecomap tool to help students and mental health professionals create digital social support maps.",
   "main": "src/index.js",
   "scripts": {
-    "serve": "webpack-dev-server --mode development --hot --inline --open",
+    "serve": "webpack serve --mode development --hot --inline",
     "test": "npm run test-unit && npm run test-client",
     "test-unit": "mocha test/model-test.js",
     "test-client": "mocha-chrome test/view-test.html",
@@ -42,7 +42,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "chai": "^4.0.2",
-    "eslint": "~7.12.1",
+    "eslint": "~7.13.0",
     "eslint-config-scanjs": "^1.0.0-beta4",
     "eslint-plugin-no-unsafe-innerhtml": "^1.0.16",
     "eslint-plugin-security": "^1.4.0",
