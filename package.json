@@ -63,7 +63,7 @@
     "popper.js": "1.16.1",
     "style-loader": "^2.0.0",
     "ua-parser-js": "0.7.27",
-    "underscore": "1.12.1",
+    "underscore": "1.13.0",
     "underscore-template-loader": "^1.0.0",
     "webpack": "^5.10.3"
   }
