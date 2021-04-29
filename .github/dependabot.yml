@@ -1,0 +1,33 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  versioning-strategy: increase-if-necessary
+  ignore:
+  - dependency-name: webpack
+    versions:
+    - 5.26.1
+    - 5.26.3
+    - 5.27.2
+    - 5.34.0
+  - dependency-name: css-loader
+    versions:
+    - 5.1.0
+    - 5.2.3
+  - dependency-name: underscore
+    versions:
+    - 1.13.0
+  - dependency-name: ua-parser-js
+    versions:
+    - 0.7.26
+  - dependency-name: chai
+    versions:
+    - 4.3.1
+    - 4.3.2
+  - dependency-name: webpack-cli
+    versions:
+    - 4.4.0
