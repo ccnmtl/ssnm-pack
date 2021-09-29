@@ -18,7 +18,6 @@ function waitFor(testFx, doneFx, millis) {
     var timeout = millis ? millis : 3000; // Default Max Timout is 10s
     var start = new Date().getTime();
 
-    // eslint-disable-next-line scanjs-rules/call_setInterval
     var interval = setInterval(function() {
         var condition = testFx();
 
