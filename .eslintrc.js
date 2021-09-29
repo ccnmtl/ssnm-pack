@@ -6,6 +6,7 @@ module.exports = {
     },
     "plugins": [
         "security",
+        "scanjs-rules",
         "no-unsafe-innerhtml"
     ],
     "extends": [
