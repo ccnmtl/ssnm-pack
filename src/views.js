@@ -288,7 +288,6 @@ var SocialSupportMapView = Backbone.View.extend({
         }
     },
     readSession: function() {
-        /* eslint-disable scanjs-rules/identifier_sessionStorage */
         if (utils.storageAvailable('sessionStorage')) {
             var dt = new Date();
             var str =
@@ -301,31 +300,22 @@ var SocialSupportMapView = Backbone.View.extend({
                 return true;
             }
         }
-        /* eslint-enable scanjs-rules/identifier_sessionStorage */
         return false;
     },
     writeSession: function() {
-        /* eslint-disable scanjs-rules/identifier_sessionStorage */
-        /* eslint-disable scanjs-rules/property_sessionStorage */
         if (utils.storageAvailable('sessionStorage')) {
             var dt = new Date();
             var str =
                 dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate();
             window.sessionStorage.setItem('ssnmmap', this.model.encrypt(str));
         }
-        /* eslint-enable scanjs-rules/identifier_sessionStorage */
-        /* eslint-enable scanjs-rules/property_sessionStorage */
     },
     newMap: function(evt) {
-        /* eslint-disable scanjs-rules/identifier_sessionStorage */
-        /* eslint-disable scanjs-rules/property_sessionStorage */
         this.$el.find('#confirmNewMapModal').modal('hide');
         window.sessionStorage.removeItem('ssnmmap');
 
         this.createModel();
         this.render();
-        /* eslint-enable scanjs-rules/identifier_sessionStorage */
-        /* eslint-enable scanjs-rules/property_sessionStorage */
     },
     exportMap: function(evt) {
         var dlg = jQuery(evt.currentTarget).parents('.modal');
