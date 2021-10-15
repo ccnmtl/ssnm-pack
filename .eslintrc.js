@@ -5,9 +5,7 @@ module.exports = {
         "jquery": true
     },
     "plugins": [
-        "security",
-        "scanjs-rules",
-        "no-unsafe-innerhtml"
+        "security"
     ],
     "extends": [
         "eslint:recommended",
@@ -40,9 +38,6 @@ module.exports = {
         "no-trailing-spaces": ["error"],
         "key-spacing": ["error", { "beforeColon": false }],
         "func-call-spacing": ["error", "never"],
-
-        /** no-unsafe-innerhtml rule **/
-        "no-unsafe-innerhtml/no-unsafe-innerhtml" : 2,
 
         'security/detect-buffer-noassert': 1,
         'security/detect-child-process': 1,
