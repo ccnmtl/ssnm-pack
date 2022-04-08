@@ -65,5 +65,8 @@
     "underscore": "1.13.1",
     "underscore-template-loader": "^1.0.0",
     "webpack": "^5.51.2"
+  },
+  "overrides": {
+     "minimist": "~1.2.6"
   }
 }
