@@ -43,7 +43,7 @@
   "devDependencies": {
     "acorn": "8.8.0",
     "chai": "^4.0.2",
-    "eslint": "~8.28.0",
+    "eslint": "~8.29.0",
     "eslint-plugin-security": "^1.4.0",
     "loglevel": "^1.4.1",
     "mocha": "^10.0.0",
