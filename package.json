@@ -42,7 +42,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "acorn": "8.11.2",
-    "chai": "^4.0.2",
+    "chai": "^5.1.1",
     "eslint": "~8.57.0",
     "eslint-plugin-security": "^3.0.0",
     "loglevel": "^1.4.1",
