@@ -1,7 +1,6 @@
 /* global module: true */
 /* exported SocialSupportMapView */
 
-// eslint-disable-next-line no-redeclare
 var jQuery = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
@@ -393,6 +392,7 @@ var SocialSupportMapView = Backbone.View.extend({
                 // map was imported
                 utils.trackEvent('import_map', {});
 
+            // eslint-disable-next-line no-unused-vars
             } catch(err) {
                 var $elt = jQuery(dlg).find('.file-read-error');
                 $elt.addClass('is-invalid');
