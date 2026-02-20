@@ -41,7 +41,7 @@
   },
   "license": "GPL-3.0",
   "devDependencies": {
-    "acorn": "8.15.0",
+    "acorn": "8.16.0",
     "chai": "^6.0.0",
     "eslint": "~9.39.0",
     "eslint-plugin-security": "^4.0.0",
