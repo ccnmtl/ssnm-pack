@@ -87,10 +87,12 @@ var PersonAddModal = Backbone.View.extend({
         this.setAttributes();
 
         var step = this.state.get('step');
+        // eslint-disable-next-line no-useless-assignment
         this.state.set('step', ++step);
     },
     onPrev: function(evt) {
         var step = this.state.get('step');
+        // eslint-disable-next-line no-useless-assignment
         this.state.set('step', --step);
     },
     onSave: function(evt) {

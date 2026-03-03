@@ -10,7 +10,6 @@ require('!style-loader!css-loader!../static/css/main.css');
 var chai = require('chai');
 var assert = chai.assert;
 
-// eslint-disable-next-line no-redeclare
 var jQuery = require('jquery');
 var module = require('../src/views');
 
